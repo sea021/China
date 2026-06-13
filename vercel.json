@@ -8,12 +8,16 @@
   ],
   "routes": [
     {
+      "src": "/v.mp4",
+      "dest": "/public/v.mp4"
+    },
+    {
       "src": "/api/(.*)",
-      "dest": "server.js"
+      "dest": "/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "public/$1"
+      "dest": "/public/index.html"
     }
   ]
 }
