@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chinese Listening Challenge - Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,13 +25,19 @@
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
-            overflow: hidden;
+            /* แก้บั๊กจอจม: อนุญาตให้เลื่อนขึ้นลงได้ */
+            overflow-x: hidden;
+            overflow-y: auto; 
             background-color: #000; 
             position: relative;
         }
+
+        /* ตกแต่ง Scrollbar ให้สวยงาม */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.6); }
 
         .video-background {
             position: fixed;
@@ -53,6 +59,8 @@
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             z-index: 2;
+            /* ทำให้กล่องอยู่ตรงกลางเสมอ แม้จะเลื่อนจอ */
+            margin: auto; 
         }
 
         @keyframes shake {
@@ -82,7 +90,7 @@
             border-width: 0 6px 6px 6px; border-style: solid; border-color: transparent transparent #1e293b transparent;
         }
 
-        /* ⏱️ Timer */
+        /* ⏱️ Timer & Progress */
         .timer-wrapper { width: 100%; background: rgba(226, 232, 240, 0.4); height: 5px; border-radius: 999px; margin-bottom: 15px; overflow: hidden; }
         .timer-bar { height: 100%; background: linear-gradient(90deg, #f59e0b, #ef4444); width: 100%; transition: width 0.1s linear; }
 
@@ -115,7 +123,7 @@
         /* 📋 Options */
         .options-grid { display: flex; flex-direction: column; gap: 10px; }
         .btn-option {
-            background: #ffffff; border: 2px solid #e2e8f0; padding: 12px 18px; font-size: 15px; font-family: inherit; font-weight: 500;
+            background: #ffffff; border: 2px solid #e2e8f0; padding: 12px 16px; font-size: 15px; font-family: inherit; font-weight: 500;
             color: var(--text-main); border-radius: 14px; cursor: pointer; transition: all 0.2s ease; text-align: left; display: flex; align-items: center; gap: 10px;
         }
         .btn-option:hover:not(:disabled) { background: #f8fafc; border-color: var(--primary-color); }
@@ -123,13 +131,13 @@
         .btn-correct { background: #ecfdf5 !important; border-color: var(--success-color) !important; color: #047857 !important; }
         .btn-wrong { background: #fef2f2 !important; border-color: var(--error-color) !important; color: #b91c1c !important; }
 
-        #result { margin-top: 12px; min-height: 28px; font-size: 15px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 6px; }
+        #result { margin-top: 10px; min-height: 24px; font-size: 14px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 6px; }
 
         /* 📖 กล่องเฉลยความรู้ */
         .explanation-box {
-            background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 12px 16px;
-            margin-top: 12px; border-radius: 0 8px 8px 0; font-size: 14px; display: none;
-            text-align: left; animation: fadeIn 0.4s ease; color: #0369a1;
+            background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 10px 14px;
+            margin-top: 10px; border-radius: 0 8px 8px 0; font-size: 13px; display: none;
+            text-align: left; animation: fadeIn 0.4s ease; color: #0369a1; line-height: 1.4;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -142,21 +150,40 @@
         .btn-share:hover { background: #059669; }
 
         /* 🎛️ ปุ่มเลือกความยาก */
-        .difficulty-menu { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .difficulty-menu { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
         .btn-diff {
-            padding: 16px; border: none; border-radius: 16px; font-size: 16px; font-weight: 600; font-family: inherit;
+            padding: 14px; border: none; border-radius: 16px; font-size: 15px; font-weight: 600; font-family: inherit;
             cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .btn-diff:hover { transform: translateY(-2px); filter: brightness(95%); }
         .diff-easy { background: #e6fbf1; color: #047857; border: 2px solid #10b981; }
         .diff-medium { background: #fff7ed; color: #b45309; border: 2px solid #f59e0b; }
         .diff-hard { background: #fef2f2; color: #b91c1c; border: 2px solid #ef4444; }
-        .btn-diff span { font-size: 12px; font-weight: 400; opacity: 0.8; }
+        .btn-diff span { font-size: 11px; font-weight: 400; opacity: 0.8; }
 
-        .summary-card i { font-size: 56px; color: #eab308; margin-bottom: 15px; }
-        .score-big { font-size: 40px; font-weight: 700; color: var(--primary-color); margin: 10px 0; }
+        .summary-card i { font-size: 50px; color: #eab308; margin-bottom: 10px; }
+        .score-big { font-size: 36px; font-weight: 700; color: var(--primary-color); margin: 5px 0; }
 
         #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+
+        /* 📱 RESPONSIVE DESIGN สำหรับมือถือและหน้าจอขนาดเล็ก */
+        @media (max-width: 480px) {
+            body { padding: 15px; }
+            .quiz-container { padding: 20px 16px; border-radius: 20px; }
+            .mascot-avatar { font-size: 44px; }
+            h2 { font-size: 18px; }
+            .subtitle { font-size: 13px; margin-bottom: 10px; }
+            .btn-audio { width: 54px; height: 54px; font-size: 18px; margin-bottom: 15px; }
+            .btn-option { padding: 10px 14px; font-size: 14px; border-radius: 12px; }
+            .mascot-bubble { font-size: 12px; padding: 4px 10px; }
+            .next-btn, .btn-share { padding: 12px 20px; font-size: 14px; }
+        }
+        @media (max-height: 650px) {
+            /* สำหรับมือถือแนวนอน หรือจอเตี้ยมากๆ */
+            .mascot-avatar { font-size: 38px; }
+            .btn-audio { width: 48px; height: 48px; font-size: 16px; margin-bottom: 10px; }
+            .btn-option { padding: 8px 12px; font-size: 13px; }
+        }
     </style>
 </head>
 <body>
@@ -174,21 +201,21 @@
             <div class="mascot-avatar">🐼</div>
             <div class="mascot-bubble">ยินดีต้อนรับ! เลือกความยากที่ท่านต้องการท้าทายเลย</div>
         </div>
-        <h2 style="margin-top: 15px;">Chinese Listening</h2>
+        <h2 style="margin-top: 10px;">Chinese Listening</h2>
         <p class="subtitle">เลือกโหมดการเล่นเพื่อทดสอบระดับหูทิพย์ภาษาจีน</p>
         
         <div class="difficulty-menu">
             <button class="btn-diff diff-easy" onclick="startGame('easy')">
                 <div><i class="fa-solid fa-seedling"></i> โหมดง่าย</div>
-                <span>❤️ x5 | ⏱️ 20 วินาที</span>
+                <span>❤️ x5 | ⏱️ 20s</span>
             </button>
             <button class="btn-diff diff-medium" onclick="startGame('medium')">
                 <div><i class="fa-solid fa-shield-halved"></i> โหมดจอมยุทธ์</div>
-                <span>❤️ x3 | ⏱️ 15 วินาที</span>
+                <span>❤️ x3 | ⏱️ 15s</span>
             </button>
             <button class="btn-diff diff-hard" onclick="startGame('hard')">
                 <div><i class="fa-solid fa-dragon"></i> โหมดฮ่องเต้โหด</div>
-                <span>❤️ x1 | ⏱️ 7 วินาที!</span>
+                <span>❤️ x1 | ⏱️ 7s</span>
             </button>
         </div>
     </div>
@@ -273,7 +300,6 @@
         loadQuizData();
     }
 
-    // ฟังก์ชันสุ่มอาร์เรย์ (ฟีเจอร์ที่ 1)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -287,7 +313,6 @@
             const response = await fetch('/api/quiz');
             let data = await response.json();
             if (data && data.length > 0) {
-                // สุ่มลำดับข้อสอบทุกครั้งที่เริ่มเกม!
                 quizzes = shuffleArray(data);
                 document.getElementById('total-questions').innerText = quizzes.length;
                 showQuestion();
@@ -354,7 +379,6 @@
         revealCorrectAnswer();
     }
 
-    // แสดงคำอธิบาย (ฟีเจอร์ที่ 2)
     function showExplanation(correctIndex) {
         const currentQuiz = quizzes[currentIdx];
         const expBox = document.getElementById('explanation-box');
@@ -362,6 +386,11 @@
         
         expBox.innerHTML = `💡 <b>เฉลย:</b> ข้อที่ถูกต้องคือ <b>"${correctText}"</b>`;
         expBox.style.display = 'block';
+        
+        // เลื่อนหน้าจอลงมาให้เห็นปุ่ม "ถัดไป" อัตโนมัติเวลาตอบเสร็จ (บนจอมือถือ)
+        setTimeout(() => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }, 100);
     }
 
     async function revealCorrectAnswer() {
@@ -390,9 +419,12 @@
             return;
         }
 
+        // เลื่อนจอกลับไปด้านบนสุดตอนเริ่มข้อใหม่
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         document.getElementById('panda-avatar').innerText = "🐼";
         document.getElementById('panda-talk').innerText = pandaQuotes[Math.floor(Math.random() * pandaQuotes.length)];
-        document.getElementById('explanation-box').style.display = 'none'; // ซ่อนกล่องเฉลยเมื่อเริ่มข้อใหม่
+        document.getElementById('explanation-box').style.display = 'none'; 
 
         const currentQuiz = quizzes[currentIdx];
         const progressPercent = ((currentIdx + 1) / quizzes.length) * 100;
@@ -401,7 +433,6 @@
         const levelTag = document.getElementById('level-tag');
         let modeLabel = currentMode === 'easy' ? 'โหมดง่าย' : currentMode === 'medium' ? 'โหมดจอมยุทธ์' : 'โหมดฮ่องเต้';
         
-        // แบ่งระดับความยากตาม Progress ของเกม
         const portion = quizzes.length / 3;
         if (currentIdx < portion) {
             levelTag.innerHTML = `<i class="fa-solid fa-seedling"></i> ${modeLabel} - เลเวล 1`;
@@ -474,7 +505,6 @@
                 resultDiv.innerHTML = `<span style="color: var(--success-color);"><i class="fa-solid fa-circle-check"></i> ถูกต้องยอดเยี่ยม!</span>`;
                 totalScore++;
                 
-                // ตอบถูกก็แสดงเฉลยได้
                 showExplanation(selectedIndex);
 
             } else {
@@ -505,7 +535,6 @@
 
     function nextQuestion() { currentIdx++; showQuestion(); }
 
-    // ฟังก์ชันแชร์คะแนน (ฟีเจอร์ที่ 3)
     function shareScore() {
         const modeLabel = currentMode === 'easy' ? 'โหมดง่าย 🌱' : currentMode === 'medium' ? 'โหมดจอมยุทธ์ ⚔️' : 'โหมดฮ่องเต้โหด 🐉';
         let shareText = `🐼 บททดสอบหูทิพย์ภาษาจีน\n`;
@@ -556,18 +585,18 @@
                 <div class="score-big">${totalScore} / ${quizzes.length}</div>
                 <p>${feedback}</p>
                 
-                <button class="btn-share" id="btn-share" style="margin-top: 24px;" onclick="shareScore()">
+                <button class="btn-share" id="btn-share" style="margin-top: 20px;" onclick="shareScore()">
                     <i class="fa-solid fa-share-nodes"></i> แชร์คะแนนอวดเพื่อน
                 </button>
                 
-                <button class="next-btn" style="display:block; margin-top:12px; background: #1e293b;" onclick="location.reload()">
+                <button class="next-btn" style="display:block; margin-top:10px; background: #1e293b;" onclick="location.reload()">
                     <i class="fa-solid fa-rotate-right"></i> เล่นใหม่อีกรอบ
                 </button>
             </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 🎇 ระบบเอฟเฟกต์พลุกระดาษฉลอง
     function initConfetti() {
         const canvas = document.getElementById("confetti-canvas");
         const ctx = canvas.getContext("2d");
