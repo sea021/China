@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinese Listening Challenge</title>
+    <title>Chinese Listening Challenge - Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -30,189 +30,133 @@
             padding: 20px;
             overflow: hidden;
             background-color: #000; 
+            position: relative;
         }
 
-        /* 🎬 วิดีโอพื้นหลัง v.mp4 เต็มหน้าจอ (แก้ไข Path ชี้ตำแหน่งไฟล์) */
         .video-background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: brightness(60%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; filter: brightness(60%);
         }
 
         .quiz-container {
             background: var(--card-bg);
-            padding: 35px;
+            padding: 24px;
             border-radius: 24px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
             width: 100%;
-            max-width: 520px;
+            max-width: 440px;
             text-align: center;
             position: relative;
             transition: all 0.3s ease;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 2;
         }
 
-        /* Progress Bar */
-        .progress-wrapper {
-            margin-bottom: 25px;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
         }
-        .progress-bar-bg {
-            background: rgba(226, 232, 240, 0.6);
-            height: 8px;
-            border-radius: 999px;
-            overflow: hidden;
+        .shake-effect { animation: shake 0.4s ease-in-out; }
+
+        /* 🐼 Mascot */
+        .mascot-zone { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
+        .mascot-avatar {
+            font-size: 54px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+            animation: pandaFloat 3s ease-in-out infinite;
+            transition: all 0.2s ease;
         }
-        .progress-bar-fill {
-            background: linear-gradient(90deg, #6366f1, #818cf8);
-            height: 100%;
-            width: 5%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        @keyframes pandaFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.03); }
+        }
+        .mascot-bubble {
+            background: #1e293b; color: white; padding: 6px 14px; border-radius: 12px;
+            font-size: 13px; font-weight: 500; margin-top: 6px; position: relative;
+        }
+        .mascot-bubble::after {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+            border-width: 0 6px 6px 6px; border-style: solid; border-color: transparent transparent #1e293b transparent;
         }
 
-        /* ป้ายระดับความยาก */
-        .level-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
+        /* ⏱️ Timer */
+        .timer-wrapper { width: 100%; background: rgba(226, 232, 240, 0.4); height: 5px; border-radius: 999px; margin-bottom: 15px; overflow: hidden; }
+        .timer-bar { height: 100%; background: linear-gradient(90deg, #f59e0b, #ef4444); width: 100%; transition: width 0.1s linear; }
+
+        .game-status-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .hearts-container { display: flex; gap: 4px; font-size: 18px; color: var(--error-color); }
+        .combo-badge {
+            background: linear-gradient(135deg, #f97316 0%, #ef4444 100%); color: white;
+            padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 600; display: none; align-items: center; gap: 4px;
         }
+
+        .progress-wrapper { margin-bottom: 15px; }
+        .progress-bar-bg { background: rgba(226, 232, 240, 0.6); height: 6px; border-radius: 999px; overflow: hidden; }
+        .progress-bar-fill { background: linear-gradient(90deg, #6366f1, #818cf8); height: 100%; width: 0%; transition: width 0.4s ease; }
+
+        .level-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; margin-bottom: 12px; }
         .level-easy { background: #ecfdf5; color: #059669; }
         .level-medium { background: #fff7ed; color: #d97706; }
         .level-hard { background: #fef2f2; color: #dc2626; }
 
-        h2 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+        h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+        .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 15px; }
 
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 15px;
-            margin-bottom: 30px;
-        }
-
-        /* ปุ่มฟังเสียง */
         .btn-audio {
-            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-            color: white;
-            border: none;
-            width: 84px;
-            height: 84px;
-            border-radius: 50%;
-            font-size: 28px;
-            cursor: pointer;
-            margin-bottom: 35px;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
-            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); color: white; border: none;
+            width: 64px; height: 64px; border-radius: 50%; font-size: 22px; cursor: pointer; margin-bottom: 20px;
+            display: inline-flex; justify-content: center; align-items: center; box-shadow: 0 6px 14px rgba(79, 70, 229, 0.3);
         }
-        .btn-audio:hover {
-            transform: scale(1.08);
-            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.4);
-        }
-        .btn-audio:active { transform: scale(0.95); }
+        .btn-audio:hover { transform: scale(1.06); }
 
-        /* ปุ่มตัวเลือก */
-        .options-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
+        /* 📋 Options */
+        .options-grid { display: flex; flex-direction: column; gap: 10px; }
         .btn-option {
-            background: #ffffff;
-            border: 2px solid #e2e8f0;
-            padding: 18px 24px;
-            font-size: 16px;
-            font-family: inherit;
-            font-weight: 500;
-            color: var(--text-main);
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            background: #ffffff; border: 2px solid #e2e8f0; padding: 12px 18px; font-size: 15px; font-family: inherit; font-weight: 500;
+            color: var(--text-main); border-radius: 14px; cursor: pointer; transition: all 0.2s ease; text-align: left; display: flex; align-items: center; gap: 10px;
         }
-        .btn-option:hover:not(:disabled) {
-            background: #f8fafc;
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        .btn-option:disabled {
-            cursor: not-allowed;
-            opacity: 0.8;
-        }
+        .btn-option:hover:not(:disabled) { background: #f8fafc; border-color: var(--primary-color); }
+        .btn-option:disabled { cursor: not-allowed; opacity: 0.8; }
+        .btn-correct { background: #ecfdf5 !important; border-color: var(--success-color) !important; color: #047857 !important; }
+        .btn-wrong { background: #fef2f2 !important; border-color: var(--error-color) !important; color: #b91c1c !important; }
 
-        /* สถานะปุ่มหลังกดยืนยันคำตอบ */
-        .btn-correct {
-            background: #ecfdf5 !important;
-            border-color: var(--success-color) !important;
-            color: #047857 !important;
-        }
-        .btn-wrong {
-            background: #fef2f2 !important;
-            border-color: var(--error-color) !important;
-            color: #b91c1c !important;
-        }
+        #result { margin-top: 12px; min-height: 28px; font-size: 15px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 6px; }
 
-        /* ข้อความแจ้งผล */
-        #result {
-            margin-top: 25px;
-            min-height: 32px;
-            font-size: 18px;
-            font-weight: 600;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
+        /* 📖 กล่องเฉลยความรู้ */
+        .explanation-box {
+            background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 12px 16px;
+            margin-top: 12px; border-radius: 0 8px 8px 0; font-size: 14px; display: none;
+            text-align: left; animation: fadeIn 0.4s ease; color: #0369a1;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ปุ่มถัดไป */
-        .next-btn {
-            margin-top: 25px;
-            background: #1e293b;
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 14px;
-            cursor: pointer;
-            width: 100%;
-            display: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+        .next-btn, .btn-share {
+            margin-top: 12px; color: white; border: none; padding: 14px 24px; font-size: 15px; font-weight: 600; border-radius: 12px; cursor: pointer; width: 100%; transition: 0.2s;
         }
-        .next-btn:hover { background: #0f172a; transform: translateY(-1px); }
+        .next-btn { background: #1e293b; display: none; }
+        .next-btn:hover { background: #0f172a; }
+        .btn-share { background: #10b981; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn-share:hover { background: #059669; }
 
-        .summary-card i {
-            font-size: 64px;
-            color: #eab308;
-            margin-bottom: 20px;
+        /* 🎛️ ปุ่มเลือกความยาก */
+        .difficulty-menu { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .btn-diff {
+            padding: 16px; border: none; border-radius: 16px; font-size: 16px; font-weight: 600; font-family: inherit;
+            cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .score-big {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 15px 0;
-        }
+        .btn-diff:hover { transform: translateY(-2px); filter: brightness(95%); }
+        .diff-easy { background: #e6fbf1; color: #047857; border: 2px solid #10b981; }
+        .diff-medium { background: #fff7ed; color: #b45309; border: 2px solid #f59e0b; }
+        .diff-hard { background: #fef2f2; color: #b91c1c; border: 2px solid #ef4444; }
+        .btn-diff span { font-size: 12px; font-weight: 400; opacity: 0.8; }
+
+        .summary-card i { font-size: 56px; color: #eab308; margin-bottom: 15px; }
+        .score-big { font-size: 40px; font-weight: 700; color: var(--primary-color); margin: 10px 0; }
+
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
     </style>
 </head>
 <body>
@@ -221,75 +165,252 @@
     <source src="/v.mp4" type="video/mp4">
 </video>
 
-<div class="quiz-container">
-    <div class="progress-wrapper">
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progress-fill"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="quiz-container" id="quiz-box">
+    <!-- หน้าแรก: เมนูเลือกความยาก 🎯 -->
+    <div id="start-screen">
+        <div class="mascot-zone">
+            <div class="mascot-avatar">🐼</div>
+            <div class="mascot-bubble">ยินดีต้อนรับ! เลือกความยากที่ท่านต้องการท้าทายเลย</div>
+        </div>
+        <h2 style="margin-top: 15px;">Chinese Listening</h2>
+        <p class="subtitle">เลือกโหมดการเล่นเพื่อทดสอบระดับหูทิพย์ภาษาจีน</p>
+        
+        <div class="difficulty-menu">
+            <button class="btn-diff diff-easy" onclick="startGame('easy')">
+                <div><i class="fa-solid fa-seedling"></i> โหมดง่าย</div>
+                <span>❤️ x5 | ⏱️ 20 วินาที</span>
+            </button>
+            <button class="btn-diff diff-medium" onclick="startGame('medium')">
+                <div><i class="fa-solid fa-shield-halved"></i> โหมดจอมยุทธ์</div>
+                <span>❤️ x3 | ⏱️ 15 วินาที</span>
+            </button>
+            <button class="btn-diff diff-hard" onclick="startGame('hard')">
+                <div><i class="fa-solid fa-dragon"></i> โหมดฮ่องเต้โหด</div>
+                <span>❤️ x1 | ⏱️ 7 วินาที!</span>
+            </button>
         </div>
     </div>
 
-    <div id="level-tag" class="level-badge level-easy">
-        <i class="fa-solid fa-graduation-cap"></i> LEVEL 1: เริ่มต้นเบบี๋
+    <!-- หน้าหลักของเกมควิซ -->
+    <div id="game-screen" style="display: none;">
+        <div class="timer-wrapper">
+            <div class="timer-bar" id="timer-bar-fill"></div>
+        </div>
+
+        <div class="game-status-bar">
+            <div class="hearts-container" id="hearts-box"></div>
+            <div class="combo-badge" id="combo-box">
+                <i class="fa-solid fa-fire"></i> Combo x<span id="combo-count">0</span>
+            </div>
+        </div>
+
+        <div class="mascot-zone">
+            <div class="mascot-avatar" id="panda-avatar">🐼</div>
+            <div class="mascot-bubble" id="panda-talk">เหลาซือพร้อมแล้ว ตั้งใจฟังนะ!</div>
+        </div>
+
+        <div class="progress-wrapper">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="level-tag" class="level-badge level-easy"></div>
+        
+        <h2>ข้อที่ <span id="question-number">1</span> / <span id="total-questions">20</span></h2>
+        <p class="subtitle">ฟังสำเนียงแล้วเลือกความหมายที่ถูกต้องที่สุด</p>
+        
+        <button class="btn-audio" onclick="playAudio()" title="ฟังเสียง">
+            <i class="fa-solid fa-volume-high"></i>
+        </button>
+        <audio id="quiz-audio"></audio>
+
+        <div class="options-grid" id="options-container"></div>
+
+        <div id="result"></div>
+        
+        <!-- กล่องเฉลย -->
+        <div id="explanation-box" class="explanation-box"></div>
+
+        <button class="next-btn" id="next-button" onclick="nextQuestion()">
+            ถัดไป <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+        </button>
     </div>
-    
-    <h2>ข้อที่ <span id="question-number">1</span> / 20</h2>
-    <p class="subtitle">ฟังสำเนียงแล้วเลือกความหมายที่ถูกต้องที่สุด</p>
-    
-    <button class="btn-audio" onclick="playAudio()" title="ฟังเสียง">
-        <i class="fa-solid fa-volume-high"></i>
-    </button>
-    <audio id="quiz-audio"></audio>
-
-    <div class="options-grid" id="options-container"></div>
-
-    <div id="result"></div>
-    <button class="next-btn" id="next-button" onclick="nextQuestion()">
-        ถัดไป <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
-    </button>
 </div>
 
 <script>
     let quizzes = [];
     let currentIdx = 0;
     let totalScore = 0;
+    
+    // ตั้งค่าตัวแปรระบบเกม
+    let lives = 3;
+    let maxLives = 3;
+    let combo = 0;
+    let timeLimitPerQuestion = 15;
+    let timeLeft = 15; 
+    let timerInterval = null;
+    let hasAnswered = false;
+    let currentMode = 'medium';
 
-    window.onload = loadQuizData;
+    const pandaQuotes = [
+        "ข้อนี้ไม่ยาก ลุยเลย!", "หูเราเทพอยู่แล้ว ฟังดี ๆ นะ", 
+        "สมาธิมา ปัญญาเกิด!", "คำนี้ออกสอบบ่อยน้าา", "ใจเย็น ๆ แล้วเลือกข้อที่ใช่"
+    ];
+
+    // ฟังก์ชันเริ่มเกม
+    function startGame(mode) {
+        currentMode = mode;
+        if (mode === 'easy') { maxLives = 5; lives = 5; timeLimitPerQuestion = 20; } 
+        else if (mode === 'medium') { maxLives = 3; lives = 3; timeLimitPerQuestion = 15; } 
+        else if (mode === 'hard') { maxLives = 1; lives = 1; timeLimitPerQuestion = 7; }
+
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+        
+        loadQuizData();
+    }
+
+    // ฟังก์ชันสุ่มอาร์เรย์ (ฟีเจอร์ที่ 1)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 
     async function loadQuizData() {
         try {
             const response = await fetch('/api/quiz');
-            quizzes = await response.json();
-            if (quizzes && quizzes.length > 0) {
+            let data = await response.json();
+            if (data && data.length > 0) {
+                // สุ่มลำดับข้อสอบทุกครั้งที่เริ่มเกม!
+                quizzes = shuffleArray(data);
+                document.getElementById('total-questions').innerText = quizzes.length;
                 showQuestion();
             } else {
-                document.querySelector('.quiz-container').innerHTML = '<h2>เกิดข้อผิดพลาดในการโหลดข้อมูลคำถาม</h2>';
+                document.getElementById('game-screen').innerHTML = '<h2>เกิดข้อผิดพลาดในการโหลดข้อสอบ</h2>';
             }
         } catch (error) {
-            console.error("Error โหลดข้อมูลควิซ:", error);
-            document.querySelector('.quiz-container').innerHTML = '<h2>ไม่สามารถติดต่อเซิร์ฟเวอร์เพื่อโหลดข้อสอบได้</h2>';
+            console.error(error);
+            document.getElementById('game-screen').innerHTML = '<h2>ไม่สามารถติดต่อเซิร์ฟเวอร์ได้</h2>';
         }
     }
 
+    function updateHearts() {
+        const heartsBox = document.getElementById('hearts-box');
+        heartsBox.innerHTML = '';
+        for (let i = 0; i < maxLives; i++) {
+            if (i < lives) {
+                heartsBox.innerHTML += '<i class="fa-solid fa-heart"></i>';
+            } else {
+                heartsBox.innerHTML += '<i class="fa-regular fa-heart" style="color: #cbd5e1;"></i>';
+            }
+        }
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval);
+        timeLeft = timeLimitPerQuestion;
+        hasAnswered = false;
+        const bar = document.getElementById('timer-bar-fill');
+        bar.style.width = '100%';
+        
+        timerInterval = setInterval(() => {
+            if (hasAnswered) { clearInterval(timerInterval); return; }
+            timeLeft -= 0.1;
+            const percent = (timeLeft / timeLimitPerQuestion) * 100;
+            bar.style.width = `${percent}%`;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                handleTimeOut();
+            }
+        }, 100);
+    }
+
+    function handleTimeOut() {
+        hasAnswered = true;
+        document.getElementById('quiz-box').classList.add('shake-effect');
+        setTimeout(() => document.getElementById('quiz-box').classList.remove('shake-effect'), 400);
+
+        document.getElementById('panda-avatar').innerText = "😭";
+        document.getElementById('panda-talk').innerText = "อัยยา! หมดเวลาซะแล้ว!";
+
+        const buttons = document.querySelectorAll('.btn-option');
+        buttons.forEach(btn => btn.disabled = true);
+
+        combo = 0;
+        document.getElementById('combo-box').style.display = 'none';
+        lives--;
+        updateHearts();
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `<span style="color: var(--error-color);"><i class="fa-solid fa-hourglass-end"></i> หมดเวลา! หักพลังชีวิต 💔</span>`;
+        
+        revealCorrectAnswer();
+    }
+
+    // แสดงคำอธิบาย (ฟีเจอร์ที่ 2)
+    function showExplanation(correctIndex) {
+        const currentQuiz = quizzes[currentIdx];
+        const expBox = document.getElementById('explanation-box');
+        const correctText = currentQuiz.options[correctIndex];
+        
+        expBox.innerHTML = `💡 <b>เฉลย:</b> ข้อที่ถูกต้องคือ <b>"${correctText}"</b>`;
+        expBox.style.display = 'block';
+    }
+
+    async function revealCorrectAnswer() {
+        const currentQuiz = quizzes[currentIdx];
+        try {
+            const response = await fetch('/api/check-answer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ questionId: currentQuiz.id, selectedIndex: -1 })
+            });
+            const data = await response.json();
+            if (data && data.correctAnswerIndex !== undefined) {
+                const correctButton = document.getElementById(`option-${data.correctAnswerIndex}`);
+                if (correctButton) correctButton.classList.add('btn-correct');
+                showExplanation(data.correctAnswerIndex);
+            }
+        } catch (e) { console.error(e); }
+        
+        if (lives <= 0) { document.getElementById('next-button').innerText = 'ดูหน้าสรุปเกม'; }
+        document.getElementById('next-button').style.display = 'block';
+    }
+
     function showQuestion() {
-        if (currentIdx >= quizzes.length) {
+        if (lives <= 0 || currentIdx >= quizzes.length) {
             renderSummary();
             return;
         }
 
+        document.getElementById('panda-avatar').innerText = "🐼";
+        document.getElementById('panda-talk').innerText = pandaQuotes[Math.floor(Math.random() * pandaQuotes.length)];
+        document.getElementById('explanation-box').style.display = 'none'; // ซ่อนกล่องเฉลยเมื่อเริ่มข้อใหม่
+
         const currentQuiz = quizzes[currentIdx];
-        
         const progressPercent = ((currentIdx + 1) / quizzes.length) * 100;
         document.getElementById('progress-fill').style.width = `${progressPercent}%`;
 
         const levelTag = document.getElementById('level-tag');
-        if (currentIdx < 7) {
-            levelTag.innerHTML = `<i class="fa-solid fa-seedling"></i> LEVEL 1: เริ่มต้นเบบี๋`;
+        let modeLabel = currentMode === 'easy' ? 'โหมดง่าย' : currentMode === 'medium' ? 'โหมดจอมยุทธ์' : 'โหมดฮ่องเต้';
+        
+        // แบ่งระดับความยากตาม Progress ของเกม
+        const portion = quizzes.length / 3;
+        if (currentIdx < portion) {
+            levelTag.innerHTML = `<i class="fa-solid fa-seedling"></i> ${modeLabel} - เลเวล 1`;
             levelTag.className = "level-badge level-easy";
-        } else if (currentIdx < 14) {
-            levelTag.innerHTML = `<i class="fa-solid fa-fire"></i> LEVEL 2: เริ่มจริงจัง`;
+        } else if (currentIdx < portion * 2) {
+            levelTag.innerHTML = `<i class="fa-solid fa-fire"></i> ${modeLabel} - เลเวล 2`;
             levelTag.className = "level-badge level-medium";
         } else {
-            levelTag.innerHTML = `<i class="fa-solid fa-dragon"></i> LEVEL 3: ระดับปราบเซียน`;
+            levelTag.innerHTML = `<i class="fa-solid fa-dragon"></i> ${modeLabel} - เลเวล 3`;
             levelTag.className = "level-badge level-hard";
         }
 
@@ -306,22 +427,24 @@
             button.className = 'btn-option';
             button.id = `option-${index}`; 
             button.innerHTML = `<span style="color:var(--text-muted); font-weight:600; margin-right:4px;">${index + 1}.</span> ${option}`;
-            
             button.onclick = () => sendAnswerToBackend(currentQuiz.id, index, button);
             optionsContainer.appendChild(button);
         });
 
+        updateHearts();
+        startTimer();
         setTimeout(() => { playAudio(); }, 300);
     }
 
     function playAudio() {
         const audio = document.getElementById('quiz-audio');
-        if (audio.src) {
-             audio.play().catch(err => console.log("รอผู้ใช้มีส่วนร่วมหน้าจอก่อนเริ่มเปิดเสียง"));
-        }
+        if (audio.src) { audio.play().catch(e => console.log(e)); }
     }
 
     async function sendAnswerToBackend(questionId, selectedIndex, clickedButton) {
+        hasAnswered = true;
+        clearInterval(timerInterval);
+        
         const buttons = document.querySelectorAll('.btn-option');
         buttons.forEach(btn => btn.disabled = true);
 
@@ -334,50 +457,142 @@
             const data = await response.json();
             
             const resultDiv = document.getElementById('result');
+            const comboBadge = document.getElementById('combo-box');
             
             if (data && data.correct) {
                 clickedButton.classList.add('btn-correct'); 
+                document.getElementById('panda-avatar').innerText = "🤩";
+                document.getElementById('panda-talk').innerText = "เก่งมาก! ตอบถูกเผงเลย!";
+
+                combo++;
+                if (combo >= 2) {
+                    document.getElementById('combo-count').innerText = combo;
+                    comboBadge.style.display = 'inline-flex';
+                    document.getElementById('panda-avatar').innerText = "🔥";
+                }
+                
                 resultDiv.innerHTML = `<span style="color: var(--success-color);"><i class="fa-solid fa-circle-check"></i> ถูกต้องยอดเยี่ยม!</span>`;
                 totalScore++;
+                
+                // ตอบถูกก็แสดงเฉลยได้
+                showExplanation(selectedIndex);
+
             } else {
                 clickedButton.classList.add('btn-wrong'); 
+                document.getElementById('quiz-box').classList.add('shake-effect');
+                setTimeout(() => document.getElementById('quiz-box').classList.remove('shake-effect'), 400);
+
+                document.getElementById('panda-avatar').innerText = "😢";
+                document.getElementById('panda-talk').innerText = "โธ่.. พลาดไปนิดเดียว";
+
+                combo = 0;
+                comboBadge.style.display = 'none';
+                lives--;
+                updateHearts();
                 
-                if (data && data.correctAnswerIndex !== undefined && data.correctAnswerIndex !== null) {
+                if (data && data.correctAnswerIndex !== undefined) {
                     const correctButton = document.getElementById(`option-${data.correctAnswerIndex}`);
-                    if (correctButton) {
-                        correctButton.classList.add('btn-correct');
-                    }
+                    if (correctButton) correctButton.classList.add('btn-correct');
+                    showExplanation(data.correctAnswerIndex);
                 }
-                resultDiv.innerHTML = `<span style="color: var(--error-color);"><i class="fa-solid fa-circle-xmark"></i> ยังไม่ถูกนะน้า..</span>`;
+                resultDiv.innerHTML = `<span style="color: var(--error-color);"><i class="fa-solid fa-circle-xmark"></i> คำตอบยังไม่ถูกนะ</span>`;
             }
             
+            if (lives <= 0) { document.getElementById('next-button').innerText = 'ดูหน้าสรุปเกม'; }
             document.getElementById('next-button').style.display = 'block';
-        } catch (error) {
-            console.error("เกิดปัญหาระหว่างส่งตรวจคำตอบ:", error);
-            buttons.forEach(btn => btn.disabled = false);
-            document.getElementById('result').innerHTML = `<span style="color: var(--error-color);">ระบบตรวจคำตอบขัดข้อง</span>`;
-        }
+        } catch (error) { console.error(error); }
     }
 
-    function nextQuestion() {
-        currentIdx++;
-        showQuestion();
+    function nextQuestion() { currentIdx++; showQuestion(); }
+
+    // ฟังก์ชันแชร์คะแนน (ฟีเจอร์ที่ 3)
+    function shareScore() {
+        const modeLabel = currentMode === 'easy' ? 'โหมดง่าย 🌱' : currentMode === 'medium' ? 'โหมดจอมยุทธ์ ⚔️' : 'โหมดฮ่องเต้โหด 🐉';
+        let shareText = `🐼 บททดสอบหูทิพย์ภาษาจีน\n`;
+        shareText += `เป้าหมาย: ${modeLabel}\n`;
+        shareText += `คะแนนที่ทำได้: ${totalScore} / ${quizzes.length}\n`;
+        shareText += `มาประลองความแม่นยำกันเถอะ! ✨`;
+
+        navigator.clipboard.writeText(shareText).then(() => {
+            const btn = document.getElementById('btn-share');
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> คัดลอกผลลัพธ์ลงคลิปบอร์ดแล้ว!`;
+            btn.style.background = "#059669";
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-solid fa-share-nodes"></i> แชร์คะแนนอวดเพื่อน`;
+                btn.style.background = "#10b981";
+            }, 3000);
+        });
     }
 
     function renderSummary() {
-        const container = document.querySelector('.quiz-container');
+        clearInterval(timerInterval);
+        const container = document.getElementById('quiz-box');
+        
+        let titleText = "จบการท้าทายแล้ว!";
+        let iconHtml = '<i class="fa-solid fa-trophy"></i>';
+        let feedback = "ทำได้ดีมากครับ พัฒนาการฟังต่อไปนะ!";
+        const scorePercent = (totalScore / quizzes.length) * 100;
+        
+        if (lives <= 0) {
+            titleText = "GAME OVER!";
+            iconHtml = '<i class="fa-solid fa-heart-crack" style="color:#ef4444;"></i>';
+            feedback = "พลังชีวิตหมดก่อนเกลี้ยงเลย! ไว้ลองปรับโหมดง่ายแล้วมาฝึกใหม่นะ";
+        } else if (scorePercent >= 90) {
+            titleText = "ระดับ: ฮ่องเต้มาเอง! 👑";
+            iconHtml = '<i class="fa-solid fa-crown" style="color:#eab308;"></i>';
+            feedback = "หูเทพเจ้าของจริง ฟังออกหมดทุกคำไร้ที่ติครับ!";
+            initConfetti();
+        } else if (scorePercent >= 60) {
+            titleText = "ระดับ: จอมยุทธ์หน้าหยก ⚔️";
+            feedback = "ฝีมือไม่ธรรมดา ฟังออกเกินครึ่ง สู้ต่อไปจ้า!";
+            initConfetti();
+        }
+
         container.innerHTML = `
             <div class="summary-card">
-                <i class="fa-solid fa-trophy"></i>
-                <h2>จบการท้าทายแล้ว!</h2>
-                <p class="subtitle">มาดูคะแนนความสามารถในการฟังภาษาจีนของคุณกัน</p>
+                ${iconHtml}
+                <h2>${titleText}</h2>
+                <p class="subtitle">โหมดความยาก: ${currentMode === 'easy' ? 'ง่าย' : currentMode === 'medium' ? 'จอมยุทธ์' : 'ฮ่องเต้โหมดโหด'}</p>
                 <div class="score-big">${totalScore} / ${quizzes.length}</div>
-                <p>เก่งมากที่ทำจนจบ! พัฒนาต่อไปเรื่อยๆ นะครับ</p>
-                <button class="next-btn" style="display:block; margin-top:30px;" onclick="location.reload()">
-                    <i class="fa-solid fa-rotate-right"></i> เล่นอีกรอบ
+                <p>${feedback}</p>
+                
+                <button class="btn-share" id="btn-share" style="margin-top: 24px;" onclick="shareScore()">
+                    <i class="fa-solid fa-share-nodes"></i> แชร์คะแนนอวดเพื่อน
+                </button>
+                
+                <button class="next-btn" style="display:block; margin-top:12px; background: #1e293b;" onclick="location.reload()">
+                    <i class="fa-solid fa-rotate-right"></i> เล่นใหม่อีกรอบ
                 </button>
             </div>
         `;
+    }
+
+    // 🎇 ระบบเอฟเฟกต์พลุกระดาษฉลอง
+    function initConfetti() {
+        const canvas = document.getElementById("confetti-canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let pieces = [];
+        const colors = ["#f59e0b", "#10b981", "#3b82f6", "#ef4444", "#8b5cf6"];
+        for (let i = 0; i < 120; i++) {
+            pieces.push({
+                x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
+                rotation: Math.random() * 360, color: colors[Math.floor(Math.random() * colors.length)],
+                width: Math.random() * 6 + 6, height: Math.random() * 10 + 8,
+                speed: Math.random() * 3 + 2, rotationSpeed: Math.random() * 8 - 4
+            });
+        }
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pieces.forEach((p) => {
+                p.y += p.speed; p.rotation += p.rotationSpeed;
+                ctx.save(); ctx.translate(p.x + p.width/2, p.y + p.height/2); ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.fillStyle = p.color; ctx.fillRect(-p.width/2, -p.height/2, p.width, p.height); ctx.restore();
+                if (p.y > canvas.height) { p.y = -20; p.x = Math.random() * canvas.width; }
+            });
+            requestAnimationFrame(update);
+        }
+        update();
     }
 </script>
 </body>
