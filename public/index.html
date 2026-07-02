@@ -3,356 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinese Listening Challenge</title>
+    <title>Chinese Culture & Listening Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanakit:wght@400;600;700&family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Mitr', sans-serif;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Mitr', sans-serif; }
         body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
                         url('https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1920') no-repeat center center/cover;
             padding: 20px;
         }
-
         .container {
-            background: rgba(255, 245, 245, 0.95);
-            border-radius: 32px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            text-align: center;
-            border: 4px solid rgba(255, 255, 255, 0.5);
-            max-height: 90vh;
-            overflow-y: auto;
+            background: rgba(255, 245, 245, 0.95); border-radius: 32px; padding: 40px 30px;
+            width: 100%; max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: center;
+            border: 4px solid rgba(255, 255, 255, 0.5); max-height: 90vh; overflow-y: auto;
         }
-
-        .panda-avatar {
-            font-size: 64px;
-            margin-bottom: 15px;
-            display: inline-block;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .welcome-badge {
-            background-color: #1a2536;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 28px;
-            color: #2d3748;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            color: #718096;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .name-input-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            border: 2px dashed #fca5a5;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-
-        .name-label {
-            display: block;
-            font-size: 15px;
-            color: #4a5568;
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        .name-input {
-            width: 100%;
-            padding: 14px 20px;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.2s;
-            text-align: center;
-            color: #1a2536;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .name-input:disabled {
-            background-color: #cbd5e1 !important;
-            color: #475569 !important;
-            border: 2px solid #94a3b8 !important;
-            cursor: not-allowed !important;
-            pointer-events: none !important;
-        }
-
-        .confirm-name-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
-            transition: all 0.2s;
-        }
-
-        .confirm-name-btn:hover { background: #dc2626; }
-
-        .mode-list {
-            display: none; 
-            flex-direction: column;
-            gap: 16px;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .mode-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 24px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 18px;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        .mode-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-
-        .mode-meta {
-            font-size: 14px;
-            color: #718096;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .panda-avatar { font-size: 64px; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .welcome-badge { background-color: #1a2536; color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 13px; display: inline-block; margin-bottom: 20px; }
+        h1 { font-size: 28px; color: #2d3748; margin-bottom: 8px; }
+        .subtitle { color: #718096; font-size: 14px; margin-bottom: 25px; }
+        .name-input-container { background: #fff; padding: 20px; border-radius: 20px; margin-bottom: 25px; border: 2px dashed #fca5a5; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .name-label { display: block; font-size: 15px; color: #4a5568; font-weight: 600; margin-bottom: 10px; text-align: left; }
+        .name-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; outline: none; text-align: center; color: #1a2536; font-weight: 600; margin-bottom: 12px; }
+        .confirm-name-btn { background: #ef4444; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
+        .mode-list { display: none; flex-direction: column; gap: 16px; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .mode-card { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; font-size: 18px; font-weight: 600; text-align: left; }
+        .mode-card:hover { transform: scale(1.02); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .mode-meta { font-size: 14px; color: #718096; font-weight: 400; display: flex; align-items: center; gap: 12px; }
         .easy-card { background-color: #e6f7f0; color: #059669; border: 2px solid #a7f3d0; }
         .medium-card { background-color: #fffbeb; color: #d97706; border: 2px solid #fde68a; }
         .hard-card { background-color: #fef2f2; color: #dc2626; border: 2px solid #fca5a5; }
-
+        .category-culture-card { background-color: #fff7ed !important; color: #ea580c !important; border: 2px solid #ffedd5 !important; }
+        .category-chinese-card { background-color: #fae8ff !important; color: #a21caf !important; border: 2px solid #f5d0fe !important; }
         .screen { display: none; }
         .active-screen { display: block; }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            background: #fff;
-            padding: 12px 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
+        .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; background: #fff; padding: 12px 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .status-item { font-size: 15px; font-weight: 600; color: #4a5568; }
-
-        .audio-box {
-            background: #fff;
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .play-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
-        }
-
+        .audio-box { background: #fff; padding: 30px; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .play-btn { background: #ef4444; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4); }
         .options-grid { display: flex; flex-direction: column; gap: 12px; }
-
-        .option-btn {
-            background: #fff;
-            color: #2d3748;
-            border: 2px solid #e2e8f0;
-            padding: 16px;
-            border-radius: 15px;
-            font-size: 16px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
+        .option-btn { background: #fff; color: #2d3748; border: 2px solid #e2e8f0; padding: 16px; border-radius: 15px; font-size: 16px; text-align: left; cursor: pointer; transition: all 0.2s; }
         .option-btn:hover { background: #f7fafc; transform: translateX(5px); }
-
-        .history-container {
-            margin-top: 25px;
-            text-align: left;
-            background: #fff;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .history-title {
-            font-size: 18px;
-            color: #1a2536;
-            font-weight: 600;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 8px;
-        }
-
-        .history-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .history-table th {
-            background-color: #f8fafc;
-            color: #64748b;
-            font-weight: 600;
-            padding: 10px;
-            text-align: left;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .history-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #f1f5f9;
-            vertical-align: middle;
-        }
-
-        .badge-status {
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 12px;
-            display: inline-block;
-        }
+        .history-container { margin-top: 25px; text-align: left; background: #fff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .history-title { font-size: 18px; color: #1a2536; font-weight: 600; margin-bottom: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+        .history-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .history-table th { background-color: #f8fafc; color: #64748b; font-weight: 600; padding: 10px; text-align: left; border-bottom: 2px solid #e2e8f0; }
+        .history-table td { padding: 12px 10px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+        .badge-status { padding: 4px 8px; border-radius: 8px; font-weight: 600; font-size: 12px; display: inline-block; }
         .badge-correct { background-color: #dcfce7; color: #15803d; }
         .badge-wrong { background-color: #fee2e2; color: #b91c1c; }
         .badge-timeout { background-color: #fef3c7; color: #b45309; }
-
-        .mini-sound-btn {
-            background: #6366f1;
-            color: white;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .restart-btn {
-            background: #1a2536;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 15px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 25px;
-            width: 100%;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-box {
-            background: white;
-            padding: 30px;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-            border: 3px solid #f1f5f9;
-            animation: popupScale 0.25s ease-out;
-        }
-
-        @keyframes popupScale {
-            0% { transform: scale(0.7); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-btn {
-            background: #1a2536;
-            color: white;
-            border: none;
-            padding: 12px 35px;
-            border-radius: 15px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: 600;
-            margin-top: 5px;
-        }
+        .mini-sound-btn { background: #6366f1; color: white; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        .restart-btn { background: #1a2536; color: white; border: none; padding: 14px 28px; border-radius: 15px; font-size: 16px; cursor: pointer; margin-top: 25px; width: 100%; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; }
+        .modal-box { background: white; padding: 30px; border-radius: 24px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.25); animation: popupScale 0.25s ease-out; }
+        @keyframes popupScale { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .modal-btn { background: #1a2536; color: white; border: none; padding: 12px 35px; border-radius: 15px; font-size: 16px; cursor: pointer; width: 100%; font-weight: 600; margin-top: 5px; }
     </style>
 </head>
 <body>
 
     <div class="container">
         
+        <!-- หน้าจอที่ 1: เมนูหลัก -->
         <div id="menu-screen" class="screen active-screen">
             <div class="panda-avatar">🐼</div>
-            <div class="welcome-badge">ระบบสอบพาร์ทฟังภาษาจีนเต็มรูปแบบ </div>
-            <h1>Chinese Listening</h1>
-            <p class="subtitle">สุ่มคำถามชุดละ 20 ข้อ แยกเกรดความยากตามเวลาและค่าพลังชีวิต</p>
+            <div class="welcome-badge">ระบบทดสอบคณิตศาสตร์และภาษาจีนเต็มรูปแบบ</div>
+            <h1>Chinese Challenge Quiz</h1>
+            <p class="subtitle">ระบบสุ่มโจทย์ 20 ข้อ และสลับตำแหน่งช้อยส์คำตอบทุกรอบ</p>
             
             <div class="name-input-container">
                 <label class="name-label" for="username" id="label-username">ขั้นตอนที่ 1: ลงชื่อเข้าสู่ระบบสอบ</label>
-                <input type="text" id="username" class="name-input" placeholder="กรุณาพิมพ์ชื่อจริงหรือชื่อเล่นที่นี่..." autocomplete="off">
-                <button type="button" id="btn-confirm-name" class="confirm-name-btn" onclick="lockAndVerifyName()">⚔️ ลงทะเบียนและล็อกชื่อผู้เล่น</button>
+                <input type="text" id="username" class="name-input" placeholder="กรุณาพิมพ์ชื่อผู้เล่นที่นี่...">
+                <button type="button" id="btn-confirm-name" class="confirm-name-btn" onclick="lockAndVerifyName()">⚔️ ลงทะเบียนล็อกชื่อผู้เล่น</button>
             </div>
             
             <div class="mode-list" id="mode-selection-list">
@@ -371,6 +99,27 @@
             </div>
         </div>
 
+        <!-- หน้าจอที่ 2: เลือกประเภท -->
+        <div id="category-screen" class="screen">
+            <div class="panda-avatar">🎋</div>
+            <div class="welcome-badge" id="selected-mode-badge">ระดับที่เลือก: -</div>
+            <h1>เลือกประเภทคำถาม</h1>
+            <p class="subtitle">เลือกแนวข้อสอบที่คุณต้องการท้าทายฝีมือเพื่อเริ่มเกม</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="mode-card category-culture-card" onclick="selectCategory('culture')">
+                    <div>🏮 ประเพณีและวัฒนธรรมจีน</div>
+                    <div class="mode-meta" style="color: #ea580c;">แบบไฮบริด มีโจทย์ตัวหนังสือ + เสียงเปิดคลอ</div>
+                </div>
+                <div class="mode-card category-chinese-card" onclick="selectCategory('chinese')">
+                    <div>🎵 พาร์ทฟังภาษาจีน (Listening)</div>
+                    <div class="mode-meta" style="color: #a21caf;">เน้นทักษะการฟังไฟล์เสียงภาษาจีนกลาง</div>
+                </div>
+            </div>
+            <button class="restart-btn" style="background: #64748b; margin-top: 25px;" onclick="switchScreen('menu-screen')">🔙 ย้อนกลับ</button>
+        </div>
+
+        <!-- หน้าจอที่ 3: หน้าจอเล่นเกม -->
         <div id="game-screen" class="screen">
             <div class="game-header">
                 <div class="status-item" id="info-username" style="color:#6366f1; font-weight: 700;">ผู้เล่น: -</div>
@@ -378,12 +127,16 @@
                 <div class="status-item" id="info-lives">❤️ x5</div>
                 <div class="status-item" id="info-timer" style="color: #ef4444;">⏱️ 20s</div>
             </div>
-            <div class="audio-box">
+            
+            <div id="question-text" style="font-size: 20px; font-weight: 600; color: #2d3748; margin-bottom: 25px; padding: 25px; background: #fff; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: none;"></div>
+
+            <div class="audio-box" id="audio-player-zone" style="display: none;">
                 <button class="play-btn" onclick="playAudio()">🔊 กดเพื่อฟังเสียงโจทย์</button>
             </div>
             <div class="options-grid" id="options-container"></div>
         </div>
 
+        <!-- หน้าจอที่ 4: สรุปผล -->
         <div id="result-screen" class="screen">
             <div class="panda-avatar" id="result-emoji">🏆</div>
             <h1 id="result-title">จบการทดสอบ!</h1>
@@ -391,29 +144,27 @@
             <p id="result-comment" style="color: #718096; margin-bottom: 20px;"></p>
             
             <div class="history-container">
-                <div class="history-title">📝 ตารางสรุปผลและเฉลยคำตอบย้อนหลัง</div>
+                <div class="history-title">📝 ตารางสรุปผลและคำตอบย้อนหลัง</div>
                 <div style="overflow-x: auto;">
                     <table class="history-table">
                         <thead>
                             <tr>
                                 <th>ข้อ</th>
-                                <th>เสียง</th>
+                                <th>โจทย์/เสียง</th>
                                 <th>คำตอบของคุณ</th>
-                                <th>เฉลยที่ถูกต้อง</th>
                                 <th>ผลลัพธ์</th>
                             </tr>
                         </thead>
-                        <tbody id="history-table-body">
-                        </tbody>
+                        <tbody id="history-table-body"></tbody>
                     </table>
                 </div>
             </div>
-
-            <button class="restart-btn" onclick="goToMenu()">🔄 กลับไปหน้าเลือกโหมดท้าทายอีกครั้ง</button>
+            <button class="restart-btn" onclick="goToMenu()">🔄 กลับไปหน้าหลัก</button>
         </div>
 
     </div>
 
+    <!-- แจ้งเตือน Modal -->
     <div id="custom-alert" class="modal-overlay">
         <div class="modal-box">
             <div id="alert-icon" style="font-size: 52px; margin-bottom: 12px;">🎉</div>
@@ -434,6 +185,8 @@
         let currentAudio = null;
         let playerName = "";
         let quizHistory = [];
+        let selectedMode = ""; 
+        let selectedCategory = ""; 
 
         const soundCorrect = new Audio('https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav'); 
         const soundWrong = new Audio('https://assets.mixkit.co/active_storage/sfx/2955/2955-84.wav');   
@@ -443,10 +196,8 @@
             document.getElementById('alert-icon').innerText = icon;
             document.getElementById('alert-title').innerText = title;
             document.getElementById('alert-message').innerText = message;
-            
             const alertModal = document.getElementById('custom-alert');
             alertModal.style.display = 'flex';
-            
             document.getElementById('alert-close-btn').onclick = function() {
                 alertModal.style.display = 'none';
                 if (callback) callback();
@@ -456,27 +207,32 @@
         function lockAndVerifyName() {
             const nameField = document.getElementById('username');
             const nameInput = nameField.value.trim();
-
             if (!nameInput) {
                 soundWrong.play();
-                showCustomAlert('📛', 'พบข้อผิดพลาด', 'คุณจำเป็นต้องพิมพ์ชื่อผู้เล่นเข้าสู่ระบบก่อนครับ!');
+                showCustomAlert('📛', 'พบข้อผิดพลาด', 'คุณจำเป็นต้องพิมพ์ชื่อผู้เล่นก่อนครับ!');
                 return;
             }
-
             nameField.disabled = true;
-            nameField.setAttribute('disabled', 'disabled');
             playerName = nameInput;
-
             document.getElementById('btn-confirm-name').style.display = 'none';
             document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อสำเร็จแล้ว!</span>';
             document.getElementById('mode-selection-list').style.display = 'flex';
         }
 
-        async function selectMode(mode) {
-            document.getElementById('info-username').innerText = `ผู้เล่น: ${playerName}`;
+        function selectMode(mode) {
+            selectedMode = mode;
+            const badge = document.getElementById('selected-mode-badge');
+            if (mode === 'easy') badge.innerHTML = "🌱 ระดับที่เลือก: <b>โหมดง่าย</b>";
+            else if (mode === 'medium') badge.innerHTML = "🛡️ ระดับที่เลือก: <b>โหมดจอมยุทธ์</b>";
+            else if (mode === 'hard') badge.innerHTML = "🐉 ระดับที่เลือก: <b>โหมดฮ่องเต้โหด</b>";
+            switchScreen('category-screen');
+        }
 
+        async function selectCategory(category) {
+            selectedCategory = category;
+            document.getElementById('info-username').innerText = `ผู้เล่น: ${playerName}`;
             try {
-                const response = await fetch(`/api/quiz?mode=${mode}`);
+                const response = await fetch(`/api/quiz?mode=${selectedMode}&category=${selectedCategory}`);
                 if (!response.ok) throw new Error("เกิดข้อผิดพลาดจากเครือข่ายฐานข้อมูลหลังบ้าน");
                 currentQuestions = await response.json();
                 
@@ -484,9 +240,9 @@
                 score = 0;
                 quizHistory = []; 
 
-                if (mode === 'easy') { lives = 5; maxTimeAllowed = 20; } 
-                else if (mode === 'medium') { lives = 3; maxTimeAllowed = 15; } 
-                else if (mode === 'hard') { lives = 1; maxTimeAllowed = 7; }
+                if (selectedMode === 'easy') { lives = 5; maxTimeAllowed = 20; } 
+                else if (selectedMode === 'medium') { lives = 3; maxTimeAllowed = 15; } 
+                else if (selectedMode === 'hard') { lives = 1; maxTimeAllowed = 7; }
 
                 switchScreen('game-screen');
                 loadQuestion();
@@ -503,13 +259,31 @@
 
             document.getElementById('info-progress').innerText = `ข้อที่: ${currentQuestionIndex + 1}/${currentQuestions.length}`;
             document.getElementById('info-lives').innerText = `❤️ x${lives}`;
-            
             timeLeft = maxTimeAllowed;
             document.getElementById('info-timer').innerText = `⏱️ ${timeLeft}s`;
             
             const currentQuestion = currentQuestions[currentQuestionIndex];
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
+
+            const qTextField = document.getElementById('question-text');
+            const audioZone = document.getElementById('audio-player-zone');
+            
+            const questionContent = currentQuestion.question || currentQuestion.questionText || currentQuestion.text || currentQuestion.title;
+            if (questionContent) {
+                qTextField.innerText = questionContent;
+                qTextField.style.display = 'block';
+            } else {
+                qTextField.style.display = 'none';
+            }
+
+            if (currentQuestion.audio) {
+                audioZone.style.display = 'block';
+                playAudio();
+            } else {
+                audioZone.style.display = 'none';
+                if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+            }
 
             currentQuestion.options.forEach((option, index) => {
                 const btn = document.createElement('button');
@@ -518,18 +292,19 @@
                 btn.onclick = () => handleAnswer(currentQuestion.id, index);
                 optionsContainer.appendChild(btn);
             });
-
-            playAudio();
             startTimer();
         }
 
         function playAudio() {
+            const currentQ = currentQuestions[currentQuestionIndex];
+            if (!currentQ || !currentQ.audio) return;
             if (currentAudio) currentAudio.pause();
-            currentAudio = new Audio(currentQuestions[currentQuestionIndex].audio);
-            currentAudio.play().catch(e => console.log("บราวเซอร์ป้องกันการเล่นอัตโนมัติ"));
+            currentAudio = new Audio(currentQ.audio);
+            currentAudio.play().catch(e => console.log("Auto-play blocked"));
         }
 
         function playHistoryAudio(audioUrl) {
+            if (!audioUrl || audioUrl === "undefined") return;
             if (currentAudio) currentAudio.pause();
             currentAudio = new Audio(audioUrl);
             currentAudio.play();
@@ -543,19 +318,18 @@
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
                     lives--;
-                    
                     const q = currentQuestions[currentQuestionIndex];
+                    const questionContent = q.question || q.questionText || q.text || q.title || "คำถามพาร์ทฟัง";
+
                     quizHistory.push({
                         id: currentQuestionIndex + 1,
+                        questionText: questionContent,
                         audio: q.audio,
                         userAnswer: "⏰ หมดเวลาการทำข้อ",
-                        correctAnswer: "กำลังตรวจข้อมูลหลังบ้าน...", 
                         status: "timeout"
                     });
-
                     soundTimeout.play(); 
-                    showCustomAlert('⏱️', 'หมดเวลาทำข้อสอบ!', 'คุณใช้เวลาคิดนานเกินไป หักพลังชีวิต 1 ดวง ❌', () => {
-                        fetchCorrectAnswerText(q.id, quizHistory.length - 1);
+                    showCustomAlert('⏱️', 'หมดเวลาทำข้อสอบ!', 'หักพลังชีวิต 1 ดวง ❌', () => {
                         currentQuestionIndex++;
                         loadQuestion();
                     });
@@ -567,72 +341,64 @@
             clearInterval(timerInterval);
             const currentQ = currentQuestions[currentQuestionIndex];
             const selectedText = currentQ.options[selectedIndex];
+            const questionContent = currentQ.question || currentQ.questionText || currentQ.text || currentQ.title || "คำถามพาร์ทฟัง";
+
+            // 🛠️ แปลง Index ตัวเลือกหลังบ้านที่โดนสลับ ให้กลับไปเป็นค่าเดิมก่อนส่งไปตรวจคำตอบ
+            let originalIndexToSend = selectedIndex;
+            if (currentQ.shuffledOrder && currentQ.shuffledOrder[selectedIndex] !== undefined) {
+                originalIndexToSend = currentQ.shuffledOrder[selectedIndex];
+            }
 
             try {
                 const response = await fetch('/api/check-answer', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ questionId, selectedIndex })
+                    body: JSON.stringify({ questionId, selectedIndex: originalIndexToSend }) 
                 });
                 const result = await response.json();
 
                 quizHistory.push({
                     id: currentQuestionIndex + 1,
+                    questionText: questionContent,
                     audio: currentQ.audio,
                     userAnswer: selectedText,
-                    correctAnswer: result.correctAnswerText,
                     status: result.correct ? "correct" : "wrong"
                 });
 
                 if (result.correct) {
                     score++;
                     soundCorrect.play(); 
-                    showCustomAlert('🎉', 'ตอบได้ถูกต้อง!', `ยอดเยี่ยมมากคุณ ${playerName} ยินดีด้วยรับ 1 คะแนน! 🟢`, () => {
+                    showCustomAlert('🎉', 'ตอบได้ถูกต้อง!', `ยอดเยี่ยมรับ 1 คะแนน! 🟢`, () => {
                         currentQuestionIndex++;
                         loadQuestion();
                     });
                 } else {
                     lives--;
                     soundWrong.play(); 
-                    showCustomAlert('❌', 'คำตอบไม่ถูกต้อง!', `เสียใจด้วยครับคุณ ${playerName} โดนหักพลังชีวิต 1 ดวง\n\n📌 เฉลยคำตอบที่ถูกต้องคือ:\n👉 "${result.correctAnswerText}"`, () => {
+                    showCustomAlert('❌', 'คำตอบไม่ถูกต้อง!', `โดนหักพลังชีวิต 1 ดวง`, () => {
                         currentQuestionIndex++;
                         loadQuestion();
                     });
                 }
             } catch (e) {
-                showCustomAlert('⚠️', 'ระบบผิดพลาด', 'การส่งค่าตรวจคำตอบไปยังเซิร์ฟเวอร์ขัดข้อง');
+                showCustomAlert('⚠️', 'ระบบผิดพลาด', 'การส่งค่าตรวจคำตอบล้มเหลว');
             }
-        }
-
-        async function fetchCorrectAnswerText(questionId, historyIndex) {
-            try {
-                const response = await fetch('/api/check-answer', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ questionId, selectedIndex: -1 })
-                });
-                const result = await response.json();
-                if(quizHistory[historyIndex]) {
-                    quizHistory[historyIndex].correctAnswer = result.correctAnswerText;
-                }
-            } catch(e) {}
         }
 
         function endGame() {
             clearInterval(timerInterval);
             if (currentAudio) currentAudio.pause();
-
             document.getElementById('result-score').innerText = `คุณ ${playerName} ทำได้ ${score} จากทั้งหมด ${currentQuestions.length} คะแนน`;
             const resultTitle = document.getElementById('result-title');
             const resultEmoji = document.getElementById('result-emoji');
             const resultComment = document.getElementById('result-comment');
 
             if (lives <= 0) {
-                resultEmoji.innerText = '💀'; resultTitle.innerText = 'พลังชีวิตหมดสิ้น!'; resultComment.innerText = 'สอบพ่ายแพ้พลังชีวิตหมด! ตรวจสอบตารางเฉลยละเอียดด้านล่างเพื่อทบทวนคำศัพท์นะครับ!';
+                resultEmoji.innerText = '💀'; resultTitle.innerText = 'พลังชีวิตหมดสิ้น!'; resultComment.innerText = 'สอบพ่ายแพ้พลังชีวิตหมดความสามารถ!';
             } else if (score >= 16) {
-                resultEmoji.innerText = '👑'; resultTitle.innerText = 'ผ่านการทดสอบระดับเทพ!'; resultComment.innerText = `สุดยอดมากคุณ ${playerName}! ทักษะการฟังของคุณเยี่ยมยอดมาก!`;
+                resultEmoji.innerText = '👑'; resultTitle.innerText = 'ผ่านระดับเทพ!'; resultComment.innerText = 'ทักษะเยี่ยมยอดรอบรู้ขงเบ้งมาเอง!';
             } else {
-                resultEmoji.innerText = '👍'; resultTitle.innerText = 'ผ่านการทดสอบแล้ว'; resultComment.innerText = 'ทำคะแนนได้ดีแล้ว! ตรวจสอบข้อที่ทำผิดพลาดในตารางด้านล่างได้เลยครับ';
+                resultEmoji.innerText = '👍'; resultTitle.innerText = 'ผ่านการทดสอบแล้ว'; resultComment.innerText = 'ทำได้ดีมากครับตรวจสอบตารางด้านล่างได้เลย';
             }
 
             const tableBody = document.getElementById('history-table-body');
@@ -640,22 +406,23 @@
 
             quizHistory.forEach(item => {
                 const row = document.createElement('tr');
-                
-                let statusBadge = "";
-                if(item.status === "correct") statusBadge = `<span class="badge-status badge-correct">✓ ถูกต้อง</span>`;
-                else if(item.status === "wrong") statusBadge = `<span class="badge-status badge-wrong">✗ ผิด</span>`;
-                else statusBadge = `<span class="badge-status badge-timeout">⏳ หมดเวลา</span>`;
+                let statusBadge = item.status === "correct" ? `<span class="badge-status badge-correct">✓ ถูกต้อง</span>` : (item.status === "wrong" ? `<span class="badge-status badge-wrong">✗ ผิด</span>` : `<span class="badge-status badge-timeout">⏳ หมดเวลา</span>`);
+
+                let questionDisplay = item.questionText;
+                if(item.audio && item.questionText === "คำถามพาร์ทฟัง") {
+                    questionDisplay = `<button class="mini-sound-btn" onclick="playHistoryAudio('${item.audio}')">🔊 ฟังซ้ำ</button>`;
+                } else if(item.audio && item.questionText !== "คำถามพาร์ทฟัง") {
+                    questionDisplay = `<div>${item.questionText}</div><button class="mini-sound-btn" style="margin-top:5px;" onclick="playHistoryAudio('${item.audio}')">🔊 ฟังซ้ำ</button>`;
+                }
 
                 row.innerHTML = `
                     <td style="font-weight:600; text-align:center;">${item.id}</td>
-                    <td><button class="mini-sound-btn" onclick="playHistoryAudio('${item.audio}')">🔊 ฟังซ้ำ</button></td>
+                    <td>${questionDisplay}</td>
                     <td style="color: ${item.status==='correct'?'#16803d':'#b91c1c'};">${item.userAnswer}</td>
-                    <td style="color: #1a2536; font-weight:600;">${item.correctAnswer}</td>
                     <td>${statusBadge}</td>
                 `;
                 tableBody.appendChild(row);
             });
-
             switchScreen('result-screen');
         }
 
@@ -664,29 +431,15 @@
             document.getElementById(screenId).classList.add('active-screen');
         }
 
-        // 🛠️ ปรับปรุงลอจิก: จำชื่อเดิมไว้ ไม่ล้างค่า และแสดงหน้าเลือกโหมดต่อได้ทันที
         function goToMenu() { 
             const nameField = document.getElementById('username');
-            
             if (playerName) {
-                // หากผู้เล่นเคยพิมพ์ชื่อล็อกสำเร็จไว้แล้ว ให้ล็อก Input ค้างไว้ และแสดงรายการโหมดความยากทันที
                 nameField.disabled = true;
-                nameField.setAttribute('disabled', 'disabled');
-                nameField.value = playerName; // ดึงชื่อเดิมขึ้นมาใส่ไว้ใน Input
-                
+                nameField.value = playerName;
                 document.getElementById('btn-confirm-name').style.display = 'none';
                 document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อสำเร็จแล้ว!</span>';
                 document.getElementById('mode-selection-list').style.display = 'flex';
-            } else {
-                // กรณี fallback ป้องกันระบบขัดข้อง ถ้าไม่มีชื่อ ให้กลับไปหน้ากรอกชื่อปกติ
-                nameField.disabled = false;
-                nameField.removeAttribute('disabled');
-                nameField.value = "";
-                document.getElementById('btn-confirm-name').style.display = 'block';
-                document.getElementById('label-username').innerText = 'ขั้นตอนที่ 1: ลงชื่อเข้าสู่ระบบสอบ';
-                document.getElementById('mode-selection-list').style.display = 'none';
             }
-
             switchScreen('menu-screen'); 
         }
     </script>

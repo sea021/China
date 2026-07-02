@@ -2,13 +2,13 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// ชี้เป้าโฟลเดอร์สำหรับหน้าเว็บสติก (HTML/CSS/JS)
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-// คลังคำถาม 20 ข้อ แบ่งระดับความยาก
-const quizData = [
-    // === LEVEL 1: เริ่มต้นเบบี๋ (คำศัพท์พื้นฐานที่ต้องรู้) ===
+// ==========================================
+// คลังคำถาม 1: พาร์ทฟังภาษาจีน (Chinese Listening)
+// ==========================================
+const chineseListeningData = [
     {
         id: 1,
         audio: 'https://www.purpleculture.net/mp3/ni3hao3.mp3',
@@ -51,8 +51,6 @@ const quizData = [
         options: ['请问 (ขอถามหน่อย)', '你好 (สวัสดี)', '谢谢 (ขอบคุณ)', '再见 (ลาก่อน)'],
         correctAnswer: 0
     },
-
-    // === LEVEL 2: เริ่มจริงจัง (ตัวเลข เวลา และคำสรรพนามรอบตัว) ===
     {
         id: 8,
         audio: 'https://www.purpleculture.net/mp3/hao3.mp3',
@@ -95,8 +93,6 @@ const quizData = [
         options: ['昨天 (เมื่อวาน)', '今天 (วันนี้)', '明天 (พรุ่งนี้)', '现在 (ตอนนี้)'],
         correctAnswer: 1
     },
-
-    // === LEVEL 3: ปราบเซียน (ประโยคสนทนาสั้นและคำกริยาที่ซับซ้อนขึ้น) ===
     {
         id: 15,
         audio: 'https://www.purpleculture.net/mp3/xian4zai4ji3dian3.mp3',
@@ -135,23 +131,113 @@ const quizData = [
     }
 ];
 
-// 1. API ส่งคำถาม
+// ==========================================
+// คลังคำถาม 2: ประเพณีและวัฒนธรรมจีน (Culture ไฮบริด)
+// ==========================================
+const cultureData = [
+    {
+        id: 101,
+        question: "เทศกาลใดของจีนที่มีธรรมเนียมการกิน 'ขนมบ๊ะจ่าง' และแข่งเรือมังกร?",
+        audio: "https://www.purpleculture.net/mp3/duan1wu3jie2.mp3",
+        options: ["เทศกาลตรุษจีน", "เทศกาลไหว้พระจันทร์", "เทศกาลขนมจ้าง (ตวนอู่)", "เทศกาลเชงเม้ง"],
+        correctAnswer: 2
+    },
+    {
+        id: 102,
+        question: "สัตว์ชนิดใดที่เป็นสัญลักษณ์ของความทรงพลัง ความยิ่งใหญ่ และจักรพรรดิของจีน?",
+        audio: "https://www.purpleculture.net/mp3/long2.mp3",
+        options: ["มังกร (龙)", "หงส์ (凤凰)", "สิงโต (狮子)", "แพนด้า (熊猫)"],
+        correctAnswer: 0
+    },
+    {
+        id: 103,
+        question: "ตามความเชื่อของชาวจีน สีใดที่สื่อถึงความสุข โชคลาภ และความเป็นสิริมงคลนิยมใช้ในงานมงคล?",
+        audio: "https://www.purpleculture.net/mp3/hong2se4.mp3",
+        options: ["สีขาว", "สีเหลือง", "สีดำ", "สีแดง"],
+        correctAnswer: 3
+    },
+    {
+        id: 104,
+        question: "ในวันตรุษจีน เงินขวัญถุงที่ผู้ใหญ่จะมอบให้เด็ก ๆ บรรจุในซองสีแดง เรียกว่าอะไร?",
+        audio: "https://www.purpleculture.net/mp3/hong2bao1.mp3",
+        options: ["กิโมโน", "อั่งเปา / แต๊ะเอีย", "ขนมเข่ง", "เกี๊ยว"],
+        correctAnswer: 1
+    },
+    {
+        id: 105,
+        question: "อาหารชนิดใดที่ชาวจีนนิยมทานในวันตรุษจีนเพราะมีรูปร่างคล้าย 'เงินตำลึงจีน' โบราณ สื่อถึงความมั่งคั่ง?",
+        audio: "https://www.purpleculture.net/mp3/jiao3zi5.mp3",
+        options: ["เกี๊ยว (饺子)", "เต้าหู้", "ก๋วยเตี๋ยวสายยาว", "ปอเปี๊ยะ"],
+        correctAnswer: 0
+    },
+    {
+        id: 106,
+        question: "ศิลปะการต่อสู้และออกกำลังกายโบราณของจีนที่เน้นความนุ่มนวลและการคุมลมปราณคือข้อใด?",
+        audio: "https://www.purpleculture.net/mp3/tai4ji2quan2.mp3",
+        options: ["เทควันโด", "มวยไทย", "มวยไทเก๊ก (太极拳)", "คาราเต้"],
+        correctAnswer: 2
+    },
+    {
+        id: 107,
+        question: "ตัวเลขใดในวัฒนธรรมจีนที่ออกเสียงคล้ายคำว่า 'ความร่ำรวย' (ฟา) และถือเป็นเลขมงคลสูงสุดในการทำธุรกิจ?",
+        audio: "https://www.purpleculture.net/mp3/ba1.mp3",
+        options: ["เลข 4", "เลข 7", "เลข 8", "เลข 9"],
+        correctAnswer: 2
+    }
+];
+
+// ฟังก์ชันสำหรับสุ่มสลับตำแหน่ง Array (Fisher-Yates Shuffle)
+function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// 1. API ส่งคำถาม (สุ่มข้อ + สุ่มสลับช้อยส์)
 app.get('/api/quiz', (req, res) => {
-    const secureQuiz = quizData.map(q => ({
-        id: q.id,
-        audio: q.audio,
-        options: q.options
-    }));
+    const { category } = req.query;
+    let selectedData = [];
+
+    if (category === 'culture') {
+        selectedData = cultureData;
+    } else {
+        selectedData = chineseListeningData;
+    }
+
+    // สุ่มสลับลำดับโจทย์ทั้งหมดก่อน แล้วตัดเอามาสุ่มชุดละ 20 ข้อ
+    const shuffledQuestions = shuffleArray(selectedData).slice(0, 20);
+
+    // แมปข้อมูลและสั่งสุ่มตำแหน่งตัวเลือกภายในข้อ
+    const secureQuiz = shuffledQuestions.map(q => {
+        const optionsWithIndex = q.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
+        const shuffledOptions = shuffleArray(optionsWithIndex);
+
+        return {
+            id: q.id,
+            audio: q.audio || null,
+            question: q.question || null,
+            options: shuffledOptions.map(o => o.text),
+            shuffledOrder: shuffledOptions.map(o => o.originalIndex) // แนบแมปตำแหน่งส่งไปหน้าบ้านใช้ถอดรหัส
+        };
+    });
+
     res.json(secureQuiz);
 });
 
-// 2. API ตรวจคำตอบ
+// 2. API ตรวจคำตอบ (ดักตรวจจากคลัง)
 app.post('/api/check-answer', (req, res) => {
     const { questionId, selectedIndex } = req.body;
-    const question = quizData.find(q => q.id === questionId);
+    
+    let question = chineseListeningData.find(q => q.id === questionId);
+    if (!question) {
+        question = cultureData.find(q => q.id === questionId);
+    }
     
     if (!question) {
-        return res.status(404).json({ error: 'ไม่พบคำถาม' });
+        return res.status(404).json({ error: 'ไม่พบคำถามในคลังข้อสอบ' });
     }
 
     let isCorrect = false;
@@ -168,14 +254,10 @@ app.post('/api/check-answer', (req, res) => {
     });
 });
 
-// 🌟 แก้ไขจุดเจ้าปัญหาตรงนี้ครับ: ใช้พาร์ทกำหนดแบบเจาะจง ไม่ใช้เครื่องหมายดอกจันแปลก ๆ เพื่อตัดปัญหากับ Express ทุกเวอร์ชัน
-app.use(express.static(path.join(__dirname, 'public')));
-   
-   app.get('/', (req, res) => {
-       res.sendFile(path.join(__dirname, 'public', 'index.html'));
-   });
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-// 🌟 ไฮบริดตรวจสอบระบบ: ถ้าเปิดบนคอมตัวเอง รันพอร์ต 3000 อัตโนมัติ
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
     const PORT = 3000;
     app.listen(PORT, () => {
