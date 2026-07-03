@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinese Culture & Listening Challenge</title>
+    <title>Chinese Culture & Listening Quiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
@@ -19,19 +19,17 @@
         .container {
             background: rgba(255, 245, 245, 0.95); border-radius: 32px; padding: 40px 30px;
             width: 100%; max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: center;
-            border: 4px solid rgba(255, 255, 255, 0.5); max-height: 90vh; overflow-y: auto;
+            border: 4px solid rgba(255, 255, 255, 0.5); max-height: 95vh; overflow-y: auto;
         }
         .panda-avatar { font-size: 64px; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         .welcome-badge { background-color: #1a2536; color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 13px; display: inline-block; margin-bottom: 20px; }
         h1 { font-size: 28px; color: #2d3748; margin-bottom: 8px; }
         .subtitle { color: #718096; font-size: 14px; margin-bottom: 25px; }
-        .name-input-container { background: #fff; padding: 20px; border-radius: 20px; margin-bottom: 25px; border: 2px dashed #fca5a5; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .name-label { display: block; font-size: 15px; color: #4a5568; font-weight: 600; margin-bottom: 10px; text-align: left; }
-        .name-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; outline: none; text-align: center; color: #1a2536; font-weight: 600; margin-bottom: 12px; }
+        .name-input-container { background: #fff; padding: 20px; border-radius: 20px; margin-bottom: 25px; border: 2px dashed #fca5a5; }
+        .name-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; outline: none; text-align: center; font-weight: 600; margin-bottom: 12px; }
         .confirm-name-btn { background: #ef4444; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
-        .mode-list { display: none; flex-direction: column; gap: 16px; animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .mode-list { display: none; flex-direction: column; gap: 16px; }
         .mode-card { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; font-size: 18px; font-weight: 600; text-align: left; }
         .mode-card:hover { transform: scale(1.02); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
         .mode-meta { font-size: 14px; color: #718096; font-weight: 400; display: flex; align-items: center; gap: 12px; }
@@ -44,8 +42,8 @@
         .active-screen { display: block; }
         .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; background: #fff; padding: 12px 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .status-item { font-size: 15px; font-weight: 600; color: #4a5568; }
-        .audio-box { background: #fff; padding: 30px; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .play-btn { background: #ef4444; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4); }
+        .audio-box { background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .play-btn { background: #ef4444; color: white; border: none; padding: 14px 30px; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4); }
         .options-grid { display: flex; flex-direction: column; gap: 12px; }
         .option-btn { background: #fff; color: #2d3748; border: 2px solid #e2e8f0; padding: 16px; border-radius: 15px; font-size: 16px; text-align: left; cursor: pointer; transition: all 0.2s; }
         .option-btn:hover { background: #f7fafc; transform: translateX(5px); }
@@ -61,8 +59,7 @@
         .mini-sound-btn { background: #6366f1; color: white; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
         .restart-btn { background: #1a2536; color: white; border: none; padding: 14px 28px; border-radius: 15px; font-size: 16px; cursor: pointer; margin-top: 25px; width: 100%; }
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; }
-        .modal-box { background: white; padding: 30px; border-radius: 24px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.25); animation: popupScale 0.25s ease-out; }
-        @keyframes popupScale { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .modal-box { background: white; padding: 30px; border-radius: 24px; width: 90%; max-width: 400px; text-align: center; }
         .modal-btn { background: #1a2536; color: white; border: none; padding: 12px 35px; border-radius: 15px; font-size: 16px; cursor: pointer; width: 100%; font-weight: 600; margin-top: 5px; }
     </style>
 </head>
@@ -70,16 +67,15 @@
 
     <div class="container">
         
-        <!-- หน้าจอที่ 1: เมนูหลัก -->
         <div id="menu-screen" class="screen active-screen">
             <div class="panda-avatar">🐼</div>
-            <div class="welcome-badge">ระบบทดสอบคณิตศาสตร์และภาษาจีนเต็มรูปแบบ</div>
+            <div class="welcome-badge">ระบบทดสอบคณิตศาสตร์และภาษาจีนกลางแบบสุ่ม</div>
             <h1>Chinese Challenge Quiz</h1>
-            <p class="subtitle">ระบบสุ่มโจทย์ 20 ข้อ และสลับตำแหน่งช้อยส์คำตอบทุกรอบ</p>
+            <p class="subtitle">ระบบสุ่มโจทย์ 20 ข้อ และสลับตำแหน่งช้อยส์คำตอบแบบเรียลไทม์</p>
             
             <div class="name-input-container">
-                <label class="name-label" for="username" id="label-username">ขั้นตอนที่ 1: ลงชื่อเข้าสู่ระบบสอบ</label>
-                <input type="text" id="username" class="name-input" placeholder="กรุณาพิมพ์ชื่อผู้เล่นที่นี่...">
+                <label style="display:block; margin-bottom:10px; font-weight:600;" id="label-username">กรุณากรอกชื่อผู้เข้าสอบก่อนเริ่มต้น</label>
+                <input type="text" id="username" class="name-input" placeholder="พิมพ์ชื่อของคุณที่นี่...">
                 <button type="button" id="btn-confirm-name" class="confirm-name-btn" onclick="lockAndVerifyName()">⚔️ ลงทะเบียนล็อกชื่อผู้เล่น</button>
             </div>
             
@@ -99,7 +95,6 @@
             </div>
         </div>
 
-        <!-- หน้าจอที่ 2: เลือกประเภท -->
         <div id="category-screen" class="screen">
             <div class="panda-avatar">🎋</div>
             <div class="welcome-badge" id="selected-mode-badge">ระดับที่เลือก: -</div>
@@ -109,17 +104,16 @@
             <div style="display: flex; flex-direction: column; gap: 16px;">
                 <div class="mode-card category-culture-card" onclick="selectCategory('culture')">
                     <div>🏮 ประเพณีและวัฒนธรรมจีน</div>
-                    <div class="mode-meta" style="color: #ea580c;">แบบไฮบริด มีโจทย์ตัวหนังสือ + เสียงเปิดคลอ</div>
+                    <div class="mode-meta" style="color: #ea580c;">โจทย์ความรู้รอบตัวและเทศกาลสำคัญ</div>
                 </div>
                 <div class="mode-card category-chinese-card" onclick="selectCategory('chinese')">
                     <div>🎵 พาร์ทฟังภาษาจีน (Listening)</div>
-                    <div class="mode-meta" style="color: #a21caf;">เน้นทักษะการฟังไฟล์เสียงภาษาจีนกลาง</div>
+                    <div class="mode-meta" style="color: #a21caf;">เน้นทักษะการฟังความรู้รอบตัวเกี่ยวกับจีน</div>
                 </div>
             </div>
             <button class="restart-btn" style="background: #64748b; margin-top: 25px;" onclick="switchScreen('menu-screen')">🔙 ย้อนกลับ</button>
         </div>
 
-        <!-- หน้าจอที่ 3: หน้าจอเล่นเกม -->
         <div id="game-screen" class="screen">
             <div class="game-header">
                 <div class="status-item" id="info-username" style="color:#6366f1; font-weight: 700;">ผู้เล่น: -</div>
@@ -128,7 +122,7 @@
                 <div class="status-item" id="info-timer" style="color: #ef4444;">⏱️ 20s</div>
             </div>
             
-            <div id="question-text" style="font-size: 20px; font-weight: 600; color: #2d3748; margin-bottom: 25px; padding: 25px; background: #fff; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: none;"></div>
+            <div id="question-text" style="font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 25px; padding: 25px; background: #fff; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: none; line-height:1.6; text-align:left;"></div>
 
             <div class="audio-box" id="audio-player-zone" style="display: none;">
                 <button class="play-btn" onclick="playAudio()">🔊 กดเพื่อฟังเสียงโจทย์</button>
@@ -136,7 +130,6 @@
             <div class="options-grid" id="options-container"></div>
         </div>
 
-        <!-- หน้าจอที่ 4: สรุปผล -->
         <div id="result-screen" class="screen">
             <div class="panda-avatar" id="result-emoji">🏆</div>
             <h1 id="result-title">จบการทดสอบ!</h1>
@@ -144,14 +137,15 @@
             <p id="result-comment" style="color: #718096; margin-bottom: 20px;"></p>
             
             <div class="history-container">
-                <div class="history-title">📝 ตารางสรุปผลและคำตอบย้อนหลัง</div>
+                <div class="history-title">📝 ตารางสรุปผลและเฉลยคำตอบย้อนหลัง</div>
                 <div style="overflow-x: auto;">
                     <table class="history-table">
                         <thead>
                             <tr>
-                                <th>ข้อ</th>
+                                <th style="text-align:center;">ข้อ</th>
                                 <th>โจทย์/เสียง</th>
                                 <th>คำตอบของคุณ</th>
+                                <th>เฉลยที่ถูกต้อง</th>
                                 <th>ผลลัพธ์</th>
                             </tr>
                         </thead>
@@ -159,17 +153,16 @@
                     </table>
                 </div>
             </div>
-            <button class="restart-btn" onclick="goToMenu()">🔄 กลับไปหน้าหลัก</button>
+            <button class="restart-btn" onclick="goToMenu()">🔄 กลับไปหน้าหลักเพื่อเริ่มท้าทายใหม่อีกครั้ง</button>
         </div>
 
     </div>
 
-    <!-- แจ้งเตือน Modal -->
     <div id="custom-alert" class="modal-overlay">
         <div class="modal-box">
             <div id="alert-icon" style="font-size: 52px; margin-bottom: 12px;">🎉</div>
             <h2 id="alert-title" style="font-size: 22px; color: #1a2536; margin-bottom: 8px;">แจ้งเตือน</h2>
-            <p id="alert-message" style="color: #4a5568; font-size: 16px; margin-bottom: 22px; white-space: pre-line; line-height: 1.5;"></p>
+            <p id="alert-message" style="color: #4a5568; font-size: 16px; margin-bottom: 22px; white-space: pre-line;"></p>
             <button id="alert-close-btn" class="modal-btn">ตกลง</button>
         </div>
     </div>
@@ -209,13 +202,13 @@
             const nameInput = nameField.value.trim();
             if (!nameInput) {
                 soundWrong.play();
-                showCustomAlert('📛', 'พบข้อผิดพลาด', 'คุณจำเป็นต้องพิมพ์ชื่อผู้เล่นก่อนครับ!');
+                showCustomAlert('📛', 'พบข้อผิดพลาด', 'คุณจำเป็นต้องพิมพ์ชื่อผู้เล่นก่อนเริ่มสอบครับ!');
                 return;
             }
             nameField.disabled = true;
             playerName = nameInput;
             document.getElementById('btn-confirm-name').style.display = 'none';
-            document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อสำเร็จแล้ว!</span>';
+            document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อผู้เล่นสำเร็จแล้ว!</span>';
             document.getElementById('mode-selection-list').style.display = 'flex';
         }
 
@@ -232,8 +225,8 @@
             selectedCategory = category;
             document.getElementById('info-username').innerText = `ผู้เล่น: ${playerName}`;
             try {
-                const response = await fetch(`/api/quiz?mode=${selectedMode}&category=${selectedCategory}`);
-                if (!response.ok) throw new Error("เกิดข้อผิดพลาดจากเครือข่ายฐานข้อมูลหลังบ้าน");
+                const response = await fetch(`/api/quiz?category=${selectedCategory}`);
+                if (!response.ok) throw new Error("การดึงข้อสอบขัดข้อง");
                 currentQuestions = await response.json();
                 
                 currentQuestionIndex = 0;
@@ -269,9 +262,8 @@
             const qTextField = document.getElementById('question-text');
             const audioZone = document.getElementById('audio-player-zone');
             
-            const questionContent = currentQuestion.question || currentQuestion.questionText || currentQuestion.text || currentQuestion.title;
-            if (questionContent) {
-                qTextField.innerText = questionContent;
+            if (currentQuestion.question) {
+                qTextField.innerText = currentQuestion.question;
                 qTextField.style.display = 'block';
             } else {
                 qTextField.style.display = 'none';
@@ -300,11 +292,11 @@
             if (!currentQ || !currentQ.audio) return;
             if (currentAudio) currentAudio.pause();
             currentAudio = new Audio(currentQ.audio);
-            currentAudio.play().catch(e => console.log("Auto-play blocked"));
+            currentAudio.play().catch(e => console.log("Blocked audio playback"));
         }
 
         function playHistoryAudio(audioUrl) {
-            if (!audioUrl || audioUrl === "undefined") return;
+            if (!audioUrl) return;
             if (currentAudio) currentAudio.pause();
             currentAudio = new Audio(audioUrl);
             currentAudio.play();
@@ -319,17 +311,19 @@
                     clearInterval(timerInterval);
                     lives--;
                     const q = currentQuestions[currentQuestionIndex];
-                    const questionContent = q.question || q.questionText || q.text || q.title || "คำถามพาร์ทฟัง";
+                    const questionContent = q.question || "คำถามพาร์ทฟัง";
 
                     quizHistory.push({
                         id: currentQuestionIndex + 1,
                         questionText: questionContent,
                         audio: q.audio,
-                        userAnswer: "⏰ หมดเวลาการทำข้อ",
-                        status: "timeout"
+                        userAnswer: "⏰ หมดเวลา",
+                        correctAnswerText: "กำลังดึงเฉลย...",
+                        status: "timeout",
+                        questionId: q.id
                     });
                     soundTimeout.play(); 
-                    showCustomAlert('⏱️', 'หมดเวลาทำข้อสอบ!', 'หักพลังชีวิต 1 ดวง ❌', () => {
+                    showCustomAlert('⏱️', 'หมดเวลาทำข้อสอบ!', 'โดนหักพลังชีวิต 1 ดวง ❌', () => {
                         currentQuestionIndex++;
                         loadQuestion();
                     });
@@ -341,9 +335,9 @@
             clearInterval(timerInterval);
             const currentQ = currentQuestions[currentQuestionIndex];
             const selectedText = currentQ.options[selectedIndex];
-            const questionContent = currentQ.question || currentQ.questionText || currentQ.text || currentQ.title || "คำถามพาร์ทฟัง";
+            const questionContent = currentQ.question || "คำถามพาร์ทฟัง";
 
-            // 🛠️ แปลง Index ตัวเลือกหลังบ้านที่โดนสลับ ให้กลับไปเป็นค่าเดิมก่อนส่งไปตรวจคำตอบ
+            // 🛠️ ถอดรหัสย้อนกลับ: แปลงช้อยส์สุ่มให้เป็นค่า Index ตัวจดจำหลักของเซิร์ฟเวอร์ก่อนส่งตรวจ
             let originalIndexToSend = selectedIndex;
             if (currentQ.shuffledOrder && currentQ.shuffledOrder[selectedIndex] !== undefined) {
                 originalIndexToSend = currentQ.shuffledOrder[selectedIndex];
@@ -362,20 +356,21 @@
                     questionText: questionContent,
                     audio: currentQ.audio,
                     userAnswer: selectedText,
+                    correctAnswerText: result.correctAnswerText,
                     status: result.correct ? "correct" : "wrong"
                 });
 
                 if (result.correct) {
                     score++;
                     soundCorrect.play(); 
-                    showCustomAlert('🎉', 'ตอบได้ถูกต้อง!', `ยอดเยี่ยมรับ 1 คะแนน! 🟢`, () => {
+                    showCustomAlert('🎉', 'ตอบได้ถูกต้อง!', `ยอดเยี่ยมมากรับ 1 คะแนน! 🟢`, () => {
                         currentQuestionIndex++;
                         loadQuestion();
                     });
                 } else {
                     lives--;
                     soundWrong.play(); 
-                    showCustomAlert('❌', 'คำตอบไม่ถูกต้อง!', `โดนหักพลังชีวิต 1 ดวง`, () => {
+                    showCustomAlert('❌', 'คำตอบไม่ถูกต้อง!', `เสียใจด้วยโดนหักพลังชีวิต 1 ดวง`, () => {
                         currentQuestionIndex++;
                         loadQuestion();
                     });
@@ -385,20 +380,42 @@
             }
         }
 
-        function endGame() {
+        async function fetchTimeoutAnswers() {
+            for (let item of quizHistory) {
+                if (item.status === "timeout") {
+                    try {
+                        const response = await fetch('/api/check-answer', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ questionId: item.questionId, selectedIndex: -1 })
+                        });
+                        const result = await response.json();
+                        item.correctAnswerText = result.correctAnswerText;
+                    } catch (e) {
+                        item.correctAnswerText = "ไม่สามารถดึงข้อมูลได้";
+                    }
+                }
+            }
+        }
+
+        async function endGame() {
             clearInterval(timerInterval);
             if (currentAudio) currentAudio.pause();
-            document.getElementById('result-score').innerText = `คุณ ${playerName} ทำได้ ${score} จากทั้งหมด ${currentQuestions.length} คะแนน`;
+            
+            // ดึงข้อมูลเฉลยของข้อที่หมดเวลาเพิ่มก่อนสรุปตาราง
+            await fetchTimeoutAnswers();
+
+            document.getElementById('result-score').innerText = `คุณ ${playerName} ทำคะแนนได้ ${score} จากทั้งหมด ${currentQuestions.length} ข้อ`;
             const resultTitle = document.getElementById('result-title');
             const resultEmoji = document.getElementById('result-emoji');
             const resultComment = document.getElementById('result-comment');
 
             if (lives <= 0) {
-                resultEmoji.innerText = '💀'; resultTitle.innerText = 'พลังชีวิตหมดสิ้น!'; resultComment.innerText = 'สอบพ่ายแพ้พลังชีวิตหมดความสามารถ!';
+                resultEmoji.innerText = '💀'; resultTitle.innerText = 'พลังชีวิตหมดสิ้น!'; resultComment.innerText = 'คุณหมดพลังชีวิตระหว่างการทดสอบรอบนี้!';
             } else if (score >= 16) {
-                resultEmoji.innerText = '👑'; resultTitle.innerText = 'ผ่านระดับเทพ!'; resultComment.innerText = 'ทักษะเยี่ยมยอดรอบรู้ขงเบ้งมาเอง!';
+                resultEmoji.innerText = '👑'; resultTitle.innerText = 'ผ่านระดับยอดฝีมือ!'; resultComment.innerText = 'ความรู้ประเพณีและภาษาจีนรอบตัวของคุณอยู่ในเกณฑ์ดีเลิศ!';
             } else {
-                resultEmoji.innerText = '👍'; resultTitle.innerText = 'ผ่านการทดสอบแล้ว'; resultComment.innerText = 'ทำได้ดีมากครับตรวจสอบตารางด้านล่างได้เลย';
+                resultEmoji.innerText = '👍'; resultTitle.innerText = 'สอบเสร็จสิ้น'; resultComment.innerText = 'ขอบคุณที่เข้าร่วมการทดสอบ ตรวจสอบเฉลยได้ที่ตารางด้านล่าง';
             }
 
             const tableBody = document.getElementById('history-table-body');
@@ -412,13 +429,14 @@
                 if(item.audio && item.questionText === "คำถามพาร์ทฟัง") {
                     questionDisplay = `<button class="mini-sound-btn" onclick="playHistoryAudio('${item.audio}')">🔊 ฟังซ้ำ</button>`;
                 } else if(item.audio && item.questionText !== "คำถามพาร์ทฟัง") {
-                    questionDisplay = `<div>${item.questionText}</div><button class="mini-sound-btn" style="margin-top:5px;" onclick="playHistoryAudio('${item.audio}')">🔊 ฟังซ้ำ</button>`;
+                    questionDisplay = `<div style="text-align:left; font-weight:600; font-size:13px; margin-bottom:5px;">${item.questionText}</div><button class="mini-sound-btn" onclick="playHistoryAudio('${item.audio}')">🔊 ฟังเสียงคลอ</button>`;
                 }
 
                 row.innerHTML = `
                     <td style="font-weight:600; text-align:center;">${item.id}</td>
                     <td>${questionDisplay}</td>
-                    <td style="color: ${item.status==='correct'?'#16803d':'#b91c1c'};">${item.userAnswer}</td>
+                    <td style="color: ${item.status==='correct'?'#15803d':'#b91c1c'}; font-weight:600;">${item.userAnswer}</td>
+                    <td style="color: #15803d; font-weight:600;">${item.correctAnswerText}</td>
                     <td>${statusBadge}</td>
                 `;
                 tableBody.appendChild(row);
@@ -437,7 +455,7 @@
                 nameField.disabled = true;
                 nameField.value = playerName;
                 document.getElementById('btn-confirm-name').style.display = 'none';
-                document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อสำเร็จแล้ว!</span>';
+                document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อผู้เล่นสำเร็จแล้ว!</span>';
                 document.getElementById('mode-selection-list').style.display = 'flex';
             }
             switchScreen('menu-screen'); 
