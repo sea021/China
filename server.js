@@ -5,7 +5,6 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-// ฟังก์ชันสุ่มสลับตำแหน่ง Array (Fisher-Yates Shuffle)
 function shuffleArray(array) {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -16,7 +15,7 @@ function shuffleArray(array) {
 }
 
 // ==========================================
-// คลังคำถาม 1: พาร์ทฟังภาษาจีนทั่วไป (Chinese Listening) - 20 ข้อ (ฟังเสียงแล้วตอบ)
+// คลังคำถาม 1: พาร์ทฟังภาษาจีน (Listening) - ฟังเสียงแล้วตอบ
 // ==========================================
 const chineseListeningData = [
     { id: 1, audio: 'https://www.purpleculture.net/mp3/ni3hao3.mp3', options: ['你好\n(nǐhǎo) (สวัสดี)', '谢谢\n(xièxie) (ขอบคุณ)', '再见\n(zàijiàn) (ลาก่อน)', '对不起\n(duìbuqǐ) (ขอโทษ)'], correctAnswer: 0 },
@@ -33,83 +32,79 @@ const chineseListeningData = [
     { id: 12, audio: 'https://www.purpleculture.net/mp3/peng2you5.mp3', options: ['老师\n(lǎoshī) (คุณครู)', '学生\n(xuéshēng) (นักเรียน)', '朋友\n(péngyou) (เพื่อน)', '医生\n(yīshēng) (หมอ)'], correctAnswer: 2 },
     { id: 13, audio: 'https://www.purpleculture.net/mp3/shui3.mp3', options: ['米饭\n(mǐfàn) (ข้าวสวย)', '水\n(shuǐ) (น้ำ)', '茶\n(chá) (ชา)', '苹果\n(píngguǒ) (แอปเปิ้ล)'], correctAnswer: 1 },
     { id: 14, audio: 'https://www.purpleculture.net/mp3/jin1tian1.mp3', options: ['昨天\n(zuótiān) (เมื่อวาน)', '今天\n(jīntiān) (วันนี้)', '明天\n(míngtiān) (พรุ่งนี้)', '现在\n(xiànzài) (ตอนนี้)'], correctAnswer: 1 },
-    { id: 15, audio: 'https://www.purpleculture.net/mp3/xian4zai4ji3dian3.mp3', options: ['你叫什么名字？\n(Nǐ jiào shénme míngzi?) (คุณชื่ออะไร?)', '现在几点？\n(Xiànzài jǐ diǎn?) (ตอนนี้กี่โมงแล้ว?)', '你去哪儿？\n(Nǐ qù nǎr?) (คุณจะไปไหน?)', '你好吗？\n(Nǐ hǎo ma?) (คุณสบายดีไหม?)'], correctAnswer: 1 },
-    { id: 16, audio: 'https://www.purpleculture.net/mp3/ni3shi4na3guo2ren2.mp3', options: ['你好吗？\n(Nǐ hǎo ma?) (คุณสบายดีไหม?)', '你是哪国人？\n(Nǐ Active nǎ guó rén?) (คุณเป็นคนประเทศอะไร?)', '你几岁了？\n(Nǐ jǐ suì le?) (คุณอายุเท่าไหร่?)', '你在做什么？\n(Nǐ zài zuò shénme?) (คุณกำลังทำอะไรอยู่?)'], correctAnswer: 1 },
-    { id: 17, audio: 'https://www.purpleculture.net/mp3/wo3ai4ni3.mp3', options: ['我爱你\n(Wǒ ài nǐ) (ฉันรักคุณ)', '我喜欢你\n(Wǒ xǐhuan nǐ) (ฉันชอบคุณ)', '我想你\n(Wǒ xiǎng nǐ) (ฉันคิดถึงคุณ)', '我谢谢你\n(Wǒ xièxie nǐ) (ฉันขอบคุณคุณ)'], correctAnswer: 0 },
-    { id: 18, audio: 'https://www.purpleculture.net/mp3/duo1shao5qian2.mp3', options: ['多少钱？\n(Duōshao qián?) (ราคาเท่าไหร่?)', '在哪儿？\n(Zài nǎr?) (อยู่ที่ไหน?)', '哪个？\n(Nǎ ge?) (อันไหน?)', '几个人？\n(Jǐ ge rén?) (กี่คน?)'], correctAnswer: 0 },
-    { id: 19, audio: 'https://www.purpleculture.net/mp3/tai4hao3le5.mp3', options: ['不错\n(Búcuò) (ไม่เลวเลย)', '祝贺你\n(Zhùhè nǐ) (ยินดีด้วย)', '太好了\n(Tài hǎo le) (ยอดเยี่ยมไปเลย/ดีเหลือเกิน)', '没关系\n(Méiguānxi) (ไม่เป็นไร)'], correctAnswer: 2 },
-    { id: 20, audio: 'https://www.purpleculture.net/mp3/zhen1de5ma5.mp3', options: ['真的吗？\n(Zhēn de ma?) (จริงเหรอ?)', '是对吗？\n(Shì duì ma?) (ใช่ไหม?)', '不是吧\n(Bú shì ba) (ไม่ใช่หรอก)', '当然\n(Dāngrán) (แน่นอน)'], correctAnswer: 0 }
+    { id: 15, audio: 'https://www.purpleculture.net/mp3/xian4zai4ji3dian3.mp3', options: ['你叫什么名字？\n(Nǐ jiào shénme míngzi?)', '现在几点？\n(Xiànzài jǐ diǎn?)', '你去哪儿？\n(Nǐ qù nǎr?)', '你好吗？\n(Nǐ hǎo ma?)'], correctAnswer: 1 },
+    { id: 16, audio: 'https://www.purpleculture.net/mp3/ni3shi4na3guo2ren2.mp3', options: ['你好吗？\n(Nǐ hǎo ma?)', '你是哪国人？\n(Nǐ shì nǎ guó rén?)', '你几岁了？\n(Nǐ jǐ suì le?)', '你在做什么？\n(Nǐ zài zuò shénme?)'], correctAnswer: 1 },
+    { id: 17, audio: 'https://www.purpleculture.net/mp3/wo3ai4ni3.mp3', options: ['我爱你\n(Wǒ ài nǐ) (ฉันรักคุณ)', '我喜欢你\n(Wǒ xǐhuan nǐ)', '我想你\n(Wǒ xiǎng nǐ)', '我谢谢你\n(Wǒ xièxie nǐ)'], correctAnswer: 0 },
+    { id: 18, audio: 'https://www.purpleculture.net/mp3/duo1shao5qian2.mp3', options: ['多少钱？\n(Duōshao qián?) (ราคาเท่าไหร่?)', '在哪儿？\n(Zài nǎr?)', '哪个？\n(Nǎ ge?)', '几个人？\n(Jǐ ge rén?)'], correctAnswer: 0 },
+    { id: 19, Pattern: 'https://www.purpleculture.net/mp3/tai4hao3le5.mp3', options: ['不错\n(Búcuò)', '祝贺你\n(Zhùhè nǐ)', '太好了\n(Tài hǎo le) (ยอดเยี่ยมไปเลย)', '没关系\n(Méiguānxi)'], correctAnswer: 2 },
+    { id: 20, audio: 'https://www.purpleculture.net/mp3/zhen1de5ma5.mp3', options: ['真的吗？\n(Zhēn de ma?) (จริงเหรอ?)', '是对吗？\n(Shì duì ma?)', '不是吧\n(Bú shì ba)', '当然\n(Dāngrán)'], correctAnswer: 0 }
 ];
 
 // ==========================================
-// คลังคำถาม 2: ประเพณีและวัฒนธรรมจีน (Culture) - 20 ข้อ (มีโจทย์ตัวหนังสือ + มีเสียงประกอบ)
+// คลังคำถาม 2: ประเพณีและวัฒนธรรมจีน (Culture) - ปรับ Path ชื่อไฟล์เป็นภาษาไทยตรงตามโฟลเดอร์ของพี่ซี
 // ==========================================
 const cultureData = [
-    { id: 101, question: "เทศกาลใดของจีนที่มีธรรมเนียมการกิน 'ขนมบ๊ะจ่าง' และแข่งเรือมังกร?", audio: "https://www.purpleculture.net/mp3/duan1wu3jie2.mp3", options: ["春节\n(Chūnjié) (เทศกาลตรุษจีน)", "中秋节\n(Zhōngqiūjié) (เทศกาลไหว้พระจันทร์)", "端午节\n(Duānwǔjié) (เทศกาลตวนอู่)", "清明节\n(Qīngmíngjié) (เทศกาลเชงเม้ง)"], correctAnswer: 2 },
-    { id: 102, question: "สัตว์ชนิดใดที่เป็นสัญลักษณ์ของความทรงพลัง ความยิ่งใหญ่ และจักรพรรดิของจีน?", audio: "https://www.purpleculture.net/mp3/long2.mp3", options: ["龙\n(Lóng) (มังกร)", "凤凰\n(Fènghuáng) (หงส์)", "狮子\n(Shīzi) (สิงโต)", "熊猫\n(Xióngmāo) (แพนด้า)"], correctAnswer: 0 },
-    { id: 103, question: "ตามความเชื่อของชาวจีน สีใดที่สื่อถึงความสุข โชคลาภ และความเป็นสิริมงคลนิยมใช้ในงานมงคล?", audio: "https://www.purpleculture.net/mp3/hong2se4.mp3", options: ["白色\n(Báisè) (สีขาว)", "黄色\n(Huángsè) (สีเหลือง)", "黑色\n(Hēisè) (สีดำ)", "红色\n(Hóngsè) (สีแดง)"], correctAnswer: 3 },
-    { id: 104, question: "ในวันตรุษจีน เงินขวัญถุงที่ผู้ใหญ่จะมอบให้เด็ก ๆ บรรจุในซองสีแดง เรียกว่าอะไร?", audio: "https://www.purpleculture.net/mp3/hong2bao1.mp3", options: ["和服\n(Héfú) (กิโมโน)", "红包\n(Hóngbāo) (อั่งเปา / ซองแดง)", "年糕\n(Niángāo) (ขนมเข่ง)", "饺子\n(Jiǎozi) (เกี๊ยว)"], correctAnswer: 1 },
-    { id: 105, question: "อาหารชนิดใดที่ชาวจีนนิยมทานในวันตรุษจีนเพราะมีรูปร่างคล้าย 'เงินตำลึงจีน' โบราณ สื่อถึงความมั่งคั่ง?", audio: "https://www.purpleculture.net/mp3/jiao3zi5.mp3", options: ["饺子\n(Jiǎozi) (เกี๊ยว)", "豆腐\n(Dòufu) (เต้าหู้)", "长寿面\n(Chángshòumiàn) (ก๋วยเตี๋ยวสายยาว)", "春卷\n(Chūnjuǎn) (ปอเปี๊ยะ)"], correctAnswer: 0 },
-    { id: 106, question: "ศิลปะการต่อสู้และออกกำลังกายโบราณของจีนที่เน้นความนุ่มนวลและการคุมลมปราณคือข้อใด?", audio: "https://www.purpleculture.net/mp3/tai4ji2quan2.mp3", options: ["跆拳道\n(Táiquándào) (เทควันโด)", "泰拳\n(Tàiquán) (มวยไทย)", "太极拳\n(Tàijíquán) (มวยไทเก๊ก)", "空手道\n(Kōngshǒudào) (คาราเต้)"], correctAnswer: 2 },
-    { id: 107, question: "ตัวเลขใดในวัฒนธรรมจีนที่ออกเสียงคล้ายคำว่า 'ความร่ำรวย' (ฟา) และถือเป็นเลขมงคลสูงสุดในการทำธุรกิจ?", audio: "https://www.purpleculture.net/mp3/ba1.mp3", options: ["四\n(Sì) (เลข 4)", "七\n(Qī) (เลข 7)", "八\n(Bā) (เลข 8)", "九\n(Jiǔ) (เลข 9)"], correctAnswer: 2 },
-    { id: 108, question: "เครื่องดื่มชนิดใดที่มีต้นกำเนิดจากจีนและมีความผูกพันกับวิถีชีวิต ชาวยิยมดื่มเพื่อต้อนรับแขกผู้มาเยือน?", audio: "https://www.purpleculture.net/mp3/cha2.mp3", options: ["咖啡\n(Kāfēi) (กาแฟ)", "茶\n(Chá) (ชา)", "菊花茶\n(Júhuāchá) (น้ำเก๊กฮวย)", "白酒\n(Báijiǔ) (เหล้าจีน)"], correctAnswer: 1 },
-    { id: 109, question: "ชุดแต่งกายประจำชาติของสตรีจีนที่มีลักษณะแนบเนื้อ คอตั้งสูง และผ่าข้าง เรียกว่าชุดอะไร?", audio: "https://www.purpleculture.net/mp3/qi2pao2.mp3", options: ["和服\n(Héfú) (ชุดกิโมโน)", "韩服\n(Hánfú) (ชุดฮันบก)", "旗袍\n(Qípáo) (ชุดกี่เพ้า)", "纱丽\n(Shālì) (ชุดส่าหรี)"], correctAnswer: 2 },
-    { id: 110, question: "เทศกาลใดของจีนที่มีการกราบไหว้บรรพบุรุษที่ล่วงลับ ณ สุสานในช่วงเริ่มต้นฤดูใบไม้ผลิ?", audio: "https://www.purpleculture.net/mp3/qing1ming2jie2.mp3", options: ["斋节\n(Zhāijié) (เทศกาลกินเจ)", "清明节\n(Qīngmíngjié) (เทศกาลเชงเม้ง)", "中元节\n(Zhōngyuánjié) (เทศกาลสาทรจีน)", "水灯节\n(Shuǐdēngjié) (เทศกาลลอยกระทงจีน)"], correctAnswer: 1 },
-    { id: 111, question: "วรรณกรรมคลาสสิกของจีนเรื่องใดที่บอกเล่าเรื่องราวการเดินทางไปอัญเชิญพระไตรปิฎก โดยมีซุนหงอคงเป็นตัวละครเอก?", audio: "https://www.purpleculture.net/mp3/xi1you2ji4.mp3", options: ["三国演义\n(Sānguó Yǎnyì) (สามก๊ก)", "西游记\n(Xīyóujì) (ไซอิ๋ว)", "红楼梦\n(Hónglóumèng) (ความฝันในหอแดง)", "水浒传\n(Shuǐhǔzhuàn) (ซ้องกั๋ง)"], correctAnswer: 1 },
-    { id: 112, question: "เครื่องดนตรีจีนโบราณชนิดใดที่มีลักษณะเป็นเครื่องสายใช้ดีด มีจำนวนสายตั้งแต่ 21 สายขึ้นไป?", audio: "https://www.purpleculture.net/mp3/gu3zheng1.mp3", options: ["古筝\n(Gǔzhēng) (กู่เจิง)", "笛子\n(Dízi) (ขลุ่ยผิว)", "二胡\n(Èrhú) (ซอเอ้อhú)", "琵琶\n(Pípá) (พิณผีผา)"], correctAnswer: 0 },
-    { id: 113, question: "สิ่งประดิษฐ์โบราณอันยิ่งใหญ่ของจีนข้อใดที่ช่วยในการบอกทิศทางและปฏิวัติการเดินเรือของโลก?", audio: "https://www.purpleculture.net/mp3/zhi3nan2zhen1.mp3", options: ["造纸术\n(Zàozhǐshù) (กระดาษ)", "指南针\n(Zhǐnánzhēn) (เข็มทิศ)", "火药\n(Huǒyào) (ดินปืน)", "印刷术\n(Yìnshuāshù) (แท่นพิมพ์)"], correctAnswer: 1 },
-    { id: 114, question: "สถาปัตยกรรมสิ่งก่อสร้างขนาดใหญ่ของจีนที่สร้างขึ้นเพื่อป้องกันการรุกรานจากข้าศึกทางตอนเหนือคือข้อใด?", audio: "https://www.purpleculture.net/mp3/chang2cheng2.mp3", options: ["故宫\n(Gùgōng) (พระราชวังต้องห้าม)", "长城\n(Chángchéng) (กำแพงเมืองจีน)", "天坛\n(Tiāntán) (หอฟ้าเทียนถาน)", "秦始皇陵\n(Qínshǐhuáng Líng) (สุสานจิ๋นซีฮ่องเต้)"], correctAnswer: 1 },
-    { id: 115, question: "ในค่ำคืนของเทศกาลไหว้พระจันทร์ ชาวจีนนิยมรับประทานขนมชนิดใดร่วมกับครอบครัว?", audio: "https://www.purpleculture.net/mp3/yue4bing3.mp3", options: ["年糕\n(Niángāo) (ขนมเข่ง)", "粽子\n(Zòngzi) (ขนมบ๊ะจ่าง)", "月饼\n(Yuèbǐng) (ขนมเปี๊ยะไหว้พระจันทร์)", "发糕\n(Fāgāo) (ขนมถ้วยฟู)"], correctAnswer: 2 },
-    { id: 116, question: "ปรัชญาเมธีท่านใดของจีนที่มีคำสอนเน้นเรื่องคุณธรรม ความกตัญญู และจริยธรรมในการปกครอง?", audio: "https://www.purpleculture.net/mp3/kong3zi3.mp3", options: ["孔子\n(Kǒngzǐ) (ขงจื๊อ)", "老子\n(Lǎozǐ) (เล่าจื๊อ)", "孟子\n(Mèngzǐ) (เม่งจื๊อ)", "秦始皇\n(Qínshǐhuáng) (จิ๋นซีฮ่องเต้)"], correctAnswer: 0 },
-    { id: 117, question: "การละเล่นในงานเทศกาลของจีนที่ใช้ผู้แสดงเชิดหุ่นเลียนแบบท่าทางสัตว์มงคลเพื่อความสนุกสนานและปัดเป่าสิ่งชั่วร้ายคือข้อใด?", audio: "https://www.purpleculture.net/mp3/wu3shi1.mp3", options: ["舞龙\n(Wǔlóng) (การเชิดมังกร)", "舞狮\n(Wǔshī) (การเชิดสิงโต)", "京剧\n(Jīngjù) (งิ้วจีน)", "扇子舞\n(Shànziwǔ) (ระบำพัด)"], correctAnswer: 1 },
-    { id: 118, question: "ตัวเลขใดในทางวัฒนธรรมจีนที่มักหลีกเลี่ยงเนื่องจากออกเสียงคล้ายคำว่า 'ตาย' (สี่)?", audio: "https://www.purpleculture.net/mp3/si4.mp3", options: ["二\n(Èr) (เลข 2)", "四\n(Sì) (เลข 4)", "六\n(Liù) (เลข 6)", "八\n(Bā) (เลข 8)"], correctAnswer: 1 },
-    { id: 119, question: "อุปกรณ์โบราณที่ชาวจีนประดิษฐ์ขึ้นเพื่อใช้ในการคำนวณและคิดเลขได้อย่างรวดเร็วคืออะไร?", audio: "https://www.purpleculture.net/mp3/suan4pan2.mp3", options: ["算盘\n(Suànpán) (ลูกคิดจีน)", "笔记本\n(Bǐjì脿n) (กระดาษบันทึก)", "算筹\n(Suànchóu) (แท่งไม้คำนวณ)", "日晷\n(Rìguǐ) (นาฬิกาแดด)"], correctAnswer: 0 },
-    { id: 120, question: "ศิลปะการแสดงโบราณของจีนที่รวมการร้อง การเจรจา และการแต่งหน้าเข้มข้นตามสีสันของตัวละครเรียกว่าอะไร?", audio: "https://www.purpleculture.net/mp3/jing1ju4.mp3", options: ["音乐剧\n(Yīnyuèjù) (ละครเพลง)", "民族舞\n(Mínzúwǔ) (ระบำชนเผ่า)", "京剧\n(Jīngjù) (งิ้วปักกิ่ง)", "木偶戏\n(Mùǒuxì) (หุ่นกระบอก)"], correctAnswer: 2 }
+    { id: 101, image: "/images/บ๊ะจ่าง.jpg", options: ["端午节\n", "春节\n", "中秋节\n", "清明节\n"], correctAnswer: 0 },
+    { id: 102, image: "/images/มังกร.jpeg", options: ["龙 ", "凤凰 ", "狮子 ", "熊猫 "], correctAnswer: 0 },
+    { id: 103, image: "/images/โคมไฟ.webp", options: ["白色 ", "黄色 ", "黑色 ", "红色 "], correctAnswer: 3 },
+    { id: 104, image: "/images/อั่งเปา.jpg", options: ["和服 ", "红包 ", "年糕 ", "饺子 "], correctAnswer: 1 },
+    { id: 105, image: "/images/เกี๊ยว.jpg", options: ["饺子 ", "豆腐 ", "长寿面 ", "春卷 "], correctAnswer: 0 },
+    { id: 106, image: "/images/ไทเก๊ก.jpg", options: ["跆拳道", "泰拳 ", "太极拳 ", "空手道"], correctAnswer: 2 },
+    { id: 107, image: "/images/เลข 8.jpg", options: ["四 ", "七 ", "八 ", "九 "], correctAnswer: 2 },
+    { id: 108, image: "/images/ชาจีน.jpg", options: ["咖啡 ", "茶 (ชา)", "菊花茶 ", "白酒 "], correctAnswer: 1 },
+    { id: 109, image: "/images/กี่เพ้า.webp", options: ["和服 ", "韩服 ", "旗袍 ", "纱丽 "], correctAnswer: 2 },
+    { id: 110, image: "/images/เชงเม้ง.jpg", options: ["斋节 ", "清明节 ", "中元节 ", "水灯节"], correctAnswer: 1 },
+    { id: 111, image: "/images/ไซอิ๋ว.jpg", options: ["三国演义 ", "西游记 ", "红楼梦", "水浒传"], correctAnswer: 1 },
+    { id: 112, image: "/images/กู่เจิง.jpg", options: ["古筝 ", "笛子 ", "二胡 ", "琵琶 "], correctAnswer: 0 },
+    { id: 113, image: "/images/เข็มทิศ.avif", options: ["造纸术 ", "指南针 ", "火药 ", "印刷术"], correctAnswer: 1 },
+    { id: 114, image: "/images/กำแพงเมืองจีน.jpg", options: ["故宫 ", "长城 ", "天坛 ", "秦始皇陵"], correctAnswer: 1 },
+    { id: 115, image: "/images/ขนมเปี๊ยะไหว้พระจันทร์.jpg", options: ["年糕 ", "粽子 ", "月饼 ", "发糕"], correctAnswer: 2 },
+    { id: 116, image: "/images/ขงจื๊อ.jpg", options: ["孔子 ", "老子 ", "孟子 ", "秦始皇"], correctAnswer: 0 },
+    { id: 117, image: "/images/เชิดสิงโต.jpg", options: ["舞龙 ", "舞狮 ", "京剧 ", "扇子舞"], correctAnswer: 1 },
+    { id: 118, image: "/images/เลข 4.jpg", options: ["二 ", "四 ", "六 ", "八 )"], correctAnswer: 1 },
+    { id: 119, image: "/images/ลูกคิดจีน.jpg", options: ["算盘 ", "笔记本 ", "算筹 ", "日晷"], correctAnswer: 0 },
+    { id: 120, image: "/images/งิ้วปักกิ่ง.jpg", options: ["音乐剧", "民族舞", "京剧 ", "木偶戏"], correctAnswer: 2 }
 ];
 
 // ==========================================
-// คลังคำถาม 3: พาร์ทฟังคำศัพท์จีน (Vocab Listening) - 20 ข้อ (ฟังเสียงแล้วตอบ ไม่มีโจทย์ตัวหนังสือ)
+// คลังคำถาม 3: หมวดเติมคำศัพท์ภาษาจีนในประโยค (มีตัวจีน พินอิน และคำแปลครบถ้วน)
 // ==========================================
-const chineseVocabListeningData = [
-    { id: 201, audio: "https://www.purpleculture.net/mp3/ben3.mp3", options: ["本\n(běn) (เล่ม)", "个\n(gè) (ชิ้น/อัน)", "张\n(zhāng) (แผ่น)", "只\n(zhī) (ตัว)"], correctAnswer: 0 },
-    { id: 202, audio: "https://www.purpleculture.net/mp3/xiao3.mp3", options: ["小\n(xiǎo) (เล็ก)", "大\n(dà) (ใหญ่)", "多\n(duō) (มาก)", "少\n(shǎo) (น้อย)"], correctAnswer: 0 },
-    { id: 203, audio: "https://www.purpleculture.net/mp3/lao3shi1.mp3", options: ["学生\n(xuéshēng) (นักเรียน)", "老师\n(lǎoshī) (คุณครู)", "医生\n(yīshēng) (หมอ)", "朋友\n(péngyou) (เพื่อน)"], correctAnswer: 1 },
-    { id: 204, audio: "https://www.purpleculture.net/mp3/ai4.mp3", options: ["爱\n(ài) (รัก)", "恨\n(hèn) (เกลียด)", "想\n(xiǎng) (คิดถึง)", "怕\n(pà) (กลัว)"], correctAnswer: 0 },
-    { id: 205, audio: "https://www.purpleculture.net/mp3/ping2guo3.mp3", options: ["香蕉\n(xiāngjiāo) (กล้วย)", "桔子\n(júzi) (ส้ม)", "苹果\n(píngguǒ) (แอปเปิ้ล)", "西瓜\n(xīguā) (แตงโม)"], correctAnswer: 2 },
-    { id: 206, audio: "https://www.purpleculture.net/mp3/yi1sheng1.mp3", options: ["医生\n(yīshēng) (หมอ)", "医院\n(yīyuàn) (โรงพยาบาล)", "护士\n(hùshi) (พยาบาล)", "病人\n(bìngrén) (คนไข้)"], correctAnswer: 0 },
-    { id: 207, audio: "https://www.purpleculture.net/mp3/bu2ke4qi5.mp3", options: ["不客气\n(búkèqi) (ไม่เป็นไร)", "对不起\n(duìbuqǐ) (ขอโทษ)", "没关系\n(méiguānxi) (ไม่เป็นไร)", "再见\n(zàijiàn) (ลาก่อน)"], correctAnswer: 0 },
-    { id: 208, audio: "https://www.purpleculture.net/mp3/xia4yu3.mp3", options: ["下雨\n(xià yǔ) (ฝนตก)", "刮风\n(guā fēng) (ลมแรง)", "下雪\n(xià xuě) (หิมะตก)", "晴天\n(qíngtiān) (แดดออก)"], correctAnswer: 0 },
-    { id: 209, audio: "https://www.purpleculture.net/mp3/kan4.mp3", options: ["听\n(tīng) (ฟัง)", "说\n(shuō) (พูด)", "看\n(kàn) (ดู/มอง)", "写\n(xiě) (เขียน)"], correctAnswer: 2 },
-    { id: 210, audio: "https://www.purpleculture.net/mp3/ba1.mp3", options: ["一\n(yī) (หนึ่ง)", "五\n(wǔ) (ห้า)", "六\n(liù) (หก)", "八\n(bā) (แปด)"], correctAnswer: 3 },
-    { id: 211, audio: "https://www.purpleculture.net/mp3/wan3shang5.mp3", options: ["早上\n(zǎoshang) (ตอนเช้า)", "中午\n(zhōngwǔ) (ตอนเที่ยง)", "下午\n(xiàwǔ) (ตอนบ่าย)", "晚上\n(wǎnshang) (ตอนเย็น/ค่ำ)"], correctAnswer: 3 },
-    { id: 212, audio: "https://www.purpleculture.net/mp3/mai4.mp3", options: ["卖\n(mài) (ขาย)", "买\n(mǎi) (ซื้อ)", "慢\n(màn) (ช้า)", "忙\n(máng) (ยุ่ง)"], correctAnswer: 0 },
-    { id: 213, audio: "https://www.purpleculture.net/mp3/shui3.mp3", options: ["水\n(shuǐ) (น้ำ)", "茶\n(chá) (ชา)", "米饭\n(mǐfàn) (ข้าวสวย)", "面条\n(miàntiáo) (บะหมี่)"], correctAnswer: 0 },
-    { id: 214, audio: "https://www.purpleculture.net/mp3/mao1.mp3", options: ["狗\n(gǒu) (สุนัข)", "猫\n(māo) (แมว)", "鸟\n(niǎo) (นก)", "鱼\n(yú) (ปลา)"], correctAnswer: 1 },
-    { id: 215, audio: "https://www.purpleculture.net/mp3/fei1ji1.mp3", options: ["火车\n(huǒchē) (รถไฟ)", "飞机\n(fēijī) (เครื่องบิน)", "出租车\n(chūzūchē) (แท็กซี่)", "自行车\n(zìxíngchē) (จักรยาน)"], correctAnswer: 1 },
-    { id: 216, audio: "https://www.purpleculture.net/mp3/qian2mian4.mp3", options: ["前面\n(qiánmiàn) (ด้านหน้า)", "后面\n(hòumiàn) (ด้านหลัง)", "左边\n(zuǒbiān) (ด้านซ้าย)", "右边\n(yòubiān) (ด้านขวา)"], correctAnswer: 0 },
-    { id: 217, audio: "https://www.purpleculture.net/mp3/gao1xing4.mp3", options: ["生气\n(shēngqì) (โกรธ)", "高兴\n(gāoxìng) (ดีใจ/สุขใจ)", "难过\n(nánguò) (เสียใจ)", "害怕\n(hàipà) (กลัว)"], correctAnswer: 1 },
-    { id: 218, audio: "https://www.purpleculture.net/mp3/han4yu3.mp3", options: ["汉语\n(Hànyǔ) (ภาษาจีน)", "英语\n(Yīngyǔ) (ภาษาอังกฤษ)", "泰语\n(Tàiyǔ) (ภาษาไทย)", "日语\n(Rìyǔ) (ภาษาญี่ปุ่น)"], correctAnswer: 0 },
-    { id: 219, audio: "https://www.purpleculture.net/mp3/shou3ji1.mp3", options: ["电脑\n(diànnǎo) (คอมพิวเตอร์)", "电视\n(diànshì) (โทรทัศน์)", "手机\n(shǒujī) (โทรศัพท์มือถือ)", "手表\n(shǒubiǎo) (นาฬิกาข้อมือ)"], correctAnswer: 2 },
-    { id: 220, audio: "https://www.purpleculture.net/mp3/re4.mp3", options: ["冷\n(lěng) (หนาว)", "热\n(rè) (ร้อน)", "晴\n(qíng) (แดดจ้า)", "阴\n(yīn) (ครึ้มฟ้าฝน)"], correctAnswer: 1 }
+const chineseVocabData = [
+    { id: 201, question: "今天天气很好，太阳很___。", options: ["大\n(dà) (ใหญ่/จ้า)", "小\n(xiǎo) (เล็ก)", "多\n(duō) (มาก)", "少\n(shǎo) (น้อย)"], correctAnswer: 0 },
+    { id: 202, question: "我不舒服，想去___看医生。", options: ["医院\n(yīyuàn) (โรงพยาบาล)", "学校\n(xuéxiào) (โรงเรียน)", "商店\n(shāngdiàn) (ร้านค้า)", "家\n(jiā) (บ้าน)"], correctAnswer: 0 },
+    { id: 203, question: "他是我的___，我们经常一起玩。", options: ["老师\n(lǎoshī) (ครู)", "学生\n(xuéshēng) (นักเรียน)", "朋友\n(péngyou) (เพื่อน)", "医生\n(yīshēng) (หมอ)"], correctAnswer: 2 },
+    { id: 204, question: "口渴了，我想喝一杯___。", options: ["水\n(shuǐ) (น้ำ)", "米饭\n(mǐfàn) (ข้าว)", "苹果\n(píngguǒ) (แอปเปิ้ล)", "衣服\n(yīfu) (เสื้อผ้า)"], correctAnswer: 0 },
+    { id: 205, question: "现在___三点ครึ่ง了，我们走吧。", options: ["昨天\n(zuótiān) (เมื่อวาน)", "现在\n(xiànzài) (ตอนนี้)", "明天\n(míngtiān) (พรุ่งนี้)", "今年\n(jīnnián) (ปีนี้)"], correctAnswer: 1 },
+    { id: 206, question: "我不___高，她比我矮一点。", options: ["很\n(hěn) (มาก)", "太\n(tài) (เกินไป)", "最\n(zuì) (ที่สุด)", "都\n(dōu) (ล้วน)"], correctAnswer: 0 },
+    { id: 207, question: "你叫什么___？我叫小明。", options: ["名字\n(míngzi) (ชื่อ)", "地方\n(dìfang) (สถานที่)", "衣服\n(yīfu) (เสื้อผ้า)", "钱\n(qián) (เงิน)"], correctAnswer: 0 },
+    { id: 208, question: "这件衣服要___钱？", options: ["多少\n(duōshao) (เท่าไหร่)", "什么\n(shénme) (อะไร)", "哪个\n(nǎge) (อันไหน)", "几岁\n(jǐsuì) (กี่ขวบ)"], correctAnswer: 0 },
+    { id: 209, question: "太___了！เราได้ที่หนึ่งเลย！", options: ["好\n(hǎo) (ดี)", "错\n(cuò) (ผิด)", "对\n(duì) (ถูก)", "累\n(lèi) (เหนื่อย)"], correctAnswer: 0 },
+    { id: 210, question: "我不认识去车站的路，你___吗？", options: ["知道\n(zhīdào) (รู้)", "谢谢\n(xièxie) (ขอบคุณ)", "再见\n(zàijiàn) (ลาก่อน)", "没关系\n(méiguānxi) (ไม่เป็นไร)"], correctAnswer: 0 },
+    { id: 211, question: "桌子上放着三___书。", options: ["本\n(běn) (เล่ม)", "个\n(gè) (ชิ้น/อัน)", "张\n(zhāng) (แผ่น)", "只\n(zhī) (ตัว)"], correctAnswer: 0 },
+    { id: 212, question: "外面正在___，你出门记得带伞。", options: ["下雨\n(xià yǔ) (ฝนตก)", "刮风\n(guā fēng) (ลมพัด)", "下雪\n(xià xuě) (หิมะตก)", "晴天\n(qíngtiān) (แดดออก)"], correctAnswer: 0 },
+    { id: 213, question: "爸爸每天坐___去公司上班。", options: ["火车\n(huǒchē) (รถไฟ)", "飞机\n(fēijī) (เครื่องบิน)", "地铁\n(dìtiě) (รถไฟใต้ดิน)", "自行车\n(zìxíngchē) (จักรยาน)"], correctAnswer: 2 },
+    { id: 214, question: "妹妹最喜欢吃的水果是红___。", options: ["苹果\n(píngguǒ) (แอปเปิ้ล)", "香蕉\n(xiāngjiāo) (กล้วย)", "西瓜\n(xīguā) (แตงโม)", "葡萄\n(pútao) (องุ่น)"], correctAnswer: 0 },
+    { id: 215, question: "老师，这道题我不太___，能再讲讲吗？", options: ["明白\n(míngbai) (เข้าใจ)", "高兴\n(gāoxìng) (ดีใจ)", "生气\n(shēngqì) (โกรธ)", "准备\n(zhǔnbèi) (เตรียมตัว)"], correctAnswer: 0 },
+    { id: 216, question: "猫坐在椅子的___，正在睡觉呢。", options: ["下面\n(xiàmiàn) (ข้างใต้)", "前面\n(qiánmiàn) (ข้างหน้า)", "里面\n(lǐmiàn) (ข้างใน)", "左边\n(zuǒbiān) (ด้านซ้าย)"], correctAnswer: 0 },
+    { id: 217, question: "你___说汉语吗？我会说一点点。", options: ["会\n(huì) (สามารถ/เป็น)", "想\n(xiǎng) (อยาก)", "要\n(yào) (เอา)", "喜欢\n(xǐhuan) (ชอบ)"], correctAnswer: 0 },
+    { id: 218, question: "小狗在房间里跑来跑___，真可爱。", options: ["去\n(qù) (ไป)", "来\n(lái) (มา)", "上\n(shàng) (ขึ้น)", "下\n(xià) (ลง)"], correctAnswer: 0 },
+    { id: 219, question: "晚上九点，我准备去___觉了。", options: ["睡\n(shuì) (นอน)", "吃\n(chī) (กิน)", "看\n(kàn) (ดู)", "写\n(xiě) (เขียน)"], correctAnswer: 0 },
+    { id: 220, question: "这儿的人很___，排队排得很长。", options: ["多\n(duō) (มาก)", "少\n(shǎo) (น้อย)", "大\n(dà) (ใหญ่)", "冷\n(lěng) (หนาว)"], correctAnswer: 0 }
 ];
-
-// 1. API สำหรับดึงข้อสอบสุ่มแบบกระจายตัวและปลอดภัย
 app.get('/api/quiz', (req, res) => {
     const { category } = req.query;
     let selectedData = [];
 
     if (category === 'culture') {
         selectedData = cultureData;
-    } else if (category === 'chinese_vocab_listening') {
-        selectedData = chineseVocabListeningData; // โหลดหมวดฟังคำศัพท์เพียว ๆ
+    } else if (category === 'chinese_vocab') {
+        selectedData = chineseVocabData;
     } else {
-        selectedData = chineseListeningData; // Default เป็นหมวดฟังทั่วไป
+        selectedData = chineseListeningData;
     }
 
-    // สุ่มข้อสอบทั้งหมดในหมวดแล้วตัดดึงมาเล่นแค่ 20 ข้อ
     const shuffledQuestions = shuffleArray(selectedData).slice(0, 20);
 
-    // ปลอดภัยยิ่งขึ้นด้วยการสุ่มช้อยส์สลับตำแหน่งจากฝั่งหลังบ้าน
     const secureQuiz = shuffledQuestions.map(q => {
         const optionsWithIndex = q.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
         const shuffledOptions = shuffleArray(optionsWithIndex);
@@ -117,7 +112,8 @@ app.get('/api/quiz', (req, res) => {
         return {
             id: q.id,
             audio: q.audio || null,
-            question: q.question || null, // ส่งค่า null ไปหน้าบ้านถ้าเป็นหมวดฟังเสียง เพื่อไม่ให้โชว์โจทย์ตัวหนังสือ
+            image: q.image || null,
+            question: q.question || null,
             options: shuffledOptions.map(o => o.text),
             shuffledOrder: shuffledOptions.map(o => o.originalIndex)
         };
@@ -126,17 +122,12 @@ app.get('/api/quiz', (req, res) => {
     res.json(secureQuiz);
 });
 
-// 2. API ตรวจคำตอบที่ปลอดภัย ค้นหาจับคู่ตาม ID คำถามจริง
 app.post('/api/check-answer', (req, res) => {
     const { questionId, selectedIndex } = req.body;
     
     let question = chineseListeningData.find(q => q.id === questionId);
-    if (!question) {
-        question = cultureData.find(q => q.id === questionId);
-    }
-    if (!question) {
-        question = chineseVocabListeningData.find(q => q.id === questionId);
-    }
+    if (!question) question = cultureData.find(q => q.id === questionId);
+    if (!question) question = chineseVocabData.find(q => q.id === questionId);
     
     if (!question) {
         return res.status(404).json({ error: 'ไม่พบชุดคำถามนี้ในระบบ' });
@@ -145,22 +136,16 @@ app.post('/api/check-answer', (req, res) => {
     const isCorrect = question.correctAnswer === selectedIndex;
     const correctText = question.options[question.correctAnswer];
     
-    res.json({
-        correct: isCorrect,
-        correctAnswerText: correctText
-    });
+    res.json({ correct: isCorrect, correctAnswerText: correctText });
 });
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// รองรับการรันทั้งแบบ Local และ Vercel Serverless
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
     const PORT = 3000;
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on http://localhost:${PORT}`);
-    });
+    app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
 }
 
 module.exports = app;
