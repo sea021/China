@@ -3,92 +3,834 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinese Culture & Listening Quiz</title>
+    <title>Chinese Language Proficiency Quiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Mitr', sans-serif; }
-        body {
-    min-height: 100vh; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), 
-                url('https://c.pxhere.com/photos/98/43/night_temple_lanterns_yokohama_lantern_omdem1_mzuikodigitaled60mmf28-382880.jpg!d') no-repeat center center/cover;
-    padding: 20px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Mitr',sans-serif;
 }
-        .container {
-            background: rgba(255, 245, 245, 0.95); border-radius: 32px; padding: 40px 30px;
-            width: 100%; max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: center;
-            border: 4px solid rgba(255, 255, 255, 0.5); max-height: 95vh; overflow-y: auto;
-        }
-        .panda-avatar { font-size: 64px; margin-bottom: 15px; display: inline-block; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .welcome-badge { background-color: #1a2536; color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 13px; display: inline-block; margin-bottom: 20px; }
-        h1 { font-size: 28px; color: #2d3748; margin-bottom: 8px; }
-        .subtitle { color: #718096; font-size: 14px; margin-bottom: 25px; }
-        .name-input-container { background: #fff; padding: 20px; border-radius: 20px; margin-bottom: 25px; border: 2px dashed #fca5a5; }
-        .name-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 16px; outline: none; text-align: center; font-weight: 600; margin-bottom: 12px; }
-        .confirm-name-btn { background: #ef4444; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
-        .mode-list { display: none; flex-direction: column; gap: 16px; }
-        .mode-card { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; font-size: 18px; font-weight: 600; text-align: left; }
-        .mode-card:hover { transform: scale(1.02); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
-        .mode-meta { font-size: 14px; color: #718096; font-weight: 400; display: flex; align-items: center; gap: 12px; }
-        .easy-card { background-color: #e6f7f0; color: #059669; border: 2px solid #a7f3d0; }
-        .medium-card { background-color: #fffbeb; color: #d97706; border: 2px solid #fde68a; }
-        .hard-card { background-color: #fef2f2; color: #dc2626; border: 2px solid #fca5a5; }
-        .category-culture-card { background-color: #fff7ed !important; color: #ea580c !important; border: 2px solid #ffedd5 !important; }
-        .category-chinese-card { background-color: #fae8ff !important; color: #a21caf !important; border: 2px solid #f5d0fe !important; }
-        
-        /* สไตล์คลาสใหม่สำหรับปุ่มหมวดเติมคำศัพท์ */
-        .category-vocab-card { background-color: #e0f2fe !important; color: #0369a1 !important; border: 2px solid #bae6fd !important; }
 
-        .screen { display: none; }
-        .screen.active-screen { display: block; }
-        .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; background: #fff; padding: 12px 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .status-item { font-size: 15px; font-weight: 600; color: #4a5568; }
-        .audio-box { background: #fff; padding: 25px; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .play-btn { background: #ef4444; color: white; border: none; padding: 14px 30px; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4); }
-        
-        /* สไตล์โจทย์กล่องประโยคภาษาจีนตัวโตในหมวดเติมศัพท์ */
-        .vocab-box { background: #e0f2fe; color: #0369a1; font-size: 24px; font-weight: bold; padding: 25px; border-radius: 20px; margin-bottom: 25px; border-left: 6px solid #0284c7; }
-        
-        /* สไตล์กรอบโชว์รูปภาพในหมวดประเพณีวัฒนธรรม */
-        .image-box { width: 100%; height: 250px; border-radius: 20px; object-fit: cover; border: 3px solid #ffedd5; margin-bottom: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:
+    linear-gradient(rgba(0,0,0,.70),rgba(0,0,0,.60)),
+    url("https://c.pxhere.com/photos/98/43/night_temple_lanterns_yokohama_lantern_omdem1_mzuikodigitaled60mmf28-382880.jpg!d")
+    center/cover no-repeat;
+}
 
-        .options-grid { display: flex; flex-direction: column; gap: 12px; }
-        
-        /* อัปเกรดช้อยส์ตอบให้อ่าน พินอิน+จีน ได้ชัดเจนและสมดุล */
-        .option-btn { background: #fff; color: #2d3748; border: 2px solid #e2e8f0; padding: 16px; border-radius: 15px; font-size: 18px; text-align: center; cursor: pointer; transition: all 0.2s; white-space: pre-line; font-weight: 500;}
-        .option-btn:hover { background: #f7fafc; transform: translateX(5px); }
-        
-        .history-container { margin-top: 25px; text-align: left; background: #fff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .history-title { font-size: 18px; color: #1a2536; font-weight: 600; margin-bottom: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
-        .history-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .history-table th { background-color: #f8fafc; color: #64748b; font-weight: 600; padding: 10px; text-align: left; border-bottom: 2px solid #e2e8f0; }
-        .history-table td { padding: 12px 10px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
-        .badge-status { padding: 4px 8px; border-radius: 8px; font-weight: 600; font-size: 12px; display: inline-block; }
-        .badge-correct { background-color: #dcfce7; color: #15803d; }
-        .badge-wrong { background-color: #fee2e2; color: #b91c1c; }
-        .badge-timeout { background-color: #fef3c7; color: #b45309; }
-        .mini-sound-btn { background: #6366f1; color: white; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-        .restart-btn { background: #1a2536; color: white; border: none; padding: 14px 28px; border-radius: 15px; font-size: 16px; cursor: pointer; margin-top: 25px; width: 100%; }
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; }
-        .modal-box { background: white; padding: 30px; border-radius: 24px; width: 90%; max-width: 400px; text-align: center; }
-        .modal-btn { background: #1a2536; color: white; border: none; padding: 12px 35px; border-radius: 15px; font-size: 16px; cursor: pointer; width: 100%; font-weight: 600; margin-top: 5px; }
-    </style>
+/* ========================= */
+
+.container{
+
+    width:100%;
+    max-width:900px;
+
+    background:rgba(255,245,245,.95);
+
+    border-radius:30px;
+
+    padding:35px;
+
+    border:4px solid rgba(255,255,255,.5);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.3);
+
+    max-height:95vh;
+
+    overflow-y:auto;
+
+    text-align:center;
+
+}
+
+/* ========================= */
+
+.screen{
+    display:none;
+}
+
+.screen.active-screen{
+    display:block;
+    animation:fade .35s ease;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(15px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* ========================= */
+
+.panda-avatar{
+
+font-size:64px;
+
+margin-bottom:15px;
+
+display:inline-block;
+
+animation:bounce 2s infinite;
+
+}
+
+@keyframes bounce{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+}
+
+.welcome-badge{
+
+display:inline-block;
+
+padding:8px 16px;
+
+border-radius:30px;
+
+background:#1a2536;
+
+color:#fff;
+
+font-size:13px;
+
+margin-bottom:20px;
+
+}
+
+h1{
+
+font-size:28px;
+
+color:#2d3748;
+
+margin-bottom:8px;
+
+}
+
+.subtitle{
+
+font-size:14px;
+
+color:#64748b;
+
+margin-bottom:25px;
+
+}
+
+/* ========================= */
+
+.name-input-container{
+
+background:#fff;
+
+padding:20px;
+
+border-radius:20px;
+
+border:2px dashed #fca5a5;
+
+margin-bottom:25px;
+
+}
+
+.name-input{
+
+width:100%;
+
+padding:14px;
+
+border-radius:12px;
+
+border:2px solid #ddd;
+
+font-size:16px;
+
+text-align:center;
+
+font-weight:600;
+
+margin-bottom:12px;
+
+outline:none;
+
+}
+
+.confirm-name-btn{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#ef4444;
+
+color:#fff;
+
+font-size:15px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.25s;
+
+}
+
+.confirm-name-btn:hover{
+
+background:#dc2626;
+
+}
+
+/* ========================= */
+
+.mode-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:16px;
+
+}
+
+.mode-card{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-start;
+
+padding:20px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+transition:.25s;
+
+text-align:left;
+
+}
+
+.mode-card:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 8px 15px rgba(0,0,0,.15);
+
+}
+
+.mode-title-row{
+
+display:flex;
+
+justify-content:space-between;
+
+width:100%;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+.mode-desc{
+
+font-size:13px;
+
+margin-top:5px;
+
+}
+
+.mode-meta{
+
+padding:5px 10px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:bold;
+
+margin-bottom:8px;
+
+}
+
+.cat-step-1{
+
+background:#e6f7f0;
+
+border:2px solid #a7f3d0;
+
+}
+
+.cat-step-2{
+
+background:#fffbeb;
+
+border:2px solid #fde68a;
+
+}
+
+.cat-step-3{
+
+background:#e0f2fe;
+
+border:2px solid #bae6fd;
+
+}
+
+.cat-step-4{
+
+background:#fef2f2;
+
+border:2px solid #fca5a5;
+
+}
+
+/* ========================= */
+
+.game-top-nav{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:15px;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+}
+
+.back-nav-btn{
+
+background:#64748b;
+
+color:#fff;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.back-nav-btn:hover{
+
+background:#475569;
+
+}
+
+/* ========================= */
+
+.game-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:#fff;
+
+padding:15px;
+
+border-radius:15px;
+
+margin-bottom:20px;
+
+box-shadow:0 5px 10px rgba(0,0,0,.08);
+
+flex-wrap:wrap;
+
+gap:10px;
+
+}
+
+.status-item{
+
+font-weight:600;
+
+}
+
+/* ========================= */
+
+.instruction-banner{
+
+background:#1a2536;
+
+color:#fff;
+
+padding:14px;
+
+border-radius:15px;
+
+margin-bottom:20px;
+
+font-weight:bold;
+
+border-left:6px solid #ef4444;
+
+}
+
+/* ========================= */
+
+.audio-box{
+
+background:#fff;
+
+padding:25px;
+
+border-radius:20px;
+
+margin-bottom:20px;
+
+box-shadow:0 5px 10px rgba(0,0,0,.08);
+
+}
+
+.play-btn{
+
+background:#ef4444;
+
+color:#fff;
+
+border:none;
+
+padding:14px 30px;
+
+border-radius:50px;
+
+cursor:pointer;
+
+font-size:16px;
+
+font-weight:bold;
+
+transition:.25s;
+
+}
+
+.play-btn:hover{
+
+transform:scale(1.05);
+
+}
+
+/* ========================= */
+
+.vocab-box{
+
+background:#e0f2fe;
+
+padding:25px;
+
+border-radius:20px;
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#0369a1;
+
+margin-bottom:20px;
+
+white-space:pre-line;
+
+word-break:break-word;
+
+line-height:1.6;
+
+}
+
+/* ========================= */
+
+.image-box{
+
+width:100%;
+
+max-height:260px;
+
+object-fit:contain;
+
+background:#fff;
+
+border-radius:20px;
+
+border:3px solid #eee;
+
+margin-bottom:20px;
+
+}
+
+/* ========================= */
+
+.options-grid{
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+.option-btn {
+    width: 80%;
+    min-height: 55px;
+    padding: 10px 15px;
+    margin: 8px auto;
+
+    border-radius: 12px;
+    border: 2px solid #cbd5e1;
+
+    background: white;
+    cursor: pointer;
+
+    font-size: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+.option-btn:hover{
+
+transform:translateX(5px);
+
+background:#f8fafc;
+
+}
+
+.option-btn:active{
+
+transform:scale(.98);
+
+}
+
+.option-btn.selected{
+
+background:#fee2e2;
+
+border-color:#ef4444;
+
+font-weight:bold;
+
+}
+
+.option-btn:disabled{
+
+opacity:.6;
+
+cursor:not-allowed;
+
+}
+
+/* ========================= */
+
+.history-container{
+
+margin-top:25px;
+
+background:#fff;
+
+padding:20px;
+
+border-radius:20px;
+
+overflow-x:auto;
+
+}
+
+.history-title{
+
+font-size:20px;
+
+margin-bottom:15px;
+
+font-weight:bold;
+
+}
+
+.history-table{
+
+width:100%;
+
+min-width:700px;
+
+border-collapse:collapse;
+
+}
+
+.history-table th{
+
+background:#f8fafc;
+
+padding:10px;
+
+}
+
+.history-table td{
+
+padding:10px;
+
+border-bottom:1px solid #eee;
+
+}
+
+.badge-status{
+
+padding:5px 8px;
+
+border-radius:8px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+.badge-correct{
+
+background:#dcfce7;
+
+color:#15803d;
+
+}
+
+.badge-wrong{
+
+background:#fee2e2;
+
+color:#dc2626;
+
+}
+
+.badge-timeout{
+
+background:#fef3c7;
+
+color:#d97706;
+
+}
+
+.mini-sound-btn{
+
+background:#4f46e5;
+
+color:#fff;
+
+border:none;
+
+padding:6px 12px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+/* ========================= */
+
+.restart-btn{
+
+margin-top:25px;
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:15px;
+
+background:#1a2536;
+
+color:#fff;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+/* ========================= */
+
+.modal-overlay{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.6);
+
+backdrop-filter:blur(4px);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+}
+
+.modal-box{
+
+background:#fff;
+
+padding:30px;
+
+border-radius:25px;
+
+width:90%;
+
+max-width:400px;
+
+animation:popup .25s ease;
+
+text-align:center;
+
+}
+
+@keyframes popup{
+
+from{
+
+opacity:0;
+
+transform:scale(.8);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+.modal-btn{
+
+width:100%;
+
+padding:13px;
+
+margin-top:15px;
+
+background:#1a2536;
+
+color:#fff;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}
+
+/* ========================= */
+
+@media(max-width:768px){
+
+.container{
+
+padding:20px;
+
+}
+
+.game-header{
+
+flex-direction:column;
+
+}
+
+.vocab-box{
+
+font-size:20px;
+
+}
+
+.option-btn{
+
+font-size:15px;
+
+}
+
+.history-table{
+
+font-size:12px;
+
+}
+
+}
+</style>
 </head>
 <body>
 
     <div class="container">
         
+        <!-- หน้าจอเมนูหลัก -->
         <div id="menu-screen" class="screen active-screen">
             <div class="panda-avatar">🐼</div>
-            <div class="welcome-badge">ระบบทดสอบคณิตศาสตร์และภาษาจีนกลางแบบสุ่ม</div>
-            <h1>Chinese Challenge Quiz</h1>
-            <p class="subtitle">ระบบสุ่มโจทย์ 20 ข้อ และสลับตำแหน่งช้อยส์คำตอบแบบเรียลไทม์</p>
+            <div class="welcome-badge">ระบบทดสอบและเรียนรู้ภาษาจีนกลาง</div>
+            <h1 class="hero-title">Chinese Language Proficiency Test</h1>
+            <p class="hero-subtitle">
+                เลือกทักษะที่ต้องการทำแบบทดสอบ
+            </p>
             
             <div class="name-input-container">
                 <label style="display:block; margin-bottom:10px; font-weight:600;" id="label-username">กรุณากรอกชื่อผู้เข้าสอบก่อนเริ่มต้น</label>
@@ -96,69 +838,103 @@
                 <button type="button" id="btn-confirm-name" class="confirm-name-btn" onclick="lockAndVerifyName()">⚔️ ลงทะเบียนล็อกชื่อผู้เล่น</button>
             </div>
             
-            <div class="mode-list" id="mode-selection-list">
-                <div class="mode-card easy-card" onclick="selectMode('easy')">
-                    <div>🌱 โหมดง่าย (สอบ 20 ข้อ)</div>
-                    <div class="mode-meta"><span>❤️ x5</span> | <span>⏱️ 20 วินาที</span></div>
+            <!-- 4 หมวดหมู่การเรียนรู้ -->
+            <div class="mode-list" id="mode-selection-list" style="display: none;">
+                
+               <div class="mode-card cat-step-1" onclick="selectCategory('listening')">
+                      <span class="mode-meta">Listening</span>
+                     <div class="mode-title-row">
+                    <span>🎧 Listening</span>
+                     </div>
+                     <div class="mode-desc">
+                                 ฟังเสียงแล้วเลือกคำตอบที่ถูกต้อง
+                    </div>
                 </div>
-                <div class="mode-card medium-card" onclick="selectMode('medium')">
-                    <div>🛡️ โหมดจอมยุทธ์ (สอบ 20 ข้อ)</div>
-                    <div class="mode-meta"><span>❤️ x3</span> | <span>⏱️ 15 วินาที</span></div>
+
+                <div class="mode-card cat-step-2" onclick="selectCategory('speaking')">
+                      <span class="mode-meta">Speaking</span>
+                     <div class="mode-title-row">
+                      <span>🗣️ Speaking</span>
+                    </div>
+                    <div class="mode-desc">
+                               ฝึกพูดและออกเสียงภาษาจีน
+                     </div>
                 </div>
-                <div class="mode-card hard-card" onclick="selectMode('hard')">
-                    <div>🐉 โหมดฮ่องเต้โหด (สอบ 20 ข้อ)</div>
-                    <div class="mode-meta"><span>❤️ x1</span> | <span>⏱️ 7 วินาที</span></div>
+
+                 <div class="mode-card cat-step-3" onclick="selectCategory('reading')">
+                <span class="mode-meta">Reading</span>
+                <div class="mode-title-row">
+                    <span>📖 Reading</span>
+                 </div>
+                    <div class="mode-desc">
+                    อ่านข้อความแล้วตอบคำถาม
+                 </div>
                 </div>
+
+                <div class="mode-card cat-step-4" onclick="selectCategory('writing')">
+                    <span class="mode-meta">Writing</span>
+                    <div class="mode-title-row">
+                        <span>✍️ Writing</span>
+                    </div>
+                    <div class="mode-desc">
+                        เขียนหรือเติมคำภาษาจีนให้ถูกต้อง
+                    </div>
+            </div>
+
             </div>
         </div>
 
-        <div id="category-screen" class="screen">
-            <div class="panda-avatar">🎋</div>
-            <div class="welcome-badge" id="selected-mode-badge">ระดับที่เลือก: -</div>
-            <h1>เลือกประเภทคำถาม</h1>
-            <p class="subtitle">เลือกแนวข้อสอบที่คุณต้องการท้าทายฝีมือเพื่อเริ่มเกม</p>
-            
-            <div style="display: flex; flex-direction: column; gap: 16px;">
-                <div class="mode-card category-culture-card" onclick="selectCategory('culture')">
-                    <div>🏮 ประเพณีและวัฒนธรรมจีน</div>
-                    <div class="mode-meta" style="color: #ea580c;">โจทย์แสดงภาพถ่ายปริศนาภาพเดี่ยว</div>
-                </div>
-                <div class="mode-card category-chinese-card" onclick="selectCategory('chinese')">
-                    <div>🎵 พาร์ทฟังภาษาจีน (Listening)</div>
-                    <div class="mode-meta" style="color: #a21caf;">เน้นทักษะการฟังคลิปเสียงประโยคยาว</div>
-                </div>
-                <!-- หมวดหมู่ใหม่พาร์ทเติมคำศัพท์ภาษาจีน -->
-                <div class="mode-card category-vocab-card" onclick="selectCategory('chinese_vocab')">
-                    <div>✍️ หมวดเติมคำศัพท์ภาษาจีนในประโยค</div>
-                    <div class="mode-meta" style="color: #0369a1;">แสดงโจทย์ข้อความภาษาจีนและช่องว่างให้เติมคำ</div>
-                </div>
-            </div>
-            <button class="restart-btn" style="background: #64748b; margin-top: 25px;" onclick="switchScreen('menu-screen')">🔙 ย้อนกลับ</button>
-        </div>
-
+        <!-- หน้าจอทำข้อสอบหลัก -->
         <div id="game-screen" class="screen">
+            <div class="game-top-nav">
+                <button class="back-nav-btn" onclick="goToMenu()">⬅️ กลับหน้าเลือกหมวด</button>
+                <button class="back-nav-btn" id="btn-prev-question" style="background: #0284c7; display: none;" onclick="goToPrevQuestion()">⬅️ ข้อก่อนหน้า</button>
+                <button class="back-nav-btn" style="background: #1a2536;" onclick="goToMenu()">🏠 หน้าหลัก</button>
+            </div>
+
             <div class="game-header">
-                <div class="status-item" id="info-username" style="color:#6366f1; font-weight: 700;">ผู้เล่น: -</div>
-                <div class="status-item" id="info-progress">ข้อที่: 1/20</div>
-                <div class="status-item" id="info-lives">❤️ x5</div>
-                <div class="status-item" id="info-timer" style="color: #ef4444;">⏱️ 20s</div>
+
+            <div class="status-item"
+                id="info-username">
+                ผู้เล่น : -
+            </div>
+
+            <div class="status-item"
+                id="info-progress">
+                ข้อที่ 1/10
+            </div>
+
+            <div class="status-item"
+                id="info-score">
+                ⭐ 0 คะแนน
+            </div>
+
+            <div class="status-item"
+                id="info-lives">
+                ❤️ x3
+            </div>
+
+            <div class="status-item"
+                id="info-timer">
+                ⏱️15s
+            </div>
+
             </div>
             
-            <!-- 🏮 บล็อกแสดงรูปภาพข้อสอบ (สำหรับหมวดวัฒนธรรม) -->
-            <img id="culture-img-box" class="image-box" style="display: none;" src="" alt="โจทย์รูปภาพ">
+            <div id="instruction-banner" class="instruction-banner">📌 คำสั่ง: กรุณาพิจารณาโจทย์และเลือกคำตอบที่ถูกต้องที่สุด</div>
 
-            <!-- ✍️ บล็อกแสดงข้อความประโยคภาษาจีนตัวโต (สำหรับหมวดเติมคำ) -->
+            <img id="culture-img-box" class="image-box" style="display: none;" src="" alt="โจทย์รูปภาพ">
             <div id="vocab-question-box" class="vocab-box" style="display: none;"></div>
 
-            <!-- 🎵 บล็อกเล่นเสียงลำโพงสีแดงแบบดั้งเดิม (สำหรับพาร์ทฟังภาษาจีน) -->
-            <div class="audio-box" id="audio-player-zone" style="display: none; margin-top: 20px;">
+            <div class="audio-box" id="audio-player-zone" style="display: none;">
                 <button class="play-btn" onclick="playAudio()">🔊 กดเพื่อฟังเสียงโจทย์</button>
             </div>
             
             <div id="question-text" style="display: none;"></div>
-            <div class="options-grid" id="options-container" style="margin-top: 20px;"></div>
+            <div class="options-grid" id="options-container" style="margin-top: 15px;"></div>
         </div>
 
+        <!-- หน้าจอสรุปผลคะแนน -->
         <div id="result-screen" class="screen">
             <div class="panda-avatar" id="result-emoji">🏆</div>
             <h1 id="result-title">จบการทดสอบ!</h1>
@@ -172,7 +948,7 @@
                         <thead>
                             <tr>
                                 <th style="text-align:center;">ข้อ</th>
-                                <th>คำถาม/เสียงโจทย์</th>
+                                <th>โจทย์ / เสียง</th>
                                 <th>คำตอบของคุณ</th>
                                 <th>เฉลยที่ถูกต้อง</th>
                                 <th>ผลลัพธ์</th>
@@ -182,11 +958,12 @@
                     </table>
                 </div>
             </div>
-            <button class="restart-btn" onclick="goToMenu()">🔄 กลับไปหน้าหลักเพื่อเริ่มท้าทายใหม่อีกครั้ง</button>
+            <button class="restart-btn" onclick="goToMenu()">🔄 กลับไปหน้าหลักเพื่อเลือกหมวดอื่น</button>
         </div>
 
     </div>
 
+    <!-- Modal แจ้งเตือนแบบ Custom -->
     <div id="custom-alert" class="modal-overlay">
         <div class="modal-box">
             <div id="alert-icon" style="font-size: 52px; margin-bottom: 12px;">🎉</div>
@@ -200,19 +977,37 @@
         let currentQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
-        let lives = 5;
-        let timeLeft = 20;
-        let maxTimeAllowed = 20;
+        let lives = 3;
+        let timeLeft = 15;
+        let maxTimeAllowed = 15;
         let timerInterval = null;
         let currentAudio = null;
         let playerName = "";
         let quizHistory = [];
-        let selectedMode = ""; 
+        let userAnswersMap = {}; 
         let selectedCategory = ""; 
 
         const soundCorrect = new Audio('https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav'); 
         const soundWrong = new Audio('https://assets.mixkit.co/active_storage/sfx/2955/2955-84.wav');   
         const soundTimeout = new Audio('https://assets.mixkit.co/active_storage/sfx/1013/1013-84.wav'); 
+
+        // ฐานข้อมูลตัวอย่าง (มุ่งเน้นหมวดที่ 1 ให้สมบูรณ์ก่อน)
+        const mockDatabase = {
+            'pinyin-basics': [
+                { id: 1, question: "สวัสดี", options: ["你好 (nǐ hǎo)", "谢谢 (xièxie)", "再见 (zàijiàn)", "对不起 (duìbuqǐ)"], correctIndex: 0 },
+                { id: 2, question: "ขอบคุณ", options: ["你好 (nǐ hǎo)", "谢谢 (xièxie)", "没关系 (méiguānxi)", "再见 (zàijiàn)"], correctIndex: 1 },
+                { id: 3, question: "ลาก่อน", options: ["อรุณสวัสดิ์", "ขอบคุณ", "再见 (zàijiàn)", "ยินดีต้อนรับ"], correctIndex: 2 }
+            ],
+            'culture': [
+                { id: 1, image: "https://images.unsplash.com/photo-1508804019834-f7499f58992a?w=600", question: "เทศกาลโคมไฟ", options: ["ตรุษจีน", "เทศกาลไหว้พระจันทร์", "เทศกาลโคมไฟ", "เช็งเม้ง"], correctIndex: 2 }
+            ],
+            'chinese': [
+                { id: 1, audio: "https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3", question: "เสียงทดสอบทักษะการฟัง", options: ["ตัวเลือก A", "ตัวเลือก B", "ตัวเลือก C", "ตัวเลือก D"], correctIndex: 0 }
+            ],
+            'chinese_vocab': [
+                { id: 1, question: "今天是______，明天是星期二", options: ["星期一", "星期三", "星期四", "星期五"], correctIndex: 0 }
+            ]
+        };
 
         function showCustomAlert(icon, title, message, callback) {
             document.getElementById('alert-icon').innerText = icon;
@@ -240,254 +1035,985 @@
             document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อผู้เล่นสำเร็จแล้ว!</span>';
             document.getElementById('mode-selection-list').style.display = 'flex';
         }
+       async function selectCategory(category) {
 
-        function selectMode(mode) {
-            selectedMode = mode;
-            const badge = document.getElementById('selected-mode-badge');
-            if (mode === 'easy') badge.innerHTML = "🌱 ระดับง่าย: <b>ระดับง่าย</b>";
-            else if (mode === 'medium') badge.innerHTML = "🛡️ ระดับปานกลาง: <b>ระดับปานกลาง</b>";
-            else if (mode === 'hard') badge.innerHTML = "🐉 ระดับยาก: <b>ระดับยาก</b>";
-            switchScreen('category-screen');
+    selectedCategory = category;
+
+    showInstruction(category);
+
+}
+
+        function showInstruction(category){
+
+    let message = "";
+
+    if(category==="listening"){
+
+        message =
+`🎧 Listening Test
+
+• ฟังเสียงได้เพียง 1 ครั้ง
+• เลือกคำตอบที่ถูกต้องที่สุด
+• ทั้งหมด 10 ข้อ
+• ข้อละ 1 คะแนน
+
+กด OK เพื่อเริ่ม`;
+
+    }
+
+    else if(category==="speaking"){
+
+        message =
+`🗣️ Speaking Test
+
+• เลือกประโยคภาษาจีนที่ถูกต้อง
+• ทั้งหมด 10 ข้อ
+• ข้อละ 1 คะแนน
+
+กด OK เพื่อเริ่ม`;
+
+    }
+
+    else if(category==="reading"){
+
+        message =
+`📖 Reading Test
+
+• อ่านบทความแล้วตอบคำถาม
+• ทั้งหมด 10 ข้อ
+• ข้อละ 1 คะแนน
+
+กด OK เพื่อเริ่ม`;
+
+    }
+
+    else{
+
+        message =
+`✍️ Writing Test
+
+• เติมคำให้ถูกต้อง
+• ทั้งหมด 10 ข้อ
+• ข้อละ 1 คะแนน
+
+กด OK เพื่อเริ่ม`;
+
+    }
+
+    showCustomAlert(
+        "📚",
+        "คำชี้แจง",
+        message,
+        function(){
+
+            startQuiz();
+
+        }
+    );
+
+}
+
+
+
+       async function startQuiz() {
+
+    currentQuestionIndex = 0;
+    score = 0;
+    lives = 3;
+
+    userAnswersMap = {};
+    quizHistory = [];
+
+    document.getElementById("info-score").innerText = "⭐ 0 คะแนน";
+    document.getElementById("info-lives").innerText = "❤️ x3";
+    document.getElementById("info-progress").innerText = "ข้อที่ 1/10";
+
+    try {
+
+        const response = await fetch(`/api/quiz?category=${selectedCategory}`);
+
+        if (!response.ok) {
+            throw new Error("ไม่สามารถโหลดข้อสอบได้");
         }
 
-        async function selectCategory(category) {
-            selectedCategory = category;
-            document.getElementById('info-username').innerText = `ผู้เล่น: ${playerName}`;
-            try {
-                const response = await fetch(`/api/quiz?category=${selectedCategory}`);
-                if (!response.ok) throw new Error("การดึงข้อสอบขัดข้อง");
-                currentQuestions = await response.json();
-                
-                currentQuestionIndex = 0;
-                score = 0;
-                quizHistory = []; 
+        currentQuestions = await response.json();
 
-                if (selectedMode === 'easy') { lives = 5; maxTimeAllowed = 20; } 
-                else if (selectedMode === 'medium') { lives = 3; maxTimeAllowed = 15; } 
-                else if (selectedMode === 'hard') { lives = 1; maxTimeAllowed = 7; }
+        console.log(currentQuestions);
 
-                switchScreen('game-screen');
-                loadQuestion();
-            } catch (error) {
-                showCustomAlert('⚠️', 'เกิดข้อผิดพลาด', error.message);
-            }
+        if (!Array.isArray(currentQuestions) || currentQuestions.length === 0) {
+            alert("ไม่มีข้อสอบในหมวดนี้");
+            return;
         }
+
+        document.getElementById("info-username").innerText =
+            `ผู้เล่น : ${playerName}`;
+
+        switchScreen("game-screen");
+
+        loadQuestion();
+
+    } catch (err) {
+
+        console.error("Start Quiz Error:", err);
+        alert("ไม่สามารถโหลดข้อสอบจาก Server ได้");
+
+    }
+}
 
         function loadQuestion() {
-            if (currentQuestionIndex >= currentQuestions.length || lives <= 0) {
-                endGame();
-                return;
+
+    // จบเกมเมื่อทำครบทุกข้อ หรือหัวใจหมด
+    if (currentQuestionIndex >= currentQuestions.length || lives <= 0) {
+        endGame();
+        return;
+    }
+
+    // หยุด Timer เดิม
+    clearInterval(timerInterval);
+
+    // หยุดเสียงเดิม
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
+
+    // โหลดข้อปัจจุบัน
+    const currentQ = currentQuestions[currentQuestionIndex];
+
+    if (!currentQ) {
+        console.error("ไม่พบข้อสอบลำดับ", currentQuestionIndex);
+        endGame();
+        return;
+    }
+
+    // ปุ่มย้อนกลับ
+    const prevBtn = document.getElementById("btn-prev-question");
+
+    prevBtn.style.display =
+        currentQuestionIndex > 0 ? "inline-block" : "none";
+
+
+    // แสดงข้อมูลด้านบน
+    document.getElementById("info-progress").innerText =
+        `ข้อที่ ${currentQuestionIndex + 1}/${currentQuestions.length}`;
+
+    document.getElementById("info-score").innerText =
+        `⭐ ${score} คะแนน`;
+
+    document.getElementById("info-lives").innerText =
+        `❤️ x${lives}`;
+
+
+    // รีเซ็ตเวลา
+    timeLeft = maxTimeAllowed;
+
+    document.getElementById("info-timer").innerText =
+        `⏱️ ${timeLeft}s`;
+
+
+    // กล่องต่าง ๆ
+    const imgBox = document.getElementById("culture-img-box");
+    const vocabBox = document.getElementById("vocab-question-box");
+    const audioBox = document.getElementById("audio-player-zone");
+    const instructionBanner = document.getElementById("instruction-banner");
+    const optionsContainer = document.getElementById("options-container");
+
+
+    // ซ่อนทั้งหมด
+    imgBox.style.display = "none";
+    vocabBox.style.display = "none";
+    audioBox.style.display = "none";
+
+
+    imgBox.src = "";
+
+
+    // ค่าเริ่มต้น
+    vocabBox.innerHTML = `
+        <h2>${currentQ.question}</h2>
+
+        ${currentQ.pinyin ? `
+        <div style="
+            margin-top:12px;
+            color:#ef4444;
+            font-size:18px;
+            font-weight:bold;
+            font-style:italic;
+        ">
+            ${currentQ.pinyin}
+        </div>
+        ` : ""}
+    `;
+
+
+    optionsContainer.innerHTML = "";
+
+
+    // ======================
+    // Listening
+    // ======================
+    if (selectedCategory === "listening") {
+
+        audioBox.style.display = "block";
+
+        instructionBanner.innerHTML =
+            "🎧 ฟังเสียงภาษาจีน แล้วเลือกคำตอบที่ถูกต้องที่สุด";
+
+        playAudio();
+
+    }
+
+
+    // ======================
+    // Speaking
+    // ======================
+    else if (selectedCategory === "speaking") {
+
+        vocabBox.style.display = "block";
+
+        vocabBox.innerHTML = `
+            <h2>${currentQ.question}</h2>
+
+            ${currentQ.pinyin ? `
+            <div style="
+                margin-top:10px;
+                font-size:18px;
+                color:#ef4444;
+                font-style:italic;
+            ">
+                ${currentQ.pinyin}
+            </div>
+            ` : ""}
+        `;
+
+
+        instructionBanner.innerHTML =
+            "🗣 เลือกประโยคภาษาจีนที่ถูกต้องที่สุด";
+
+    }
+
+
+    // ======================
+    // Reading
+    // ======================
+    else if (selectedCategory === "reading") {
+
+        vocabBox.style.display = "block";
+
+
+        vocabBox.innerHTML = `
+            <div style="
+                text-align:left;
+                font-size:20px;
+                line-height:2;
+            ">
+                ${currentQ.passage}
+            </div>
+
+
+            ${currentQ.pinyin ? `
+            <div style="
+                margin-top:10px;
+                color:#ef4444;
+                font-style:italic;
+                font-size:16px;
+            ">
+                ${currentQ.pinyin}
+            </div>
+            ` : ""}
+
+
+            <hr>
+
+
+            <h3>${currentQ.question}</h3>
+        `;
+
+
+        instructionBanner.innerHTML =
+            "📖 อ่านบทความ แล้วตอบคำถาม";
+
+    }
+
+
+    // ======================
+    // Writing
+    // ======================
+    else if (selectedCategory === "writing") {
+
+        vocabBox.style.display = "block";
+
+
+        vocabBox.innerHTML = `
+            <h2>${currentQ.question}</h2>
+
+
+            ${currentQ.pinyin ? `
+            <div style="
+                margin-top:10px;
+                color:#ef4444;
+                font-size:18px;
+                font-style:italic;
+            ">
+                ${currentQ.pinyin}
+            </div>
+            ` : ""}
+        `;
+
+
+        instructionBanner.innerHTML =
+            "✍ เติมคำหรือเลือกคำตอบที่ถูกต้อง";
+
+    }
+
+
+
+    // ======================
+    // ตัวเลือกคำตอบ
+    // ======================
+
+    const previousAnswer = userAnswersMap[currentQuestionIndex];
+
+
+    currentQ.options.forEach((option, index) => {
+
+
+        const btn = document.createElement("button");
+
+
+        btn.className = "option-btn";
+
+
+        btn.disabled = false;
+
+
+        btn.innerHTML = `
+            <div style="
+                font-size:24px;
+                font-weight:bold;
+                color:#1e293b;
+            ">
+                ${option.text}
+            </div>
+
+
+            ${option.pinyin ? `
+            <div style="
+                font-size:15px;
+                color:#64748b;
+                margin-top:6px;
+                font-style:italic;
+            ">
+                ${option.pinyin}
+            </div>
+            ` : ""}
+        `;
+
+
+
+        // แสดงคำตอบเดิมที่เคยเลือก
+        if (previousAnswer === index) {
+            btn.classList.add("selected");
+        }
+
+
+
+        btn.onclick = () => {
+
+
+            document.querySelectorAll(".option-btn")
+                .forEach(btn => {
+                    btn.disabled = true;
+                });
+
+
+            handleAnswer(currentQ.id, index);
+
+        };
+
+
+        optionsContainer.appendChild(btn);
+
+    });
+
+
+
+    // เริ่มจับเวลา
+    startTimer();
+
+}
+
+        function goToPrevQuestion() {
+            if (currentQuestionIndex > 0) {
+                clearInterval(timerInterval);
+                if (currentAudio) currentAudio.pause();
+                currentQuestionIndex--;
+                loadQuestion();
             }
-
-            document.getElementById('info-progress').innerText = `ข้อที่: ${currentQuestionIndex + 1}/${currentQuestions.length}`;
-            document.getElementById('info-lives').innerText = `❤️ x${lives}`;
-            timeLeft = maxTimeAllowed;
-            document.getElementById('info-timer').innerText = `⏱️ ${timeLeft}s`;
-            
-            const currentQuestion = currentQuestions[currentQuestionIndex];
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-
-            if (currentAudio) { currentAudio.pause(); currentAudio = null; }
-
-            // จับคู่จัดการ Component แสดงผลตามแต่ละหมวดหมู่โจทย์ใหม่
-            const imgBox = document.getElementById('culture-img-box');
-            const vocabBox = document.getElementById('vocab-question-box');
-            const audioBox = document.getElementById('audio-player-zone');
-
-            imgBox.style.display = 'none';
-            vocabBox.style.display = 'none';
-            audioBox.style.display = 'none';
-
-            if (selectedCategory === 'culture') {
-                imgBox.src = currentQuestion.image;
-                imgBox.style.display = 'block'; // โชว์รูปภาพภาพเดียวโดดๆ
-            } else if (selectedCategory === 'chinese_vocab') {
-                vocabBox.innerText = currentQuestion.question;
-                vocabBox.style.display = 'block'; // โชว์ประโยคตัวหนาใหญ่ๆ ให้เติมคำศัพท์
-            } else {
-                audioBox.style.display = 'block'; // โหมดฟังเสียงปกติ เปิดกล่องลำโพงแดงเดิม
-                playAudio();
-            }
-
-            currentQuestion.options.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = option;
-                btn.onclick = () => handleAnswer(currentQuestion.id, index);
-                optionsContainer.appendChild(btn);
-            });
-            startTimer();
         }
 
-        function playAudio() {
-            const currentQ = currentQuestions[currentQuestionIndex];
-            if (!currentQ || !currentQ.audio) return;
+       function playAudio() {
 
-            if (currentAudio) currentAudio.pause();
-            currentAudio = new Audio(currentQ.audio);
-            currentAudio.play().catch(e => console.log("Blocked audio playback"));
-        }
+    // ไม่มีข้อสอบ
+    if (!currentQuestions || currentQuestions.length === 0) {
+        console.log("ไม่มีข้อสอบ");
+        return;
+    }
 
-        function playHistoryAudio(audioUrl) {
-            if (!audioUrl) return;
-            if (currentAudio) currentAudio.pause();
-            currentAudio = new Audio(audioUrl);
-            currentAudio.play().catch(e => console.log("Playback error"));
-        }
+    // ข้อปัจจุบัน
+    const currentQ = currentQuestions[currentQuestionIndex];
 
+    if (!currentQ) {
+        console.log("ไม่พบข้อสอบ");
+        return;
+    }
+
+    // ไม่มีไฟล์เสียง
+    if (!currentQ.audio || currentQ.audio.trim() === "") {
+        console.log("ข้อสอบนี้ไม่มีไฟล์เสียง");
+        return;
+    }
+
+    // หยุดเสียงเดิม
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
+
+    // สร้าง Audio ใหม่
+    currentAudio = new Audio(currentQ.audio);
+
+    currentAudio.preload = "auto";
+    currentAudio.volume = 1.0;
+
+    // โหลดเสร็จแล้วค่อยเล่น
+    currentAudio.oncanplaythrough = () => {
+        currentAudio.play().catch(err => {
+            console.error("Play Error :", err);
+        });
+    };
+
+    // ถ้าไฟล์เสีย
+    currentAudio.onerror = () => {
+        console.error("โหลดไฟล์เสียงไม่ได้ :", currentQ.audio);
+
+        showCustomAlert(
+            "🔊",
+            "ไม่สามารถเล่นเสียง",
+            "ไฟล์เสียงไม่สามารถโหลดได้",
+            () => {}
+        );
+    };
+
+    currentAudio.load();
+}
+
+// ================================
+// เล่นเสียงจากหน้าประวัติการทำข้อสอบ
+// ================================
+
+       function playHistoryAudio(audioUrl) {
+
+    // ไม่มีไฟล์เสียง
+    if (!audioUrl) {
+        console.log("ไม่มีไฟล์เสียง");
+        return;
+    }
+
+    // หยุดเสียงเดิม
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+
+    // สร้าง Audio ใหม่
+    currentAudio = new Audio(audioUrl);
+
+    // ตั้งค่าระดับเสียง
+    currentAudio.volume = 1.0;
+
+    // เล่นเสียง
+    currentAudio.play()
+        .then(() => {
+            console.log("Playing history audio...");
+        })
+        .catch(err => {
+            console.error("Playback error:", err);
+
+            showCustomAlert(
+                "🔊",
+                "ไม่สามารถเล่นเสียงได้",
+                "กรุณาลองใหม่อีกครั้ง",
+                () => {}
+            );
+        });
+
+}
         function startTimer() {
+
+    clearInterval(timerInterval);
+
+    timeLeft = maxTimeAllowed;
+
+    document.getElementById("info-timer").innerText =
+        `⏱️ ${timeLeft}s`;
+
+    timerInterval = setInterval(() => {
+
+        timeLeft--;
+
+        document.getElementById("info-timer").innerText =
+            `⏱️ ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+
             clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('info-timer').innerText = `⏱️ ${timeLeft}s`;
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    lives--;
-                    const q = currentQuestions[currentQuestionIndex];
 
-                    quizHistory.push({
-                        id: currentQuestionIndex + 1,
-                        audio: q.audio,
-                        questionText: q.question || "โจทย์รูปภาพ/เสียง",
-                        userAnswer: "⏰ หมดเวลา",
-                        correctAnswerText: "กำลังดึงเฉลย...",
-                        status: "timeout",
-                        questionId: q.id
-                    });
-                    soundTimeout.play(); 
-                    showCustomAlert('⏱️', 'หมดเวลาทำข้อสอบ!', 'โดนหักพลังชีวิต 1 ดวง ❌', () => {
-                        currentQuestionIndex++;
-                        loadQuestion();
-                    });
-                }
-            }, 1000);
-        }
-
-        async function handleAnswer(questionId, selectedIndex) {
-            clearInterval(timerInterval);
-            if (currentAudio) currentAudio.pause(); 
-            
-            const currentQ = currentQuestions[currentQuestionIndex];
-            const selectedText = currentQ.options[selectedIndex];
-
-            let originalIndexToSend = selectedIndex;
-            if (currentQ.shuffledOrder && currentQ.shuffledOrder[selectedIndex] !== undefined) {
-                originalIndexToSend = currentQ.shuffledOrder[selectedIndex];
+            // หยุดเสียง
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
             }
 
-            try {
-                const response = await fetch('/api/check-answer', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ questionId, selectedIndex: originalIndexToSend }) 
-                });
-                const result = await response.json();
+            // ลดหัวใจ
+            lives--;
 
-                quizHistory.push({
-                    id: currentQuestionIndex + 1,
-                    audio: currentQ.audio,
-                    questionText: currentQ.question || "โจทย์รูปภาพ/เสียง",
-                    userAnswer: selectedText,
-                    correctAnswerText: result.correctAnswerText,
-                    status: result.correct ? "correct" : "wrong"
-                });
+            document.getElementById("info-lives").innerText =
+                `❤️ x${lives}`;
 
-                if (result.correct) {
-                    score++;
-                    soundCorrect.play(); 
-                    showCustomAlert('🎉', 'ตอบได้ถูกต้อง!', `ยอดเยี่ยมมากรับ 1 คะแนน! 🟢`, () => {
-                        currentQuestionIndex++;
-                        loadQuestion();
-                    });
-                } else {
-                    lives--;
-                    soundWrong.play(); 
-                    showCustomAlert('❌', 'คำตอบไม่ถูกต้อง!', `เสียใจด้วยโดนหักพลังชีวิต 1 ดวง`, () => {
-                        currentQuestionIndex++;
-                        loadQuestion();
-                    });
-                }
-            } catch (e) {
-                showCustomAlert('⚠️', 'ระบบผิดพลาด', 'การส่งค่าตรวจคำตอบล้มเหลว');
-            }
-        }
+            const q = currentQuestions[currentQuestionIndex] || {};
 
-        async function fetchTimeoutAnswers() {
-            for (let item of quizHistory) {
-                if (item.status === "timeout") {
-                    try {
-                        const response = await fetch('/api/check-answer', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ questionId: item.questionId, selectedIndex: -1 })
-                        });
-                        const result = await response.json();
-                        item.correctAnswerText = result.correctAnswerText;
-                    } catch (e) {
-                        item.correctAnswerText = "ไม่สามารถดึงข้อมูลได้";
+            // บันทึกว่าหมดเวลา
+            userAnswersMap[currentQuestionIndex] = -1;
+
+            quizHistory[currentQuestionIndex] = {
+                id: currentQuestionIndex + 1,
+                category: selectedCategory,
+                audio: q.audio || null,
+                image: q.image || null,
+                passage: q.passage || null,
+                questionText: q.question || q.text || "โจทย์",
+                userAnswer: "หมดเวลา",
+                correctAnswerText:
+                    q.options ? q.options[q.correctAnswer] : "-",
+                status: "timeout"
+            };
+
+            soundTimeout.play();
+
+            showCustomAlert(
+                "⏱️",
+                "หมดเวลาทำข้อสอบ!",
+                "เสียพลังชีวิต 1 ดวง",
+                () => {
+
+                    if (lives <= 0) {
+                        endGame();
+                        return;
                     }
+
+                    currentQuestionIndex++;
+
+                    // ถ้าครบทุกข้อแล้ว จบเกม
+                    if (currentQuestionIndex >= currentQuestions.length) {
+                        endGame();
+                        return;
+                    }
+
+                    // โหลดข้อถัดไป
+                    loadQuestion();
+
                 }
+            );
+
+        }
+
+    }, 1000);
+
+}
+
+       async function handleAnswer(questionId, selectedIndex) {
+
+    clearInterval(timerInterval);
+
+    // หยุดเสียง
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+
+    // ป้องกันการกดซ้ำ
+    document.querySelectorAll(".option-btn").forEach(btn => {
+        btn.disabled = true;
+    });
+
+    const currentQ = currentQuestions[currentQuestionIndex];
+
+    const selectedText = currentQ.options[selectedIndex].text;
+
+    // บันทึกคำตอบ
+    userAnswersMap[currentQuestionIndex] = selectedIndex;
+
+    try {
+
+        const response = await fetch("/api/check-answer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                questionId: questionId,
+                selectedIndex: selectedIndex,
+                shuffledOrder: currentQ.shuffledOrder
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("API Error");
+        }
+
+        const result = await response.json();
+
+        // บันทึกประวัติ
+        quizHistory[currentQuestionIndex] = {
+            id: currentQuestionIndex + 1,
+            category: selectedCategory,
+            audio: currentQ.audio || null,
+            image: currentQ.image || null,
+            passage: currentQ.passage || null,
+            questionText: currentQ.question || "โจทย์",
+            userAnswer: selectedText,
+            correctAnswerText: result.correctAnswerText,
+            status: result.correct ? "correct" : "wrong"
+        };
+
+        if (result.correct) {
+
+            score++;
+
+            document.getElementById("info-score").innerText =
+                `⭐ ${score} คะแนน`;
+
+            soundCorrect.play();
+
+            showCustomAlert(
+                "🎉",
+                "ตอบถูกต้อง",
+                "ได้รับ 1 คะแนน",
+                () => {
+
+                    currentQuestionIndex++;
+
+                    if (currentQuestionIndex >= currentQuestions.length || lives <= 0) {
+                        endGame();
+                        return;
+                    }
+
+                    loadQuestion();
+
+                }
+            );
+
+        } else {
+
+            lives--;
+
+            document.getElementById("info-lives").innerText =
+                `❤️ x${lives}`;
+
+            soundWrong.play();
+
+            showCustomAlert(
+                "❌",
+                "ตอบไม่ถูกต้อง",
+                `คำตอบที่ถูกคือ : ${result.correctAnswerText}`,
+                () => {
+
+                    if (lives <= 0) {
+                        endGame();
+                        return;
+                    }
+
+                    currentQuestionIndex++;
+
+                    if (currentQuestionIndex >= currentQuestions.length) {
+                        endGame();
+                        return;
+                    }
+
+                    loadQuestion();
+
+                }
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        showCustomAlert(
+            "⚠️",
+            "Server Error",
+            "ไม่สามารถตรวจคำตอบได้",
+            () => {
+
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex >= currentQuestions.length || lives <= 0) {
+                    endGame();
+                    return;
+                }
+
+                loadQuestion();
+
             }
+        );
+
+    }
+
+}
+
+       function endGame() {
+
+    clearInterval(timerInterval);
+
+    // ปิดการกดปุ่มคำตอบทั้งหมด
+    document.querySelectorAll(".option-btn").forEach(btn => {
+        btn.disabled = true;
+    });
+
+    // หยุดเสียงที่กำลังเล่น
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+    }
+
+    // =========================
+    // คำนวณคะแนน
+    // =========================
+    const totalQuestion = currentQuestions.length;
+    const percent = Math.round((score / totalQuestion) * 100);
+
+    let level = "";
+    let levelColor = "";
+
+    if (percent >= 80) {
+        level = "Advanced";
+        levelColor = "#16a34a";
+    } else if (percent >= 60) {
+        level = "Intermediate";
+        levelColor = "#2563eb";
+    } else {
+        level = "Beginner";
+        levelColor = "#dc2626";
+    }
+
+    // =========================
+    // แสดงผลคะแนน
+    // =========================
+    document.getElementById("result-score").innerHTML = `
+        <h2>🎯 คะแนนรวม</h2>
+
+        <h1>${score} / ${totalQuestion}</h1>
+
+        <h3>${percent}%</h3>
+
+        <h2 style="color:${levelColor}">
+            ระดับ : ${level}
+        </h2>
+
+        <p>
+            ผู้เข้าสอบ : <b>${playerName}</b>
+        </p>
+    `;
+
+    const resultTitle = document.getElementById("result-title");
+    const resultEmoji = document.getElementById("result-emoji");
+    const resultComment = document.getElementById("result-comment");
+
+    if (lives <= 0) {
+
+        resultEmoji.innerText = "💀";
+        resultTitle.innerText = "การทดสอบสิ้นสุด";
+        resultComment.innerText = "พลังชีวิตหมดก่อนทำข้อสอบครบ";
+
+    } else {
+
+        resultEmoji.innerText = "🎓";
+        resultTitle.innerText = "Chinese Language Proficiency Test";
+
+        if (percent >= 80) {
+
+            resultComment.innerText =
+                "ยอดเยี่ยม คุณมีความสามารถภาษาจีนอยู่ในระดับสูง";
+
+        } else if (percent >= 60) {
+
+            resultComment.innerText =
+                "ทำได้ดี คุณมีพื้นฐานภาษาจีนที่ดี";
+
+        } else {
+
+            resultComment.innerText =
+                "ควรฝึกฝนเพิ่มเติม แล้วลองทำแบบทดสอบอีกครั้ง";
+        }
+    }
+
+    // =========================
+    // ตารางสรุปผล
+    // =========================
+    const tableBody = document.getElementById("history-table-body");
+
+    tableBody.innerHTML = "";
+
+    quizHistory.forEach(item => {
+
+        if (!item) return;
+
+        let statusBadge = "";
+
+        switch (item.status) {
+
+            case "correct":
+                statusBadge =
+                    `<span class="badge-status badge-correct">✅ ถูกต้อง</span>`;
+                break;
+
+            case "wrong":
+                statusBadge =
+                    `<span class="badge-status badge-wrong">❌ ผิด</span>`;
+                break;
+
+            default:
+                statusBadge =
+                    `<span class="badge-status badge-timeout">⏱ หมดเวลา</span>`;
+                break;
         }
 
-        async function endGame() {
-            clearInterval(timerInterval);
-            if (currentAudio) currentAudio.pause();
-            
-            await fetchTimeoutAnswers();
+        let content = "";
 
-            document.getElementById('result-score').innerText = `คุณ ${playerName} ทำคะแนนได้ ${score} จากทั้งหมด ${currentQuestions.length} ข้อ`;
-            const resultTitle = document.getElementById('result-title');
-            const resultEmoji = document.getElementById('result-emoji');
-            const resultComment = document.getElementById('result-comment');
+        // Listening
+        if (item.audio) {
 
-            if (lives <= 0) {
-                resultEmoji.innerText = '💀'; resultTitle.innerText = 'พลังชีวิตหมดสิ้น!'; resultComment.innerText = 'คุณหมดพลังชีวิตระหว่างการทดสอบรอบนี้!';
-            } else if (score >= 16) {
-                resultEmoji.innerText = '👑'; resultTitle.innerText = 'ผ่านระดับยอดฝีมือ!'; resultComment.innerText = 'ความรู้ประเพณีและภาษาจีนรอบตัวของคุณอยู่ในเกณฑ์ดีเลิศ!';
-            } else {
-                resultEmoji.innerText = '👍'; resultTitle.innerText = 'สอบเสร็จสิ้น'; resultComment.innerText = 'ขอบคุณที่เข้าร่วมการทดสอบ ตรวจสอบเฉลยได้ที่ตารางด้านล่าง';
-            }
+            content = `
+                <button class="mini-sound-btn"
+                    onclick="playHistoryAudio('${item.audio}')">
+                    🔊 ฟังเสียง
+                </button>
+            `;
 
-            const tableBody = document.getElementById('history-table-body');
-            tableBody.innerHTML = ""; 
+        }
+        // Speaking (รูปภาพ)
+        else if (item.image) {
 
-            quizHistory.forEach(item => {
-                const row = document.createElement('tr');
-                let statusBadge = item.status === "correct" ? `<span class="badge-status badge-correct">✓ ถูกต้อง</span>` : (item.status === "wrong" ? `<span class="badge-status badge-wrong">✗ ผิด</span>` : `<span class="badge-status badge-timeout">⏳ หมดเวลา</span>`);
+            content = `
+                <img src="${item.image}"
+                     style="max-width:120px;border-radius:8px;">
+            `;
 
-                // แสดงเนื้อหาคำถามในตารางสรุปให้เหมาะสมตามประเภทโจทย์
-                let contentShow = item.audio ? `<button class="mini-sound-btn" onclick="playHistoryAudio('${item.audio}')">🔊 ฟังโจทย์</button>` : `<span style="font-size:12px; font-weight:600;">${item.questionText}</span>`;
+        }
+        // Reading
+        else if (item.passage) {
 
-                row.innerHTML = `
-                    <td style="font-weight:600; text-align:center;">${item.id}</td>
-                    <td>${contentShow}</td>
-                    <td style="color: ${item.status==='correct'?'#15803d':'#b91c1c'}; font-weight:600; white-space: pre-line;">${item.userAnswer}</td>
-                    <td style="color: #15803d; font-weight:600; white-space: pre-line;">${item.correctAnswerText}</td>
-                    <td>${statusBadge}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-            switchScreen('result-screen');
+            content = `
+                <div style="text-align:left;max-width:320px">
+                    ${item.passage}
+                </div>
+            `;
+
+        }
+        // Speaking / Writing
+        else {
+
+            content = `
+                <div style="text-align:left;max-width:320px">
+                    ${item.questionText}
+                </div>
+            `;
         }
 
-        function switchScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active-screen'));
-            document.getElementById(screenId).classList.add('active-screen');
-        }
+        const row = document.createElement("tr");
 
-        function goToMenu() { 
-            const nameField = document.getElementById('username');
-            if (playerName) {
-                nameField.disabled = true;
-                nameField.value = playerName;
-                document.getElementById('btn-confirm-name').style.display = 'none';
-                document.getElementById('label-username').innerHTML = '🔒 <span style="color:#059669;">ลงทะเบียนล็อกชื่อผู้เล่นสำเร็จแล้ว!</span>';
-                document.getElementById('mode-selection-list').style.display = 'flex';
-            }
-            switchScreen('menu-screen'); 
-        }
+        row.innerHTML = `
+            <td>${item.id}</td>
+
+            <td>${content}</td>
+
+            <td>${item.userAnswer}</td>
+
+            <td>${item.correctAnswerText}</td>
+
+            <td>${statusBadge}</td>
+        `;
+
+        tableBody.appendChild(row);
+
+    });
+
+    // แสดงหน้าผลคะแนน
+    switchScreen("result-screen");
+}
+
+       function switchScreen(screenId) {
+
+    // ซ่อนทุกหน้า
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active-screen");
+    });
+
+    // แสดงหน้าที่ต้องการ
+    const targetScreen = document.getElementById(screenId);
+
+    if (targetScreen) {
+        targetScreen.classList.add("active-screen");
+
+        // เลื่อนไปด้านบนของหน้า
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    } else {
+        console.error("ไม่พบ Screen :", screenId);
+    }
+
+}
+       function goToMenu() {
+
+    const nameField = document.getElementById("username");
+
+    // ถ้ายังไม่ได้กรอกชื่อ
+    if (!playerName || playerName.trim() === "") {
+        showCustomAlert(
+            "⚠️",
+            "กรุณากรอกชื่อผู้เข้าสอบ",
+            "ก่อนเริ่มทำแบบทดสอบ",
+            () => {}
+        );
+        return;
+    }
+
+    // ล็อกชื่อผู้เล่น
+    nameField.disabled = true;
+    nameField.value = playerName;
+
+    // ซ่อนปุ่มยืนยัน
+    document.getElementById("btn-confirm-name").style.display = "none";
+
+    // แสดงข้อความ
+    document.getElementById("label-username").innerHTML =
+        '🔒 <span style="color:#059669;">ลงทะเบียนผู้เข้าสอบเรียบร้อยแล้ว</span>';
+
+    // แสดงเมนูเลือกทักษะ
+    document.getElementById("mode-selection-list").style.display = "flex";
+
+    // ไปหน้าเมนู
+    switchScreen("menu-screen");
+
+}
     </script>
 </body>
 </html>
