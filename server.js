@@ -129,9 +129,7 @@ const listeningData = [
     correctAnswer: 0
 }
 ];
-// ==========================================
-// คลังคำถาม 2: ประเพณีและวัฒนธรรมจีน (Culture) - ปรับ Path ชื่อไฟล์เป็นภาษาไทยตรงตามโฟลเดอร์ของพี่ซี
-// ==========================================
+
 const speakingData = [
 {
     id:101,
@@ -244,233 +242,218 @@ const speakingData = [
     correctAnswer:0
 }
 ];
-// ==========================================
-// คลังคำถาม 3: หมวดเติมคำศัพท์ภาษาจีนในประโยค (มีตัวจีน พินอิน และคำแปลครบถ้วน)
-// ==========================================
+
+const readingData = [
+{
+    id:201,
+    passage:"我叫小明。我是泰国人。我今年十八岁。",
+    pinyin:"Wǒ jiào Xiǎomíng. Wǒ shì Tàiguó rén. Wǒ jīnnián shíbā suì.",
+    question:"จากข้อความ ผู้พูดอายุเท่าไร",
+    options:["16 ปี","17 ปี","18 ปี","20 ปี"],
+    correctAnswer:2
+},
+{
+    id:202,
+    passage:"王老师在学校教汉语。",
+    pinyin:"Wáng lǎoshī zài xuéxiào jiāo Hànyǔ.",
+    question:"คุณหวังทำอาชีพอะไร",
+    options:["หมอ","ครู","ตำรวจ","นักเรียน"],
+    correctAnswer:1
+},
+{
+    id:203,
+    passage:"今天星期一，我们去学校上课。",
+    pinyin:"Jīntiān xīngqīyī, wǒmen qù xuéxiào shàngkè.",
+    question:"วันนี้วันอะไร",
+    options:["วันอาทิตย์","วันจันทร์","วันศุกร์","วันเสาร์"],
+    correctAnswer:1
+},
+{
+    id:204,
+    passage:"我的家有四个人。",
+    pinyin:"Wǒ de jiā yǒu sì ge rén.",
+    question:"ในครอบครัวมีกี่คน",
+    options:["2 คน","3 คน","4 คน","5 คน"],
+    correctAnswer:2
+},
+{
+    id:205,
+    passage:"我喜欢吃苹果。",
+    pinyin:"Wǒ xǐhuān chī píngguǒ.",
+    question:"ผู้พูดชอบกินอะไร",
+    options:["กล้วย","ส้ม","แอปเปิล","แตงโม"],
+    correctAnswer:2
+},
+{
+    id:206,
+    passage:"妹妹今年十岁。",
+    pinyin:"Mèimei jīnnián shí suì.",
+    question:"น้องสาวอายุเท่าไร",
+    options:["8 ปี","9 ปี","10 ปี","11 ปี"],
+    correctAnswer:2
+},
+{
+    id:207,
+    passage:"爸爸每天开车去公司。",
+    pinyin:"Bàba měitiān kāichē qù gōngsī.",
+    question:"คุณพ่อเดินทางไปทำงานอย่างไร",
+    options:["รถไฟ","จักรยาน","รถยนต์","รถเมล์"],
+    correctAnswer:2
+},
+{
+    id:208,
+    passage:"今天很热，我想喝水。",
+    pinyin:"Jīntiān hěn rè, wǒ xiǎng hē shuǐ.",
+    question:"ผู้พูดต้องการดื่มอะไร",
+    options:["ชา","กาแฟ","น้ำ","นม"],
+    correctAnswer:2
+},
+{
+    id:209,
+    passage:"现在是晚上九点。",
+    pinyin:"Xiànzài shì wǎnshang jiǔ diǎn.",
+    question:"ตอนนี้เป็นเวลาใด",
+    options:["09.00 น.","21.00 น.","18.00 น.","12.00 น."],
+    correctAnswer:1
+},
+{
+    id:210,
+    passage:"我的猫在桌子下面。",
+    pinyin:"Wǒ de māo zài zhuōzi xiàmian.",
+    question:"แมวอยู่ที่ไหน",
+    options:["บนโต๊ะ","ใต้โต๊ะ","หน้าประตู","บนเตียง"],
+    correctAnswer:1
+}
+];
+
 const writingData = [
-
 {
-id:301,
-question:"我___学生。",
-pinyin:"Wǒ ___ xuésheng.",
-options:[
-    {text:"是",pinyin:"shì"},
-    {text:"有",pinyin:"yǒu"},
-    {text:"去",pinyin:"qù"},
-    {text:"在",pinyin:"zài"}
-],
-correctAnswer:0
-},
-
-
-{
-id:302,
-question:"她___老师。",
-pinyin:"Tā ___ lǎoshī.",
-options:[
-    {text:"是",pinyin:"shì"},
-    {text:"有",pinyin:"yǒu"},
-    {text:"去",pinyin:"qù"},
-    {text:"吃",pinyin:"chī"}
-],
-correctAnswer:0
-},
-
-
-{
-id:303,
-question:"我喜欢___苹果。",
-pinyin:"Wǒ xǐhuān ___ píngguǒ.",
-options:[
-    {text:"吃",pinyin:"chī"},
-    {text:"喝",pinyin:"hē"},
-    {text:"看",pinyin:"kàn"},
-    {text:"写",pinyin:"xiě"}
-],
-correctAnswer:0
-},
-
-
-{
-id:304,
-question:"今天___星期一。",
-pinyin:"Jīntiān ___ xīngqīyī.",
-options:[
-    {text:"是",pinyin:"shì"},
-    {text:"有",pinyin:"yǒu"},
-    {text:"去",pinyin:"qù"},
-    {text:"做",pinyin:"zuò"}
-],
-correctAnswer:0
-},
-
-
-{
-id:305,
-question:"我___泰国人。",
-pinyin:"Wǒ ___ Tàiguó rén.",
-options:[
-    {text:"是",pinyin:"shì"},
-    {text:"叫",pinyin:"jiào"},
-    {text:"住",pinyin:"zhù"},
-    {text:"学",pinyin:"xué"}
-],
-correctAnswer:0
-},
-
-
-{
-id:306,
-question:"我们___学校学习。",
-pinyin:"Wǒmen ___ xuéxiào xuéxí.",
-options:[
-    {text:"在",pinyin:"zài"},
-    {text:"有",pinyin:"yǒu"},
-    {text:"是",pinyin:"shì"},
-    {text:"吃",pinyin:"chī"}
-],
-correctAnswer:0
-},
-
-
-{
-id:307,
-question:"他___汉语。",
-pinyin:"Tā ___ Hànyǔ.",
-options:[
-    {text:"学习",pinyin:"xuéxí"},
-    {text:"喝",pinyin:"hē"},
-    {text:"睡",pinyin:"shuì"},
-    {text:"跑",pinyin:"pǎo"}
-],
-correctAnswer:0
-},
-
-
-{
-id:308,
-question:"妈妈___饭。",
-pinyin:"Māma ___ fàn.",
-options:[
-    {text:"做",pinyin:"zuò"},
-    {text:"写",pinyin:"xiě"},
-    {text:"听",pinyin:"tīng"},
-    {text:"坐",pinyin:"zuò"}
-],
-correctAnswer:0
-},
-
-
-{
-id:309,
-question:"我___水。",
-pinyin:"Wǒ ___ shuǐ.",
-options:[
-    {text:"喝",pinyin:"hē"},
-    {text:"看",pinyin:"kàn"},
-    {text:"说",pinyin:"shuō"},
-    {text:"写",pinyin:"xiě"}
-],
-correctAnswer:0
-},
-
-
-{
-id:310,
-question:"姐姐___书。",
-pinyin:"Jiějie ___ shū.",
-options:[
-    {text:"看",pinyin:"kàn"},
-    {text:"听",pinyin:"tīng"},
-    {text:"跑",pinyin:"pǎo"},
-    {text:"跳",pinyin:"tiào"}
-],
-correctAnswer:0
-}
-
-];
- const readingData = [
-{
-id:201,
-passage:"我叫小明。我是泰国人。我今年十八岁。",
-pinyin:"Wǒ jiào Xiǎomíng. Wǒ shì Tàiguó rén. Wǒ jīnnián shíbā suì.",
-question:"จากข้อความ ผู้พูดอายุเท่าไร",
-options:["16 ปี","17 ปี","18 ปี","20 ปี"],
-correctAnswer:2
+    id:301,
+    question:"我___学生。",
+    pinyin:"Wǒ ___ xuésheng.",
+    options:[
+        {text:"是",pinyin:"shì"},
+        {text:"有",pinyin:"yǒu"},
+        {text:"去",pinyin:"qù"},
+        {text:"在",pinyin:"zài"}
+    ],
+    correctAnswer:0
 },
 {
-id:202,
-passage:"王老师在学校教汉语。",
-pinyin:"Wáng lǎoshī zài xuéxiào jiāo Hànyǔ.",
-question:"คุณหวังทำอาชีพอะไร",
-options:["หมอ","ครู","ตำรวจ","นักเรียน"],
-correctAnswer:1
+    id:302,
+    question:"她___老师。",
+    pinyin:"Tā ___ lǎoshī.",
+    options:[
+        {text:"是",pinyin:"shì"},
+        {text:"有",pinyin:"yǒu"},
+        {text:"去",pinyin:"qù"},
+        {text:"吃",pinyin:"chī"}
+    ],
+    correctAnswer:0
 },
 {
-id:203,
-passage:"今天星期一，我们去学校上课。",
-pinyin:"Jīntiān xīngqīyī, wǒmen qù xuéxiào shàngkè.",
-question:"วันนี้วันอะไร",
-options:["วันอาทิตย์","วันจันทร์","วันศุกร์","วันเสาร์"],
-correctAnswer:1
+    id:303,
+    question:"我喜欢___苹果。",
+    pinyin:"Wǒ xǐhuān ___ píngguǒ.",
+    options:[
+        {text:"吃",pinyin:"chī"},
+        {text:"喝",pinyin:"hē"},
+        {text:"看",pinyin:"kàn"},
+        {text:"写",pinyin:"xiě"}
+    ],
+    correctAnswer:0
 },
 {
-id:204,
-passage:"我的家有四个人。",
-pinyin:"Wǒ de jiā yǒu sì ge rén.",
-question:"ในครอบครัวมีกี่คน",
-options:["2 คน","3 คน","4 คน","5 คน"],
-correctAnswer:2
+    id:304,
+    question:"今天___星期一。",
+    pinyin:"Jīntiān ___ xīngqīyī.",
+    options:[
+        {text:"是",pinyin:"shì"},
+        {text:"有",pinyin:"yǒu"},
+        {text:"去",pinyin:"qù"},
+        {text:"做",pinyin:"zuò"}
+    ],
+    correctAnswer:0
 },
 {
-id:205,
-passage:"我喜欢吃苹果。",
-pinyin:"Wǒ xǐhuān chī píngguǒ.",
-question:"ผู้พูดชอบกินอะไร",
-options:["กล้วย","ส้ม","แอปเปิล","แตงโม"],
-correctAnswer:2
+    id:305,
+    question:"我___泰国人。",
+    pinyin:"Wǒ ___ Tàiguó rén.",
+    options:[
+        {text:"是",pinyin:"shì"},
+        {text:"叫",pinyin:"jiào"},
+        {text:"住",pinyin:"zhù"},
+        {text:"学",pinyin:"xué"}
+    ],
+    correctAnswer:0
 },
 {
-id:206,
-passage:"妹妹今年十岁。",
-pinyin:"Mèimei jīnnián shí suì.",
-question:"น้องสาวอายุเท่าไร",
-options:["8 ปี","9 ปี","10 ปี","11 ปี"],
-correctAnswer:2
+    id:306,
+    question:"我们___学校学习。",
+    pinyin:"Wǒmen ___ xuéxiào xuéxí.",
+    options:[
+        {text:"在",pinyin:"zài"},
+        {text:"有",pinyin:"yǒu"},
+        {text:"是",pinyin:"shì"},
+        {text:"吃",pinyin:"chī"}
+    ],
+    correctAnswer:0
 },
 {
-id:207,
-passage:"爸爸每天开车去公司。",
-pinyin:"Bàba měitiān kāichē qù gōngsī.",
-question:"คุณพ่อเดินทางไปทำงานอย่างไร",
-options:["รถไฟ","จักรยาน","รถยนต์","รถเมล์"],
-correctAnswer:2
+    id:307,
+    question:"他___汉语。",
+    pinyin:"Tā ___ Hànyǔ.",
+    options:[
+        {text:"学习",pinyin:"xuéxí"},
+        {text:"喝",pinyin:"hē"},
+        {text:"睡",pinyin:"shuì"},
+        {text:"跑",pinyin:"pǎo"}
+    ],
+    correctAnswer:0
 },
 {
-id:208,
-passage:"今天很热，我想喝水。",
-pinyin:"Jīntiān hěn rè, wǒ xiǎng hē shuǐ.",
-question:"ผู้พูดต้องการดื่มอะไร",
-options:["ชา","กาแฟ","น้ำ","นม"],
-correctAnswer:2
+    id:308,
+    question:"妈妈___饭。",
+    pinyin:"Māma ___ fàn.",
+    options:[
+        {text:"做",pinyin:"zuò"},
+        {text:"写",pinyin:"xiě"},
+        {text:"听",pinyin:"tīng"},
+        {text:"坐",pinyin:"zuò"}
+    ],
+    correctAnswer:0
 },
 {
-id:209,
-passage:"现在是晚上九点。",
-pinyin:"Xiànzài shì wǎnshang jiǔ diǎn.",
-question:"ตอนนี้เป็นเวลาใด",
-options:["09.00 น.","21.00 น.","18.00 น.","12.00 น."],
-correctAnswer:1
+    id:309,
+    question:"我___水。",
+    pinyin:"Wǒ ___ shuǐ.",
+    options:[
+        {text:"喝",pinyin:"hē"},
+        {text:"看",pinyin:"kàn"},
+        {text:"说",pinyin:"shuō"},
+        {text:"写",pinyin:"xiě"}
+    ],
+    correctAnswer:0
 },
 {
-id:210,
-passage:"我的猫在桌子下面。",
-pinyin:"Wǒ de māo zài zhuōzi xiàmian.",
-question:"แมวอยู่ที่ไหน",
-options:["บนโต๊ะ","ใต้โต๊ะ","หน้าประตู","บนเตียง"],
-correctAnswer:1
+    id:310,
+    question:"姐姐___书。",
+    pinyin:"Jiějie ___ shū.",
+    options:[
+        {text:"看",pinyin:"kàn"},
+        {text:"听",pinyin:"tīng"},
+        {text:"跑",pinyin:"pǎo"},
+        {text:"跳",pinyin:"tiào"}
+    ],
+    correctAnswer:0
 }
 ];
+const mockDatabase = {
+    'listening': listeningData,
+    'speaking': speakingData,
+    'reading': readingData,
+    'writing': writingData
+};
 app.get('/api/quiz', (req, res) => {
 
     const { category } = req.query;
@@ -480,23 +463,23 @@ app.get('/api/quiz', (req, res) => {
     switch (category) {
 
         case "listening":
-            selectedData = listeningData;
+            selectedData = mockDatabase[category];
             break;
 
         case "speaking":
-            selectedData = speakingData;
+            selectedData = mockDatabase[category];
             break;
 
         case "reading":
-            selectedData = readingData;
+            selectedData = mockDatabase[category];
             break;
 
         case "writing":
-            selectedData = writingData;
+            selectedData = mockDatabase[category];
             break;
 
         default:
-            selectedData = listeningData;
+            selectedData = mockDatabase[category] || [];
             break;
     }
 
@@ -552,7 +535,6 @@ app.get('/api/quiz', (req, res) => {
 
 });
 
-            
 app.post('/api/check-answer', (req, res) => {
 
     const { questionId, selectedIndex, shuffledOrder } = req.body;
@@ -574,9 +556,14 @@ app.post('/api/check-answer', (req, res) => {
 
     const isCorrect = originalIndex === question.correctAnswer;
 
+    // --- แก้ไขจุดนี้: รองรับทั้ง options ที่เป็น String และ Object ---
+    const correctOpt = question.options[question.correctAnswer];
+    const correctAnswerText = (typeof correctOpt === 'object' && correctOpt !== null) ? correctOpt.text : correctOpt;
+    // -------------------------------------------------------------
+
     res.json({
         correct: isCorrect,
-        correctAnswerText: question.options[question.correctAnswer].text
+        correctAnswerText: correctAnswerText
     });
 
 });
